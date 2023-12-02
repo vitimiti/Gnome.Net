@@ -4,11 +4,13 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using Gnome.Net.GLib.Utilities;
+
 namespace Gnome.Net.GLib.Imports;
 
 internal static partial class GArrayImports
 {
-    [LibraryImport("GLib", EntryPoint = "g_array_unref")]
+    [LibraryImport(LibraryName.Default, EntryPoint = "g_array_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void GArrayUnref(nint array);
 }
