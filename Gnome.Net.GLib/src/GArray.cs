@@ -6,11 +6,11 @@ namespace Gnome.Net.GLib;
 /// <summary>Contains the public fields of a GArray.</summary>
 public sealed class GArray<T>
 {
-    /// <summary>The data held by the array.</summary>
-    /// <value>A <see cref="Array" /> of the given <typeparamref name="T" /> type.</value>
-    public T[] Data { get; private init; } = Array.Empty<T>();
+    /// <summary>Get/Set the data held by the array.</summary>
+    /// <value>An <see cref="Array" /> of the given <typeparamref name="T" /> type.</value>
+    public T[] Data { get; set; } = Array.Empty<T>();
 
-    /// <summary>The length of the <see cref="Data" /> array.</summary>
+    /// <summary>Get the length of the <see cref="Data" /> array.</summary>
     /// <value>A <see cref="uint" /> with the length of the <see cref="Data" /> array.</value>
     public uint Length => (uint)Data.Length;
 
