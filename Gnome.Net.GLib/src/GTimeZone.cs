@@ -13,6 +13,21 @@ namespace Gnome.Net.GLib;
 [NativeMarshalling(typeof(SafeHandleMarshaller<GTimeZone>))]
 public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
 {
+    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to local time.</summary>
+    /// <value>A <see cref="GTimeZone" /> with the local timezone.</value>
+    /// <remarks>
+    ///     The local time zone may change between invocations to this function; for example, if the system
+    ///     administrator changes it.
+    /// </remarks>
+    public static GTimeZone Local => new(GTimeZoneImports.GTimeZoneNewLocal());
+
+    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to UTC.</summary>
+    /// <value>A new <see cref="GTimeZone" /> with the universal timezone.</value>
+    /// <remarks>
+    ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
+    /// </remarks>
+    public static GTimeZone Utc => new(GTimeZoneImports.GTimeZoneNewUtc());
+
     /// <summary>Get the identifier of this GTimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
     /// <value>A <see cref="string" /> with the identifier for the timezone.</value>
     /// <remarks>
@@ -63,7 +78,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         the local time to get Coordinated Universal Time (UTC).
     ///     </para>
     ///     <para>
-    ///         <see cref="CreateFromLocal" /> calls this function with the value of the TZ environment variable. This
+    ///         <see cref="Local" /> calls this function with the value of the TZ environment variable. This
     ///         function itself is independent of the value of TZ, but if <paramref name="identifier" /> is
     ///         <see langword="null" /> then /etc/localtime will be consulted to discover the correct time zone on UNIX
     ///         and the registry will be consulted or GetTimeZoneInformation() will be used to get the local time zone
@@ -94,17 +109,6 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
         return result == nint.Zero ? null : new GTimeZone(result);
     }
 
-    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to local time.</summary>
-    /// <returns>A <see cref="GTimeZone" /> with the local timezone.</returns>
-    /// <remarks>
-    ///     The local time zone may change between invocations to this function; for example, if the system
-    ///     administrator changes it.
-    /// </remarks>
-    public static GTimeZone CreateFromLocal()
-    {
-        return new GTimeZone(GTimeZoneImports.GTimeZoneNewLocal());
-    }
-
     /// <summary>
     ///     Creates a <see cref="GTimeZone" /> corresponding to the given constant offset from UTC, in seconds.
     /// </summary>
@@ -118,16 +122,6 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     public static GTimeZone CreateFromOffset(int seconds)
     {
         return new GTimeZone(GTimeZoneImports.GTimeZoneNewOffset(seconds));
-    }
-
-    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to UTC.</summary>
-    /// <returns>A new <see cref="GTimeZone" /> with the universal timezone.</returns>
-    /// <remarks>
-    ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
-    /// </remarks>
-    public static GTimeZone CreateFromUtc()
-    {
-        return new GTimeZone(GTimeZoneImports.GTimeZoneNewUtc());
     }
 
     private GTimeZone(nint preexistingHandle)
