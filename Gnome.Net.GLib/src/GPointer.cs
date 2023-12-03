@@ -40,7 +40,7 @@ public class GPointer : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibImports.GFree(handle);
+        GLibApi.GFree(handle);
         handle = nint.Zero;
         return true;
     }

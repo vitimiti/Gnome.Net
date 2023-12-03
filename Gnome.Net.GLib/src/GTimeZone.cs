@@ -19,14 +19,14 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///     The local time zone may change between invocations to this function; for example, if the system
     ///     administrator changes it.
     /// </remarks>
-    public static GTimeZone Local => new(GTimeZoneImports.GTimeZoneNewLocal());
+    public static GTimeZone Local => new(GLibApi.GTimeZoneNewLocal());
 
     /// <summary>Creates a <see cref="GTimeZone" /> corresponding to UTC.</summary>
     /// <value>A new <see cref="GTimeZone" /> with the universal timezone.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
     /// </remarks>
-    public static GTimeZone Utc => new(GTimeZoneImports.GTimeZoneNewUtc());
+    public static GTimeZone Utc => new(GLibApi.GTimeZoneNewUtc());
 
     /// <summary>Get the identifier of this GTimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
     /// <value>A <see cref="string" /> with the identifier for the timezone.</value>
@@ -41,7 +41,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///     </para>
     /// </remarks>
     public string Identifier =>
-        GLibImports.GStringDuplicate(GTimeZoneImports.GTimeZoneGetIdentifier(this)) ?? string.Empty;
+        GLibApi.GStringDuplicate(GLibApi.GTimeZoneGetIdentifier(this)) ?? string.Empty;
 
     /// <summary>Creates a <see cref="GTimeZone" /> corresponding to <paramref name="identifier" />.</summary>
     /// <param name="identifier">A <see cref="string" /> with the identifier.</param>
@@ -105,7 +105,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public static GTimeZone? CreateFromIdentifier(string? identifier)
     {
-        var result = GTimeZoneImports.GTimeZoneNewIdentifier(identifier);
+        var result = GLibApi.GTimeZoneNewIdentifier(identifier);
         return result == nint.Zero ? null : new GTimeZone(result);
     }
 
@@ -121,7 +121,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public static GTimeZone CreateFromOffset(int seconds)
     {
-        return new GTimeZone(GTimeZoneImports.GTimeZoneNewOffset(seconds));
+        return new GTimeZone(GLibApi.GTimeZoneNewOffset(seconds));
     }
 
     private GTimeZone(nint preexistingHandle)
@@ -140,7 +140,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </returns>
     public bool IsDaylightSavingsTime(int interval)
     {
-        return GTimeZoneImports.GTimeZoneIsDst(this, interval);
+        return GLibApi.GTimeZoneIsDst(this, interval);
     }
 
     /// <summary>
@@ -155,8 +155,8 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return GLibImports.GStringDuplicate(
-                GTimeZoneImports.GTimeZoneGetAbbreviation(this, interval)
+        return GLibApi.GStringDuplicate(
+                GLibApi.GTimeZoneGetAbbreviation(this, interval)
             ) ?? string.Empty;
     }
 
@@ -175,7 +175,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int GetOffset(int interval)
     {
-        return GTimeZoneImports.GTimeZoneGetOffset(this, interval);
+        return GLibApi.GTimeZoneGetOffset(this, interval);
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int AdjustTime(GTimeType type, ref long time)
     {
-        return GTimeZoneImports.GTimeZoneAdjustTime(this, type, ref time);
+        return GLibApi.GTimeZoneAdjustTime(this, type, ref time);
     }
 
     /// <summary>Finds an interval within the timezone that corresponds to the given <paramref name="time" />.</summary>
@@ -236,7 +236,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int FindInterval(GTimeType type, long time)
     {
-        return GTimeZoneImports.GTimeZoneFindInterval(this, type, time);
+        return GLibApi.GTimeZoneFindInterval(this, type, time);
     }
 
     /// <summary>Frees the timezone.</summary>
@@ -248,7 +248,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GTimeZoneImports.GTimeZoneUnref(this);
+        GLibApi.GTimeZoneUnref(this);
         handle = nint.Zero;
         return true;
     }

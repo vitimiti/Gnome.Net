@@ -25,14 +25,14 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int Length =>
         _isLocked
-            ? GAsyncQueueImports.GAsyncQueueLengthUnlocked(this)
-            : GAsyncQueueImports.GAsyncQueueLength(this);
+            ? GLibApi.GAsyncQueueLengthUnlocked(this)
+            : GLibApi.GAsyncQueueLength(this);
 
     /// <summary>Creates a new asynchronous queue.</summary>
     public GAsyncQueue()
         : base(true)
     {
-        handle = GAsyncQueueImports.GAsyncQueueNew();
+        handle = GLibApi.GAsyncQueueNew();
     }
 
     /// <summary>Acquires the queue‘s lock.</summary>
@@ -44,7 +44,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Lock()
     {
-        GAsyncQueueImports.GAsyncQueueLock(this);
+        GLibApi.GAsyncQueueLock(this);
         _isLocked = true;
     }
 
@@ -54,8 +54,8 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public GPointer? Pop()
     {
         var data = _isLocked
-            ? GAsyncQueueImports.GAsyncQueuePopUnlocked(this)
-            : GAsyncQueueImports.GAsyncQueuePop(this);
+            ? GLibApi.GAsyncQueuePopUnlocked(this)
+            : GLibApi.GAsyncQueuePop(this);
 
         return data == nint.Zero ? null : new GPointer(data);
     }
@@ -67,11 +67,11 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            GAsyncQueueImports.GAsyncQueuePushUnlocked(this, data);
+            GLibApi.GAsyncQueuePushUnlocked(this, data);
             return;
         }
 
-        GAsyncQueueImports.GAsyncQueuePush(this, data);
+        GLibApi.GAsyncQueuePush(this, data);
     }
 
     /// <summary>Pushes the <paramref name="item" /> into the queue.</summary>
@@ -85,11 +85,11 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            GAsyncQueueImports.GAsyncQueuePushFrontUnlocked(this, item);
+            GLibApi.GAsyncQueuePushFrontUnlocked(this, item);
             return;
         }
 
-        GAsyncQueueImports.GAsyncQueuePushFront(this, item);
+        GLibApi.GAsyncQueuePushFront(this, item);
     }
 
     /// <summary>Pops data from the queue.</summary>
@@ -107,8 +107,8 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public GPointer? TimeoutPop(uint timeout)
     {
         var data = _isLocked
-            ? GAsyncQueueImports.GAsyncQueueTimeoutPopUnlocked(this, timeout)
-            : GAsyncQueueImports.GAsyncQueueTimeoutPop(this, timeout);
+            ? GLibApi.GAsyncQueueTimeoutPopUnlocked(this, timeout)
+            : GLibApi.GAsyncQueueTimeoutPop(this, timeout);
 
         return data == nint.Zero ? null : new GPointer(data);
     }
@@ -121,8 +121,8 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public bool TryRemove(GPointer item)
     {
         return _isLocked
-            ? GAsyncQueueImports.GAsyncQueueRemoveUnlocked(this, item)
-            : GAsyncQueueImports.GAsyncQueueRemove(this, item);
+            ? GLibApi.GAsyncQueueRemoveUnlocked(this, item)
+            : GLibApi.GAsyncQueueRemove(this, item);
     }
 
     /// <summary>Tries to pop data from the queue.</summary>
@@ -132,8 +132,8 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public GPointer? TryPop()
     {
         var data = _isLocked
-            ? GAsyncQueueImports.GAsyncQueueTryPopUnlocked(this)
-            : GAsyncQueueImports.GAsyncQueueTryPop(this);
+            ? GLibApi.GAsyncQueueTryPopUnlocked(this)
+            : GLibApi.GAsyncQueueTryPop(this);
 
         return data == nint.Zero ? null : new GPointer(data);
     }
@@ -144,7 +144,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Unlock()
     {
-        GAsyncQueueImports.GAsyncQueueUnlock(this);
+        GLibApi.GAsyncQueueUnlock(this);
         _isLocked = false;
     }
 
@@ -162,7 +162,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GAsyncQueueImports.GAsyncQueueUnref(this);
+        GLibApi.GAsyncQueueUnref(this);
         handle = nint.Zero;
         return true;
     }

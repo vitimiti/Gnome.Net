@@ -1,21 +1,30 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-using Gnome.Net.GLib.Utilities;
+using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
 
-internal static partial class GLibImports
+internal static partial class GLibApi
 {
-    [LibraryImport(LibraryName.Default, EntryPoint = "g_free")]
+    static GLibApi()
+    {
+        NativeLibrary.SetDllImportResolver(
+            Assembly.GetExecutingAssembly(),
+            DynamicName.DllImportResolver
+        );
+    }
+
+    [LibraryImport(LibraryName.GLib, EntryPoint = "g_free")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void GFree(nint memory);
 
     [LibraryImport(
-        LibraryName.Default,
+        LibraryName.GLib,
         EntryPoint = "g_get_application_name",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -23,7 +32,7 @@ internal static partial class GLibImports
     public static partial nint GGetApplicationName();
 
     [LibraryImport(
-        LibraryName.Default,
+        LibraryName.GLib,
         EntryPoint = "g_get_prgname",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -31,7 +40,7 @@ internal static partial class GLibImports
     public static partial nint GGetProgramName();
 
     [LibraryImport(
-        LibraryName.Default,
+        LibraryName.GLib,
         EntryPoint = "g_set_application_name",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -39,7 +48,7 @@ internal static partial class GLibImports
     public static partial void GSetApplicationName(string applicationName);
 
     [LibraryImport(
-        LibraryName.Default,
+        LibraryName.GLib,
         EntryPoint = "g_set_prgname",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -47,7 +56,7 @@ internal static partial class GLibImports
     public static partial void GSetProgramName(string applicationName);
 
     [LibraryImport(
-        LibraryName.Default,
+        LibraryName.GLib,
         EntryPoint = "g_strdup",
         StringMarshalling = StringMarshalling.Utf8
     )]

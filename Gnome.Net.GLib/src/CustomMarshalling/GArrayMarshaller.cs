@@ -53,6 +53,6 @@ internal static unsafe class GArrayMarshaller<T>
 
     public static void Free(GArrayUnmanaged* unmanaged)
     {
-        GArrayImports.GArrayUnref((nint)unmanaged);
+        GLibApi.GArrayUnref((nint)unmanaged);
     }
 }

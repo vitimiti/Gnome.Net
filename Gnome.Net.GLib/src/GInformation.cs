@@ -23,11 +23,11 @@ public static class GInformation
     /// </remarks>
     public static string? ApplicationName
     {
-        get => GLibImports.GStringDuplicate(GLibImports.GGetApplicationName());
+        get => GLibApi.GStringDuplicate(GLibApi.GGetApplicationName());
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            GLibImports.GSetApplicationName(value);
+            GLibApi.GSetApplicationName(value);
         }
     }
 
@@ -48,11 +48,11 @@ public static class GInformation
     /// </remarks>
     public static string? ProgramName
     {
-        get => GLibImports.GStringDuplicate(GLibImports.GGetProgramName());
+        get => GLibApi.GStringDuplicate(GLibApi.GGetProgramName());
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            GLibImports.GSetProgramName(value);
+            GLibApi.GSetProgramName(value);
         }
     }
 }
