@@ -15,7 +15,7 @@ internal static partial class GLibApi
     {
         NativeLibrary.SetDllImportResolver(
             Assembly.GetExecutingAssembly(),
-            DynamicName.DllImportResolver
+            LibraryName.DllImportResolver
         );
     }
 
