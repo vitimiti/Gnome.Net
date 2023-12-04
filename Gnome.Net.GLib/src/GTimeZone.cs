@@ -124,7 +124,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
         return new GTimeZone(GLibApi.GTimeZoneNewOffset(seconds));
     }
 
-    private GTimeZone(nint preexistingHandle)
+    internal GTimeZone(nint preexistingHandle)
         : base(true)
     {
         handle = preexistingHandle;
@@ -155,9 +155,8 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return GLibApi.GStringDuplicate(
-                GLibApi.GTimeZoneGetAbbreviation(this, interval)
-            ) ?? string.Empty;
+        return GLibApi.GStringDuplicate(GLibApi.GTimeZoneGetAbbreviation(this, interval))
+            ?? string.Empty;
     }
 
     /// <summary>
