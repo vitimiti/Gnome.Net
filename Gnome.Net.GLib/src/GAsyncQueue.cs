@@ -24,9 +24,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     ///     queue or due to scheduling.
     /// </remarks>
     public int Length =>
-        _isLocked
-            ? GLibApi.GAsyncQueueLengthUnlocked(this)
-            : GLibApi.GAsyncQueueLength(this);
+        _isLocked ? GLibApi.GAsyncQueueLengthUnlocked(this) : GLibApi.GAsyncQueueLength(this);
 
     /// <summary>Creates a new asynchronous queue.</summary>
     public GAsyncQueue()
@@ -53,9 +51,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>If queue is empty, this function blocks until data becomes available.</remarks>
     public GPointer? Pop()
     {
-        var data = _isLocked
-            ? GLibApi.GAsyncQueuePopUnlocked(this)
-            : GLibApi.GAsyncQueuePop(this);
+        var data = _isLocked ? GLibApi.GAsyncQueuePopUnlocked(this) : GLibApi.GAsyncQueuePop(this);
 
         return data == nint.Zero ? null : new GPointer(data);
     }
@@ -162,7 +158,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibApi.GAsyncQueueUnref(this);
+        GLibApi.GAsyncQueueUnref(handle);
         handle = nint.Zero;
         return true;
     }

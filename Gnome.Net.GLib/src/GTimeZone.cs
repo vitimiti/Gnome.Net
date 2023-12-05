@@ -247,7 +247,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibApi.GTimeZoneUnref(this);
+        GLibApi.GTimeZoneUnref(handle);
         handle = nint.Zero;
         return true;
     }

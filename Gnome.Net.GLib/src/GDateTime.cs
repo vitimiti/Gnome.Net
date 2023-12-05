@@ -559,7 +559,7 @@ public sealed class GDateTime
         return GLibApi.GDateTimeDifference(begin, end);
     }
 
-    private GDateTime(nint preexistingHandle)
+    internal GDateTime(nint preexistingHandle)
         : base(true)
     {
         handle = preexistingHandle;
@@ -1005,7 +1005,7 @@ public sealed class GDateTime
             return true;
         }
 
-        GLibApi.GDateTimeUnref(this);
+        GLibApi.GDateTimeUnref(handle);
         handle = nint.Zero;
         return true;
     }

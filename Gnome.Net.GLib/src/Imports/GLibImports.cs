@@ -55,6 +55,9 @@ internal static partial class GLibApi
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void GSetProgramName(string applicationName);
 
+    [LibraryImport(LibraryName.GLib, EntryPoint = "g_shell_error_quark")]
+    public static partial uint GShellErrorQuark();
+
     [LibraryImport(
         LibraryName.GLib,
         EntryPoint = "g_strdup",

@@ -241,5 +241,5 @@ internal static partial class GLibApi
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_date_time_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void GDateTimeUnref(GDateTime dateTime);
+    public static partial void GDateTimeUnref(nint dateTime);
 }

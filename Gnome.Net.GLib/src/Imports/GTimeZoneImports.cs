@@ -57,5 +57,5 @@ internal static partial class GLibApi
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void GTimeZoneUnref(GTimeZone tz);
+    public static partial void GTimeZoneUnref(nint tz);
 }

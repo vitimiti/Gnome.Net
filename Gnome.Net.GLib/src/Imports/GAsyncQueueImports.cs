@@ -82,5 +82,5 @@ internal static partial class GLibApi
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_async_queue_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void GAsyncQueueUnref(GAsyncQueue queue);
+    public static partial void GAsyncQueueUnref(nint queue);
 }
