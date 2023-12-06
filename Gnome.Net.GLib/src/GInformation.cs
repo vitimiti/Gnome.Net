@@ -1,6 +1,8 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
+using System.Runtime.InteropServices;
+
 using Gnome.Net.GLib.Imports;
 
 namespace Gnome.Net.GLib;
@@ -23,7 +25,7 @@ public static class GInformation
     /// </remarks>
     public static string? ApplicationName
     {
-        get => GLibApi.GStringDuplicate(GLibApi.GGetApplicationName());
+        get => GLibApi.GGetApplicationName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -48,11 +50,63 @@ public static class GInformation
     /// </remarks>
     public static string? ProgramName
     {
-        get => GLibApi.GStringDuplicate(GLibApi.GGetProgramName());
+        get => GLibApi.GGetProgramName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
             GLibApi.GSetProgramName(value);
         }
     }
+
+    /// <summary>
+    ///     Returns a base directory in which to store user-specific application configuration information such as user
+    ///     preferences and settings.
+    /// </summary>
+    /// <value>A <see cref="string" /> with the user configuration directory.</value>
+    /// <remarks>
+    ///     <para>
+    ///         On UNIX platforms this is determined using the mechanisms described in the
+    ///         <a href="http://www.freedesktop.org/Standards/basedir-spec">XDG Base Directory Specification</a>. In
+    ///         this case the directory retrieved will be <c>XDG_CONFIG_HOME</c>.
+    ///     </para>
+    ///     <para>
+    ///         On Windows it follows XDG Base Directory Specification if <c>XDG_DATA_HOME</c> is defined. If
+    ///         <c>XDG_CONFIG_HOME</c> is undefined, the folder to user for local (as opposed to roaming) application
+    ///         data is used instead. See the
+    ///         <a href="https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid">
+    ///             documentation for <c>FOLDERID_LocalAppData</c>
+    ///         </a>. Note that in this case on Windows it will be the same as what <see cref="UserDataDir" />
+    ///         returns.
+    ///     </para>
+    /// </remarks>
+    public static string? UserConfigDir => GLibApi.GGetUserConfigDir();
+
+    /// <summary>
+    ///     Returns a base directory in which to access application data such as icons that is customized for a
+    ///     particular user.
+    /// </summary>
+    /// <value>A <see cref="string" /> with the user data directory.</value>
+    /// <remarks>
+    ///     <para>
+    ///         On UNIX platforms this is determined using the mechanisms described in the
+    ///         <a href="http://www.freedesktop.org/Standards/basedir-spec">XDG Base Directory Specification</a>. In
+    ///         this case the directory retrieved will be <c>XDG_DATA_HOME</c>.
+    ///     </para>
+    ///     <para>
+    ///         On Windows it follows XDG Base Directory Specification if <c>XDG_DATA_HOME</c> is defined. If
+    ///         <c>XDG_DATA_HOME</c> is undefined, the folder to user for local (as opposed to roaming) application
+    ///         data is used instead. See the
+    ///         <a href="https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid">
+    ///             documentation for <c>FOLDERID_LocalAppData</c>
+    ///         </a>. Note that in this case on Windows it will be the same as what <see cref="UserConfigDir" />
+    ///         returns.
+    ///     </para>
+    ///     <para>
+    ///         The return value is cached and modifying it at runtime is not supported, as it's not thread-safe to
+    ///         modify environment variables at runtime.
+    ///     </para>
+    /// </remarks>
+    public static string? UserDataDir => GLibApi.GGetUserDataDir();
+
+    public static string[]? SystemDataDirs => GLibApi.GGetSystemDataDirs();
 }

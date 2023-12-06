@@ -40,8 +40,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         time offset, that will be returned by this function.
     ///     </para>
     /// </remarks>
-    public string Identifier =>
-        GLibApi.GStringDuplicate(GLibApi.GTimeZoneGetIdentifier(this)) ?? string.Empty;
+    public string Identifier => GLibApi.GTimeZoneGetIdentifier(this) ?? string.Empty;
 
     /// <summary>Creates a <see cref="GTimeZone" /> corresponding to <paramref name="identifier" />.</summary>
     /// <param name="identifier">A <see cref="string" /> with the identifier.</param>
@@ -155,8 +154,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return GLibApi.GStringDuplicate(GLibApi.GTimeZoneGetAbbreviation(this, interval))
-            ?? string.Empty;
+        return GLibApi.GTimeZoneGetAbbreviation(this, interval) ?? string.Empty;
     }
 
     /// <summary>

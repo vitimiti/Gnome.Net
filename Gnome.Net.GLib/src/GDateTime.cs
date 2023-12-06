@@ -262,7 +262,7 @@ public sealed class GDateTime
     ///     when daylight savings time is in effect.
     /// </remarks>
     public string TimeZoneAbbreviation =>
-        GLibApi.GStringDuplicate(GLibApi.GDateTimeGetTimeZoneAbbreviation(this)) ?? string.Empty;
+        GLibApi.GDateTimeGetTimeZoneAbbreviation(this) ?? string.Empty;
 
     /// <summary>
     ///     Creates a new <see cref="GDateTime" /> corresponding to the given <paramref name="date" /> and

@@ -4,6 +4,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using Gnome.Net.GLib.CustomMarshalling;
 using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
@@ -18,13 +19,23 @@ internal static partial class GLibApi
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial int GTimeZoneFindInterval(GTimeZone tz, GTimeType type, long time);
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_get_abbreviation")]
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_time_zone_get_abbreviation",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneGetAbbreviation(GTimeZone tz, int interval);
+    public static partial string? GTimeZoneGetAbbreviation(GTimeZone tz, int interval);
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_get_identifier")]
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_time_zone_get_identifier",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneGetIdentifier(GTimeZone tz);
+    public static partial string? GTimeZoneGetIdentifier(GTimeZone tz);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_get_offset")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]

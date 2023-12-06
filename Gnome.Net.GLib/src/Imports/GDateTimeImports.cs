@@ -4,6 +4,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using Gnome.Net.GLib.CustomMarshalling;
 using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
@@ -123,9 +124,14 @@ internal static partial class GLibApi
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint GDateTimeGetTimeZone(GDateTime dateTime);
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_date_time_get_timezone_abbreviation")]
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_date_time_get_timezone_abbreviation",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GDateTimeGetTimeZoneAbbreviation(GDateTime dateTime);
+    public static partial string? GDateTimeGetTimeZoneAbbreviation(GDateTime dateTime);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_date_time_get_utc_offset")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
