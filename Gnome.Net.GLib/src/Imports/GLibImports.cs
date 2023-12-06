@@ -4,7 +4,9 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 
+using Gnome.Net.GLib.CustomMarshalling;
 using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
@@ -26,18 +28,48 @@ internal static partial class GLibApi
     [LibraryImport(
         LibraryName.GLib,
         EntryPoint = "g_get_application_name",
-        StringMarshalling = StringMarshalling.Utf8
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GGetApplicationName();
+    public static partial string? GGetApplicationName();
 
     [LibraryImport(
         LibraryName.GLib,
         EntryPoint = "g_get_prgname",
-        StringMarshalling = StringMarshalling.Utf8
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GGetProgramName();
+    public static partial string? GGetProgramName();
+
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_get_system_data_dirs",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalUsing(typeof(NullTerminatedUtf8StringArrayMarshaller))]
+    public static partial string[]? GGetSystemDataDirs();
+
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_get_user_config_dir",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial string? GGetUserConfigDir();
+
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_get_user_data_dir",
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+    )]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial string? GGetUserDataDir();
 
     [LibraryImport(
         LibraryName.GLib,
@@ -56,6 +88,7 @@ internal static partial class GLibApi
     public static partial void GSetProgramName(string applicationName);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_shell_error_quark")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial uint GShellErrorQuark();
 
     [LibraryImport(
