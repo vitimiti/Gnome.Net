@@ -6,17 +6,15 @@ using Gnome.Net.GLib.Errors;
 namespace Gnome.Net.GLib.ErrorDomains;
 
 /// <summary>Error codes returned by shell functions.</summary>
-public struct GShellErrorQuark : IErrorQuark
+public class GShellErrorQuark : IErrorQuark
 {
-    /// <summary>The error domain.</summary>
-    /// <value>A <see cref="uint" /> with the error domain.</value>
+    /// <inheritdoc cref="IErrorQuark.Domain" />
     public uint Domain { get; internal init; }
 
     /// <summary>The error code.</summary>
     /// <value>A <see cref="GShellError" /> with the error code.</value>
     public GShellError Code { get; internal init; }
 
-    /// <summary>The error message.</summary>
-    /// <value>A <see cref="string" /> with the error message, or <see langword="null" />.</value>
+    /// <inheritdoc cref="IErrorQuark.Message" />
     public string? Message { get; internal init; }
 }

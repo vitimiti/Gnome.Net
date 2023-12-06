@@ -12,6 +12,10 @@ public struct GErrorQuarkValues
     /// <value>A <see cref="uint" /> with the quark value.</value>
     public static uint GBookmarkFileError => GLibApi.GBookmarkFileErrorQuark();
 
+    /// <summary>The <see cref="GFileErrorQuark" /> value.</summary>
+    /// <value>A <see cref="uint" /> with the quark value.</value>
+    public static uint GFileError => GLibApi.GFileErrorQuark();
+
     /// <summary>The <see cref="GShellError" /> value.</summary>
     /// <value>A <see cref="uint" /> with the quark value.</value>
     public static uint GShellError => GLibApi.GShellErrorQuark();

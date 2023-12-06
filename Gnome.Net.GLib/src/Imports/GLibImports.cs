@@ -21,6 +21,9 @@ internal static partial class GLibApi
         );
     }
 
+    [LibraryImport(LibraryName.GLib, EntryPoint = "g_file_error_quark")]
+    public static partial uint GFileErrorQuark();
+
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_free")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void GFree(nint memory);

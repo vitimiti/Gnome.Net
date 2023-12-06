@@ -6,17 +6,15 @@ using Gnome.Net.GLib.Errors;
 namespace Gnome.Net.GLib.ErrorDomains;
 
 /// <summary>Error codes returned by bookmark file parsing.</summary>
-public struct GBookmarkFileErrorQuark : IErrorQuark
+public class GBookmarkFileErrorQuark : IErrorQuark
 {
-    /// <summary>The error domain.</summary>
-    /// <value>A <see cref="uint" /> with the error domain.</value>
+    /// <inheritdoc cref="IErrorQuark.Domain" />
     public uint Domain { get; internal init; }
 
-    /// <summary>The error code.</summary>
+    /// <summary>Gets the error code.</summary>
     /// <value>A <see cref="GBookmarkFileError" /> with the error code.</value>
     public GBookmarkFileError Code { get; internal init; }
 
-    /// <summary>The error message.</summary>
-    /// <value>A <see cref="string" /> with the error message, or <see langword="null" />.</value>
+    /// <inheritdoc cref="IErrorQuark.Message" />
     public string? Message { get; internal init; }
 }

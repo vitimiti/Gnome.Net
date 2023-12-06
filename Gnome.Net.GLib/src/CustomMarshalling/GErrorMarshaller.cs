@@ -32,6 +32,16 @@ internal static class GErrorMarshaller
             };
         }
 
+        if (managed.Domain == GLibApi.GFileErrorQuark())
+        {
+            return new GFileErrorQuark
+            {
+                Domain = managed.Domain,
+                Code = (GFileError)managed.Code,
+                Message = Marshal.PtrToStringUTF8(managed.Message)
+            };
+        }
+
         if (managed.Domain == GLibApi.GShellErrorQuark())
         {
             return new GShellErrorQuark
@@ -44,21 +54,4 @@ internal static class GErrorMarshaller
 
         return null;
     }
-
-    // public static GBookmarkFileErrorQuark? FromUnmanaged(nint unmanaged)
-    // {
-    //     if (unmanaged == nint.Zero)
-    //     {
-    //         return null;
-    //     }
-    //
-    //     var managed = new GLibApi.GError();
-    //     Marshal.PtrToStructure(unmanaged, managed);
-    //     return new GBookmarkFileErrorQuark
-    //     {
-    //         Domain = GLibApi.GBookmarkFileErrorQuark(),
-    //         Code = (GBookmarkFileError)managed.Code,
-    //         Message = Marshal.PtrToStringUTF8(managed.Message)
-    //     };
-    // }
 }
