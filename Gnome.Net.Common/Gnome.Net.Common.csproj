@@ -9,6 +9,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Gnome.Net.Common</RootNamespace>
         <DefineTrace>true</DefineTrace>
+        <WarningsAsErrors>true</WarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
