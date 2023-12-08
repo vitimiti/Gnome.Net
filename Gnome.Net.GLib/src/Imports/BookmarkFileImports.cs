@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
-using Gnome.Net.GLib.LibraryUtilities;
+using Gnome.Net.Common;
 
 namespace Gnome.Net.GLib.Imports;
 

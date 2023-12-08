@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
+using Gnome.Net.Common;
 using Gnome.Net.GLib.CustomMarshalling;
-using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
 
@@ -17,7 +17,7 @@ internal static partial class LibraryApi
     {
         NativeLibrary.SetDllImportResolver(
             Assembly.GetExecutingAssembly(),
-            LibraryName.DllImportResolver
+            LibraryImportResolver.DllImportResolver
         );
     }
 

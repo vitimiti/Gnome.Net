@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnome.Net.GLib", "Gnome.Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTests", "QuickTests\QuickTests.csproj", "{999AB0C7-761E-455F-B507-F661094CDD53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnome.Net.Common", "Gnome.Net.Common\Gnome.Net.Common.csproj", "{7D4FD9AC-DA50-428D-853D-E6F8B7A4CC13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{999AB0C7-761E-455F-B507-F661094CDD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{999AB0C7-761E-455F-B507-F661094CDD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{999AB0C7-761E-455F-B507-F661094CDD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4FD9AC-DA50-428D-853D-E6F8B7A4CC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4FD9AC-DA50-428D-853D-E6F8B7A4CC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4FD9AC-DA50-428D-853D-E6F8B7A4CC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4FD9AC-DA50-428D-853D-E6F8B7A4CC13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
