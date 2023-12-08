@@ -22,7 +22,38 @@ internal static partial class LibraryApi
     }
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_file_error_quark")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial uint FileErrorQuark();
+
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_file_set_contents",
+        StringMarshalling = StringMarshalling.Utf8
+    )]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool FileSetContents(
+        string filename,
+        string contents,
+        nint length,
+        out nint error
+    );
+
+    [LibraryImport(
+        LibraryName.GLib,
+        EntryPoint = "g_file_set_contents_full",
+        StringMarshalling = StringMarshalling.Utf8
+    )]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static partial bool FileSetContentsFull(
+        string filename,
+        string contents,
+        nint length,
+        FileSetContentsOptions flags,
+        int mode,
+        out nint error
+    );
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_free")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
