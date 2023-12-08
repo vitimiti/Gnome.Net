@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnome.Net.GLib", "Gnome.Net.GLib\Gnome.Net.GLib.csproj", "{CB7E4112-6C23-4DD3-B385-F52179F07F46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnome.Net.Glib", "Gnome.Net.Glib\Gnome.Net.Glib.csproj", "{CB7E4112-6C23-4DD3-B385-F52179F07F46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTests", "QuickTests\QuickTests.csproj", "{999AB0C7-761E-455F-B507-F661094CDD53}"
 EndProject

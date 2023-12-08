@@ -1,30 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--This file is part of the Gnome.Net project and is under the MIT license.-->
+<!--See LICENSE.md for more information.-->
+
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>QuickTests</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>Gnome.Net.Glib</RootNamespace>
         <DefineTrace>true</DefineTrace>
     </PropertyGroup>
-
+    
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <DefineDebug>true</DefineDebug>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
     </PropertyGroup>
-
+    
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <DefineDebug>false</DefineDebug>
         <DebugSymbols>false</DebugSymbols>
         <DebugType>none</DebugType>
         <Optimize>true</Optimize>
     </PropertyGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\Gnome.Net.Glib\Gnome.Net.Glib.csproj" />
+      <ProjectReference Include="..\Gnome.Net.Common\Gnome.Net.Common.csproj" />
     </ItemGroup>
 
 </Project>
