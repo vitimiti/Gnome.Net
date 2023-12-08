@@ -11,113 +11,113 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.GLib;
 
 /// <summary>Represents a date and time, including a time zone.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<GDateTime>))]
-public sealed class GDateTime
+[NativeMarshalling(typeof(SafeHandleMarshaller<DateTime>))]
+public sealed class DateTime
     : SafeHandleZeroOrMinusOneIsInvalid,
-        IEquatable<GDateTime>,
-        IComparable<GDateTime>,
+        IEquatable<DateTime>,
+        IComparable<DateTime>,
         IComparable
 {
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to this exact instant in the local time zone.
+    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in the local time zone.
     /// </summary>
-    /// <value>A new <see cref="GDateTime" />, or <see langword="null" />.</value>
+    /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Local" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
     /// </remarks>
-    public static GDateTime? NowLocal
+    public static DateTime? NowLocal
     {
         get
         {
-            var result = GLibApi.GDateTimeNewNowLocal();
-            return result == nint.Zero ? null : new GDateTime(result);
+            var result = LibraryApi.DateTimeNewNowLocal();
+            return result == nint.Zero ? null : new DateTime(result);
         }
     }
 
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to this exact instant in UTC.
+    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in UTC.
     /// </summary>
-    /// <value>A new <see cref="GDateTime" />, or <see langword="null" />.</value>
+    /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Utc" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
     /// </remarks>
-    public static GDateTime? NowUtc
+    public static DateTime? NowUtc
     {
         get
         {
-            var result = GLibApi.GDateTimeNewNowUtc();
-            return result == nint.Zero ? null : new GDateTime(result);
+            var result = LibraryApi.DateTimeNewNowUtc();
+            return result == nint.Zero ? null : new DateTime(result);
         }
     }
 
     /// <summary>
-    ///     Creates a new <see cref="GDateTime" /> corresponding to the same instant in time as the current one, but in
+    ///     Creates a new <see cref="DateTime" /> corresponding to the same instant in time as the current one, but in
     ///     the local time zone.
     /// </summary>
-    /// <value>A new <see cref="GDateTime" />, or <see langword="null" /> on error.</value>
+    /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Local" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
     /// </remarks>
-    public GDateTime? ToLocal
+    public DateTime? ToLocal
     {
         get
         {
-            var result = GLibApi.GDateTimeToLocal(this);
-            return result == nint.Zero ? null : new GDateTime(result);
+            var result = LibraryApi.DateTimeToLocal(this);
+            return result == nint.Zero ? null : new DateTime(result);
         }
     }
 
     /// <summary>
-    ///     Creates a new <see cref="GDateTime" /> corresponding to the same instant in time as the current one, but in
+    ///     Creates a new <see cref="DateTime" /> corresponding to the same instant in time as the current one, but in
     ///     UTC.
     /// </summary>
-    /// <value>A new <see cref="GDateTime" />, or <see langword="null" /> on error.</value>
+    /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Utc" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
     /// </remarks>
-    public GDateTime? ToUtc
+    public DateTime? ToUtc
     {
         get
         {
-            var result = GLibApi.GDateTimeToUtc(this);
-            return result == nint.Zero ? null : new GDateTime(result);
+            var result = LibraryApi.DateTimeToUtc(this);
+            return result == nint.Zero ? null : new DateTime(result);
         }
     }
 
     /// <summary>
-    ///     Gets the Unix time corresponding to the current <see cref="GDateTime" />, rounding down to the nearest
+    ///     Gets the Unix time corresponding to the current <see cref="DateTime" />, rounding down to the nearest
     ///     second.
     /// </summary>
     /// <value>An <see cref="long" /> with the Unix time.</value>
     /// <remarks>
     ///     Unix time is the number of seconds that have elapsed since 1970-01-01 00:00:00 UTC, regardless of the time
-    ///     zone associated with the <see cref="GDateTime" />.
+    ///     zone associated with the <see cref="DateTime" />.
     /// </remarks>
-    public long ToUnix => GLibApi.GDateTimeToUnix(this);
+    public long ToUnix => LibraryApi.DateTimeToUnix(this);
 
     /// <summary>
     ///     Gets whether daylight savings time is in effect at the time and in the time zone of the
-    ///     <see cref="GDateTime" />.
+    ///     <see cref="DateTime" />.
     /// </summary>
     /// <value>
-    ///     <see langword="true" /> if the current <see cref="GDateTime" /> daylight savings time is in effect,
+    ///     <see langword="true" /> if the current <see cref="DateTime" /> daylight savings time is in effect,
     ///     <see langword="false" /> otherwise.
     /// </value>
-    public bool IsDaylightSavings => GLibApi.GDateTimeIsDaylightSavings(this);
+    public bool IsDaylightSavings => LibraryApi.DateTimeIsDaylightSavings(this);
 
     /// <summary>
-    ///     Format the <see cref="GDateTime" /> in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>,
+    ///     Format the <see cref="DateTime" /> in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>,
     ///     including the date, time and time zone, and return that as a UTF-8 encoded string.
     /// </summary>
-    /// <value>A <see cref="string" /> with the formatted <see cref="GDateTime" />, or <see langword="null" />.</value>
+    /// <value>A <see cref="string" /> with the formatted <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>This will output to sub-second precision if needed.</remarks>
-    public string? FormatIso8601 => GLibApi.GDateTimeFormatIso8601(this);
+    public string? FormatIso8601 => LibraryApi.DateTimeFormatIso8601(this);
 
-    /// <summary>Gets the ISO 8601 week number for the week containing the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the ISO 8601 week number for the week containing the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the ISO 8601 week number of the week.</value>
     /// <remarks>
     ///     <para>
@@ -135,28 +135,28 @@ public sealed class GDateTime
     ///         week of the next year if 4 or more days of that week are contained within the new year.
     ///     </para>
     /// </remarks>
-    public int WeekOfYear => GLibApi.GDateTimeGetWeekOfYear(this);
+    public int WeekOfYear => LibraryApi.DateTimeGetWeekOfYear(this);
 
     /// <summary>
-    ///     Gets the day of the year represented by the <see cref="GDateTime" /> in the gregorian calendar.
+    ///     Gets the day of the year represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfYear => GLibApi.GDateTimeGetDayOfYear(this);
+    public int DayOfYear => LibraryApi.DateTimeGetDayOfYear(this);
 
     /// <summary>
-    ///     Gets the day of the month represented by the <see cref="GDateTime" /> in the gregorian calendar.
+    ///     Gets the day of the month represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfMonth => GLibApi.GDateTimeGetDayOfMonth(this);
+    public int DayOfMonth => LibraryApi.DateTimeGetDayOfMonth(this);
 
     /// <summary>
-    ///     Gets the ISO 8601 day of the week on which the <see cref="GDateTime" /> falls (1 is Monday, 2 is Tuesday… 7
+    ///     Gets the ISO 8601 day of the week on which the <see cref="DateTime" /> falls (1 is Monday, 2 is Tuesday… 7
     ///     is Sunday).
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the week.</value>
-    public int DayOfWeek => GLibApi.GDateTimeGetDayOfWeek(this);
+    public int DayOfWeek => LibraryApi.DateTimeGetDayOfWeek(this);
 
-    /// <summary>Gets the Gregorian day, month, and year of the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the Gregorian day, month, and year of the <see cref="DateTime" />.</summary>
     /// <value>
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="int" />) with the Gregorian day, month and
     ///     year.
@@ -165,37 +165,37 @@ public sealed class GDateTime
     {
         get
         {
-            GLibApi.GDateTimeGetYearMonthDay(this, out var year, out var month, out var day);
+            LibraryApi.DateTimeGetYearMonthDay(this, out var year, out var month, out var day);
             return (year, month, day);
         }
     }
 
-    /// <summary>Gets the year of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the year of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the year of the date.</value>
-    public int Year => GLibApi.GDateTimeGetYear(this);
+    public int Year => LibraryApi.DateTimeGetYear(this);
 
-    /// <summary>Gets the month of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the month of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the month of the date.</value>
-    public int Month => GLibApi.GDateTimeGetMonth(this);
+    public int Month => LibraryApi.DateTimeGetMonth(this);
 
-    /// <summary>Gets the hour of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the hour of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the hour of the date.</value>
-    public int Hour => GLibApi.GDateTimeGetHour(this);
+    public int Hour => LibraryApi.DateTimeGetHour(this);
 
-    /// <summary>Gets the minute of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the minute of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the minute of the date.</value>
-    public int Minute => GLibApi.GDateTimeGetMinute(this);
+    public int Minute => LibraryApi.DateTimeGetMinute(this);
 
-    /// <summary>Gets the second of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the second of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the second of the date.</value>
-    public int Second => GLibApi.GDateTimeGetSecond(this);
+    public int Second => LibraryApi.DateTimeGetSecond(this);
 
-    /// <summary>Gets the microsecond of the date represented by the <see cref="GDateTime" />.</summary>
+    /// <summary>Gets the microsecond of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the microsecond of the date.</value>
-    public int Microsecond => GLibApi.GDateTimeGetMicrosecond(this);
+    public int Microsecond => LibraryApi.DateTimeGetMicrosecond(this);
 
     /// <summary>
-    ///     Gets the ISO 8601 week-numbering year in which the week containing the <see cref="GDateTime" /> falls.
+    ///     Gets the ISO 8601 week-numbering year in which the week containing the <see cref="DateTime" /> falls.
     /// </summary>
     /// <value>An <see cref="int" /> with the ISO 8601 week-numbering year.</value>
     /// <remarks>
@@ -230,18 +230,18 @@ public sealed class GDateTime
     ///         Note that 0001/01/01 in the proleptic Gregorian calendar is a Monday, so this function never returns 0.
     ///     </para>
     /// </remarks>
-    public int NumberingYear => GLibApi.GDateTimeGetWeekNumberingYear(this);
+    public int NumberingYear => LibraryApi.DateTimeGetWeekNumberingYear(this);
 
-    /// <summary>Gets the time zone for this <see cref="GDateTime" />.</summary>
-    /// <value>A <see cref="GTimeZone" /> corresponding to the current <see cref="GDateTime" />.</value>
-    public GTimeZone TimeZone => new(GLibApi.GDateTimeGetTimeZone(this));
+    /// <summary>Gets the time zone for this <see cref="DateTime" />.</summary>
+    /// <value>A <see cref="GLib.TimeZone" /> corresponding to the current <see cref="DateTime" />.</value>
+    public TimeZone TimeZone => new(LibraryApi.DateTimeGetTimeZone(this));
 
     /// <summary>Gets the number of seconds since the start of the last minute, including the fractional part.</summary>
     /// <value>An <see cref="int" /> with the number of seconds since the start of the last minute.</value>
-    public double Seconds => GLibApi.GDateTimeGetSeconds(this);
+    public double Seconds => LibraryApi.DateTimeGetSeconds(this);
 
     /// <summary>
-    ///     Gets the offset to UTC in effect at the time and in the time zone of <see cref="GDateTime" />.
+    ///     Gets the offset to UTC in effect at the time and in the time zone of <see cref="DateTime" />.
     /// </summary>
     /// <value>An <see cref="long" /> with the offset to UTC at this time and time zone.</value>
     /// <remarks>
@@ -249,12 +249,12 @@ public sealed class GDateTime
     ///         The offset is the number of microseconds that you add to UTC time to arrive at local time for the time
     ///         zone (ie: negative numbers for time zones west of GMT, positive numbers for east).
     ///     </para>
-    ///     <para>If the <see cref="GDateTime" /> represents UTC time, then the offset is always zero.</para>
+    ///     <para>If the <see cref="DateTime" /> represents UTC time, then the offset is always zero.</para>
     /// </remarks>
-    public long UtcOffset => GLibApi.GDateTimeGetUtcOffset(this);
+    public long UtcOffset => LibraryApi.DateTimeGetUtcOffset(this);
 
     /// <summary>
-    ///     Gets the time zone abbreviation to be used at the time and in the time zone of the <see cref="GDateTime" />.
+    ///     Gets the time zone abbreviation to be used at the time and in the time zone of the <see cref="DateTime" />.
     /// </summary>
     /// <value>A <see cref="string" /> with the time zone abbreviation.</value>
     /// <remarks>
@@ -262,13 +262,13 @@ public sealed class GDateTime
     ///     when daylight savings time is in effect.
     /// </remarks>
     public string TimeZoneAbbreviation =>
-        GLibApi.GDateTimeGetTimeZoneAbbreviation(this) ?? string.Empty;
+        LibraryApi.DateTimeGetTimeZoneAbbreviation(this) ?? string.Empty;
 
     /// <summary>
-    ///     Creates a new <see cref="GDateTime" /> corresponding to the given <paramref name="date" /> and
+    ///     Creates a new <see cref="DateTime" /> corresponding to the given <paramref name="date" /> and
     ///     <paramref name="time" /> in the timezone <paramref name="tz" />.
     /// </summary>
-    /// <param name="tz">A <see cref="GTimeZone" /> with the timezone.</param>
+    /// <param name="tz">A <see cref="GLib.TimeZone" /> with the timezone.</param>
     /// <param name="date">
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="int" />) with the year, month and day,
     ///     respectively.
@@ -277,7 +277,7 @@ public sealed class GDateTime
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="double" />) with the hour, minute and
     ///     seconds, respectively.
     /// </param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" /> on failure.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" /> on failure.</returns>
     /// <remarks>
     ///     <para>
     ///         The <paramref name="date" />.Year must be between 1 and 9999, <paramref name="date" />.Month between 1
@@ -308,13 +308,13 @@ public sealed class GDateTime
     ///         case that they are, the function will return <see langword="null" />.
     ///     </para>
     /// </remarks>
-    public static GDateTime? Create(
-        GTimeZone tz,
+    public static DateTime? Create(
+        TimeZone tz,
         (int Year, int Month, int Day) date,
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = GLibApi.GDateTimeNew(
+        var result = LibraryApi.DateTimeNew(
             tz,
             date.Year,
             date.Month,
@@ -324,11 +324,11 @@ public sealed class GDateTime
             time.Seconds
         );
 
-        return result == nint.Zero ? null : new GDateTime(result);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a new <see cref="GDateTime" /> corresponding to the given date and time in the local timezone.
+    ///     Creates a new <see cref="DateTime" /> corresponding to the given date and time in the local timezone.
     /// </summary>
     /// <param name="date">
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="int" />) with the year, month and day,
@@ -338,17 +338,17 @@ public sealed class GDateTime
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="double" />) with the hour, minute and
     ///     seconds, respectively.
     /// </param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Local" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
     /// </remarks>
-    public static GDateTime? CreateFromLocal(
+    public static DateTime? CreateFromLocal(
         (int Year, int Month, int Day) date,
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = GLibApi.GDateTimeNewLocal(
+        var result = LibraryApi.DateTimeNewLocal(
             date.Year,
             date.Month,
             date.Day,
@@ -357,11 +357,11 @@ public sealed class GDateTime
             time.Seconds
         );
 
-        return result == nint.Zero ? null : new GDateTime(result);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a new <see cref="GDateTime" /> corresponding to the given date and time in UTC.
+    ///     Creates a new <see cref="DateTime" /> corresponding to the given date and time in UTC.
     /// </summary>
     /// <param name="date">
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="int" />) with the year, month and day,
@@ -371,17 +371,17 @@ public sealed class GDateTime
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="double" />) with the hour, minute and
     ///     seconds, respectively.
     /// </param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
-    ///     <see cref="GTimeZone" />.<see cref="GTimeZone.Utc" />.
+    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
     /// </remarks>
-    public static GDateTime? CreateFromUtc(
+    public static DateTime? CreateFromUtc(
         (int Year, int Month, int Day) date,
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = GLibApi.GDateTimeNewUtc(
+        var result = LibraryApi.DateTimeNewUtc(
             date.Year,
             date.Month,
             date.Day,
@@ -390,25 +390,25 @@ public sealed class GDateTime
             time.Seconds
         );
 
-        return result == nint.Zero ? null : new GDateTime(result);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to the given
+    ///     Creates a <see cref="DateTime" /> corresponding to the given
     ///     <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 formatted string</a> <paramref name="text" />.
     /// </summary>
     /// <param name="text">A <see cref="string" /> with an ISO 8601 formatted time, or <see langword="null" />.</param>
     /// <param name="defaultTz">
-    ///     A <see cref="GTimeZone" /> to use if the text doesn’t contain a timezone, or <see langword="null" />.
+    ///     A <see cref="GLib.TimeZone" /> to use if the text doesn’t contain a timezone, or <see langword="null" />.
     /// </param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>
     ///         ISO 8601 strings of the form are supported, with some extensions from
     ///         <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> as mentioned below.
     ///     </para>
     ///     <para>
-    ///         Note that as <see cref="GDateTime" /> “is oblivious to leap seconds”, leap seconds information in an
+    ///         Note that as <see cref="DateTime" /> “is oblivious to leap seconds”, leap seconds information in an
     ///         ISO-8601 string will be ignored, so a 23:59:60 time would be parsed as 23:59:59.
     ///     </para>
     ///     <para>
@@ -477,18 +477,18 @@ public sealed class GDateTime
     ///         <see cref="string" />.
     ///     </para>
     /// </remarks>
-    public static GDateTime? CreateFromIso8601(string? text, GTimeZone? defaultTz)
+    public static DateTime? CreateFromIso8601(string? text, TimeZone? defaultTz)
     {
-        var result = GLibApi.GDateTimeNewFromIso8601(text, defaultTz);
-        return result == nint.Zero ? null : new GDateTime(result);
+        var result = LibraryApi.DateTimeNewFromIso8601(text, defaultTz);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to the given Unix <paramref name="time" /> in the local
+    ///     Creates a <see cref="DateTime" /> corresponding to the given Unix <paramref name="time" /> in the local
     ///     timezone.
     /// </summary>
     /// <param name="time">An <see cref="long" /> with the Unix time.</param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>
     ///         Unix time is the number of seconds that have elapsed since 1970-01-01 00:00:00 UTC, regardless of the
@@ -496,20 +496,20 @@ public sealed class GDateTime
     ///     </para>
     ///     <para>
     ///         This call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
-    ///         outside of the supported range of <see cref="GDateTime" />.
+    ///         outside of the supported range of <see cref="DateTime" />.
     ///     </para>
     /// </remarks>
-    public static GDateTime? CreateFromUnixLocal(long time)
+    public static DateTime? CreateFromUnixLocal(long time)
     {
-        var result = GLibApi.GDateTimeNewFromUnixLocal(time);
-        return result == nint.Zero ? null : new GDateTime(result);
+        var result = LibraryApi.DateTimeNewFromUnixLocal(time);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to the given Unix <paramref name="time" /> in UTC.
+    ///     Creates a <see cref="DateTime" /> corresponding to the given Unix <paramref name="time" /> in UTC.
     /// </summary>
     /// <param name="time">An <see cref="long" /> with the Unix time.</param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>
     ///         Unix time is the number of seconds that have elapsed since 1970-01-01 00:00:00 UTC, regardless of the
@@ -517,76 +517,76 @@ public sealed class GDateTime
     ///     </para>
     ///     <para>
     ///         This call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
-    ///         outside of the supported range of <see cref="GDateTime" />.
+    ///         outside of the supported range of <see cref="DateTime" />.
     ///     </para>
     /// </remarks>
-    public static GDateTime? CreateFromUnixUtc(long time)
+    public static DateTime? CreateFromUnixUtc(long time)
     {
-        var result = GLibApi.GDateTimeNewFromUnixUtc(time);
-        return result == nint.Zero ? null : new GDateTime(result);
+        var result = LibraryApi.DateTimeNewFromUnixUtc(time);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
-    ///     Creates a <see cref="GDateTime" /> corresponding to this exact instant in the given timezone.
+    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in the given timezone.
     /// </summary>
-    /// <param name="tz">A <see cref="GTimeZone" /> with the timezone.</param>
-    /// <returns>A new <see cref="GDateTime" />, or <see langword="null" />.</returns>
+    /// <param name="tz">A <see cref="GLib.TimeZone" /> with the timezone.</param>
+    /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>The time is as accurate as the system allows, to a maximum accuracy of 1 microsecond.</para>
     ///     <para>This function will always succeed unless GLib is still being used after the year 9999.</para>
     /// </remarks>
-    public static GDateTime? CreateFromNow(GTimeZone tz)
+    public static DateTime? CreateFromNow(TimeZone tz)
     {
-        var result = GLibApi.GDateTimeNewNow(tz);
-        return result == nint.Zero ? null : new GDateTime(result);
+        var result = LibraryApi.DateTimeNewNow(tz);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>
     ///     Calculates the difference in time between <paramref name="end" /> and <paramref name="begin"/>.
     /// </summary>
-    /// <param name="begin">A <see cref="GDateTime" /> representing the begin value.</param>
-    /// <param name="end">A <see cref="GDateTime" /> representing the end value.</param>
+    /// <param name="begin">A <see cref="DateTime" /> representing the begin value.</param>
+    /// <param name="end">A <see cref="DateTime" /> representing the end value.</param>
     /// <returns>
-    ///     An <see cref="long" /> with the difference between the two <see cref="GDateTime" />, as a time span
+    ///     An <see cref="long" /> with the difference between the two <see cref="DateTime" />, as a time span
     ///     expressed in microseconds.
     /// </returns>
     /// <remarks>
     ///     The <see cref="long" /> that is returned is effectively end - begin (ie: positive if the first parameter is
     ///     larger).
     /// </remarks>
-    public static long Difference(GDateTime begin, GDateTime end)
+    public static long Difference(DateTime begin, DateTime end)
     {
-        return GLibApi.GDateTimeDifference(begin, end);
+        return LibraryApi.DateTimeDifference(begin, end);
     }
 
-    internal GDateTime(nint preexistingHandle)
+    internal DateTime(nint preexistingHandle)
         : base(true)
     {
         handle = preexistingHandle;
     }
 
     /// <summary>
-    ///     Create a new <see cref="GDateTime" /> corresponding to the same instant in time as the current one, but in
+    ///     Create a new <see cref="DateTime" /> corresponding to the same instant in time as the current one, but in
     ///     the timezone <paramref name="tz" />.</summary>
-    /// <param name="tz">The <see cref="GTimeZone" /> for the new <see cref="GDateTime" />.</param>
+    /// <param name="tz">The <see cref="GLib.TimeZone" /> for the new <see cref="DateTime" />.</param>
     /// <returns>
-    ///     A new <see cref="GDateTime" /> for the given <paramref name="tz" />, or <see langword="null" />.
+    ///     A new <see cref="DateTime" /> for the given <paramref name="tz" />, or <see langword="null" />.
     /// </returns>
     /// <remarks>
     ///     This call can fail in the case that the time goes out of bounds. For example, converting 0001-01-01 00:00:00
     ///     UTC to a time zone west of Greenwich will fail (due to the year 0 being out of range).
     /// </remarks>
-    public GDateTime? ToTimeZone(GTimeZone tz)
+    public DateTime? ToTimeZone(TimeZone tz)
     {
-        var result = GLibApi.GDateTimeToTimeZone(this, tz);
-        return result == nint.Zero ? null : new GDateTime(result);
+        var result = LibraryApi.DateTimeToTimeZone(this, tz);
+        return result == nint.Zero ? null : new DateTime(result);
     }
 
     /// <summary>Adds the specified timespan.</summary>
     /// <param name="timeSpan">An <see cref="long" /> with the timespan to add.</param>
     public void Add(long timeSpan)
     {
-        handle = GLibApi.GDateTimeAdd(this, timeSpan);
+        handle = LibraryApi.DateTimeAdd(this, timeSpan);
     }
 
     /// <summary>Add the specified <paramref name="date" /> and <paramref name="time" />.</summary>
@@ -604,7 +604,7 @@ public sealed class GDateTime
         (int Hours, int Minutes, double Seconds) time
     )
     {
-        handle = GLibApi.GDateTimeAddFull(
+        handle = LibraryApi.DateTimeAddFull(
             this,
             date.Years,
             date.Months,
@@ -618,13 +618,13 @@ public sealed class GDateTime
     /// <summary>Adds the specified years.</summary>
     /// <param name="years">An <see cref="int" /> with the years to add.</param>
     /// <remarks>Add negative <paramref name="years" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddYears(int years)
     {
-        handle = GLibApi.GDateTimeAddYears(this, years);
+        handle = LibraryApi.DateTimeAddYears(this, years);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{years}' years to the current date time."
             );
         }
@@ -633,13 +633,13 @@ public sealed class GDateTime
     /// <summary>Adds the specified months.</summary>
     /// <param name="months">An <see cref="int" /> with the months to add.</param>
     /// <remarks>Add negative <paramref name="months" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMonths(int months)
     {
-        handle = GLibApi.GDateTimeAddMonths(this, months);
+        handle = LibraryApi.DateTimeAddMonths(this, months);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{months}' months to the current date time."
             );
         }
@@ -648,13 +648,13 @@ public sealed class GDateTime
     /// <summary>Adds the specified weeks.</summary>
     /// <param name="weeks">An <see cref="int" /> with the weeks to add.</param>
     /// <remarks>Add negative <paramref name="weeks" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddWeeks(int weeks)
     {
-        handle = GLibApi.GDateTimeAddWeeks(this, weeks);
+        handle = LibraryApi.DateTimeAddWeeks(this, weeks);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{weeks}' weeks to the current date time."
             );
         }
@@ -663,26 +663,26 @@ public sealed class GDateTime
     /// <summary>Adds the specified days.</summary>
     /// <param name="days">An <see cref="int" /> with the days to add.</param>
     /// <remarks>Add negative <paramref name="days" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddDays(int days)
     {
-        handle = GLibApi.GDateTimeAddDays(this, days);
+        handle = LibraryApi.DateTimeAddDays(this, days);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException($"Unable to add '{days}' days to the current date time.");
+            throw new DateTimeException($"Unable to add '{days}' days to the current date time.");
         }
     }
 
     /// <summary>Adds the specified hours.</summary>
     /// <param name="hours">An <see cref="int" /> with the hours to add.</param>
     /// <remarks>Add negative <paramref name="hours" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddHours(int hours)
     {
-        handle = GLibApi.GDateTimeAddHours(this, hours);
+        handle = LibraryApi.DateTimeAddHours(this, hours);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{hours}' hours to the current date time."
             );
         }
@@ -691,13 +691,13 @@ public sealed class GDateTime
     /// <summary>Adds the specified minutes.</summary>
     /// <param name="minutes">An <see cref="int" /> with the minutes to add.</param>
     /// <remarks>Add negative <paramref name="minutes" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMinutes(int minutes)
     {
-        handle = GLibApi.GDateTimeAddMinutes(this, minutes);
+        handle = LibraryApi.DateTimeAddMinutes(this, minutes);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{minutes}' minutes to the current date time."
             );
         }
@@ -706,20 +706,20 @@ public sealed class GDateTime
     /// <summary>Adds the specified seconds.</summary>
     /// <param name="seconds">An <see cref="int" /> with the seconds to add.</param>
     /// <remarks>Add negative <paramref name="seconds" /> to subtract them.</remarks>
-    /// <exception cref="GDateTimeException">When setting the internal handle to <see langword="null" />.</exception>
+    /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddSeconds(int seconds)
     {
-        handle = GLibApi.GDateTimeAddSeconds(this, seconds);
+        handle = LibraryApi.DateTimeAddSeconds(this, seconds);
         if (handle == nint.Zero)
         {
-            throw new GDateTimeException(
+            throw new DateTimeException(
                 $"Unable to add '{seconds}' seconds to the current date time."
             );
         }
     }
 
     /// <summary>Creates a newly allocated string representing the requested <paramref name="format" />.</summary>
-    /// <param name="format">A <see cref="string" /> containing the format for the <see cref="GDateTime" />.</param>
+    /// <param name="format">A <see cref="string" /> containing the format for the <see cref="DateTime" />.</param>
     /// <returns>
     ///     A <see cref="string" /> with the new format, or <see langword="null" /> if there was an error (such as a
     ///     format specifier not being supported in the current locale).
@@ -993,7 +993,7 @@ public sealed class GDateTime
     /// </remarks>
     public string? Format(string format)
     {
-        return GLibApi.GDateTimeFormat(this, format);
+        return LibraryApi.DateTimeFormat(this, format);
     }
 
     /// <summary>Releases the memory held in the date time.</summary>
@@ -1005,139 +1005,139 @@ public sealed class GDateTime
             return true;
         }
 
-        GLibApi.GDateTimeUnref(handle);
+        LibraryApi.DateTimeUnref(handle);
         handle = nint.Zero;
         return true;
     }
 
-    /// <summary>Gets the hash code of the <see cref="GDateTime" />.</summary>
-    /// <returns>An <see cref="int" /> with the <see cref="GDateTime" /> hash.</returns>
+    /// <summary>Gets the hash code of the <see cref="DateTime" />.</summary>
+    /// <returns>An <see cref="int" /> with the <see cref="DateTime" /> hash.</returns>
     public override int GetHashCode()
     {
-        return (int)GLibApi.GDateTimeHash(this);
+        return (int)LibraryApi.DateTimeHash(this);
     }
 
-    /// <summary>Checks for equality between two <see cref="GDateTime" />.</summary>
-    /// <param name="other">The other <see cref="GDateTime" /> to compare with, or <see langword="null" />.</param>
+    /// <summary>Checks for equality between two <see cref="DateTime" />.</summary>
+    /// <param name="other">The other <see cref="DateTime" /> to compare with, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="other" /> is not <see langword="null" /> and equal to the current
-    ///     <see cref="GDateTime" />.
+    ///     <see cref="DateTime" />.
     /// </returns>
     /// <remarks>
     ///     Equal here means that they represent the same moment after converting them to the same time zone.
     /// </remarks>
-    public bool Equals(GDateTime? other)
+    public bool Equals(DateTime? other)
     {
-        return other is not null && GLibApi.GDateTimeEqual(this, other);
+        return other is not null && LibraryApi.DateTimeEqual(this, other);
     }
 
     /// <summary>
-    ///     Checks for equality between the current <see cref="GDateTime" /> and an <see cref="object" />.
+    ///     Checks for equality between the current <see cref="DateTime" /> and an <see cref="object" />.
     /// </summary>
     /// <param name="obj">The <see cref="object" /> to compare with, or <see langword="null" />.</param>
     /// <returns>
-    ///     <see langword="true" /> if the given <paramref name="obj" /> is of type <see cref="GDateTime" /> and
-    ///     <see cref="Equals(Gnome.Net.GLib.GDateTime?)" /> returns <see langword="true" />, <see langword="false" />
+    ///     <see langword="true" /> if the given <paramref name="obj" /> is of type <see cref="DateTime" /> and
+    ///     <see cref="Equals(DateTime?)" /> returns <see langword="true" />, <see langword="false" />
     ///     otherwise.
     /// </returns>
     public override bool Equals(object? obj)
     {
-        return obj is GDateTime other && Equals(other);
+        return obj is DateTime other && Equals(other);
     }
 
-    /// <summary>Compare two <see cref="GDateTime" /> objects.</summary>
-    /// <param name="other">The <see cref="GDateTime" /> to compare with, or <see langword="null" />.</param>
+    /// <summary>Compare two <see cref="DateTime" /> objects.</summary>
+    /// <param name="other">The <see cref="DateTime" /> to compare with, or <see langword="null" />.</param>
     /// <returns>
-    ///     -1, 0 or 1 if the current <see cref="GDateTime" /> is less than, equal to or greater than
+    ///     -1, 0 or 1 if the current <see cref="DateTime" /> is less than, equal to or greater than
     ///     <paramref name="other" />, or 1 if <paramref name="other" /> is <see langword="null" />.
     /// </returns>
-    public int CompareTo(GDateTime? other)
+    public int CompareTo(DateTime? other)
     {
-        return other is null ? 1 : GLibApi.GDateTimeCompare(this, other);
+        return other is null ? 1 : LibraryApi.DateTimeCompare(this, other);
     }
 
-    /// <summary>Compare an <see cref="object" /> with the current <see cref="GDateTime" />.</summary>
+    /// <summary>Compare an <see cref="object" /> with the current <see cref="DateTime" />.</summary>
     /// <param name="obj">The <see cref="object" /> to compare with, or <see langword="null" />.</param>
     /// <returns><see langword="true" /> if the given <paramref name="obj"/></returns>
     /// <exception cref="ArgumentException">
-    ///     If the given <see cref="obj" /> is not of type <see cref="GDateTime" />.
+    ///     If the given <see cref="obj" /> is not of type <see cref="DateTime" />.
     /// </exception>
     public int CompareTo(object? obj)
     {
-        return obj is GDateTime other
+        return obj is DateTime other
             ? CompareTo(other)
-            : throw new ArgumentException($"Object must be of type {nameof(GDateTime)}");
+            : throw new ArgumentException($"Object must be of type {nameof(DateTime)}");
     }
 
     /// <summary>The equality operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> and <see langword="right" /> are equal,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator ==(GDateTime? left, GDateTime? right)
+    public static bool operator ==(DateTime? left, DateTime? right)
     {
         return Equals(left, right);
     }
 
     /// <summary>The inequality operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> and <see langword="right" /> are not equal,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator !=(GDateTime? left, GDateTime? right)
+    public static bool operator !=(DateTime? left, DateTime? right)
     {
         return !Equals(left, right);
     }
 
     /// <summary>The less than operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> is less than <paramref name="right" />,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator <(GDateTime? left, GDateTime? right)
+    public static bool operator <(DateTime? left, DateTime? right)
     {
-        return Comparer<GDateTime>.Default.Compare(left, right) < 0;
+        return Comparer<DateTime>.Default.Compare(left, right) < 0;
     }
 
     /// <summary>The greater than operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> is greater than <paramref name="right" />,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator >(GDateTime? left, GDateTime? right)
+    public static bool operator >(DateTime? left, DateTime? right)
     {
-        return Comparer<GDateTime>.Default.Compare(left, right) > 0;
+        return Comparer<DateTime>.Default.Compare(left, right) > 0;
     }
 
     /// <summary>The less than or equal operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> is less than or equal to <paramref name="right" />,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator <=(GDateTime? left, GDateTime? right)
+    public static bool operator <=(DateTime? left, DateTime? right)
     {
-        return Comparer<GDateTime>.Default.Compare(left, right) <= 0;
+        return Comparer<DateTime>.Default.Compare(left, right) <= 0;
     }
 
     /// <summary>The greater than or equal operator.</summary>
-    /// <param name="left">The left sided <see cref="GDateTime" />, or <see langword="null" />.</param>
-    /// <param name="right">The right sided <see cref="GDateTime" />, or <see langword="null" />.</param>
+    /// <param name="left">The left sided <see cref="DateTime" />, or <see langword="null" />.</param>
+    /// <param name="right">The right sided <see cref="DateTime" />, or <see langword="null" />.</param>
     /// <returns>
     ///     <see langword="true" /> if <paramref name="left" /> is less greater or equal to <paramref name="right" />,
     ///     <see langword="false" /> otherwise.
     /// </returns>
-    public static bool operator >=(GDateTime? left, GDateTime? right)
+    public static bool operator >=(DateTime? left, DateTime? right)
     {
-        return Comparer<GDateTime>.Default.Compare(left, right) >= 0;
+        return Comparer<DateTime>.Default.Compare(left, right) >= 0;
     }
 }

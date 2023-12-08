@@ -8,7 +8,7 @@ namespace Gnome.Net.GLib.ErrorDomains;
 /// <summary>Error codes corresponding to <c>errno</c> codes returned from file operations on UNIX.</summary>
 /// <remarks>
 ///     <para>
-///         Unlike <c>errno</c> codes, <see cref="GFileError" /> values are available on all systems, even Windows. The
+///         Unlike <c>errno</c> codes, <see cref="FileError" /> values are available on all systems, even Windows. The
 ///         exact meaning of each code depends on what sort of file operation you were performing; the UNIX
 ///         documentation gives more details. The following error code descriptions come from the GNU C Library manual,
 ///         and are under the copyright of that manual.
@@ -19,14 +19,14 @@ namespace Gnome.Net.GLib.ErrorDomains;
 ///         system will report a given error, etc.
 ///     </para>
 /// </remarks>
-public class GFileErrorQuark : IErrorQuark
+public class FileErrorQuark : IErrorQuark
 {
     /// <inheritdoc cref="IErrorQuark.Domain" />
     public uint Domain { get; internal init; }
 
     /// <summary>The error code.</summary>
-    /// <value>A <see cref="GFileError" /> with the error code.</value>
-    public GFileError Code { get; internal init; }
+    /// <value>A <see cref="FileError" /> with the error code.</value>
+    public FileError Code { get; internal init; }
 
     /// <inheritdoc cref="IErrorQuark.Message" />
     public string? Message { get; internal init; }

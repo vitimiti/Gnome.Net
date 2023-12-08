@@ -8,9 +8,9 @@ using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
 
-internal static partial class GLibApi
+internal static partial class LibraryApi
 {
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_array_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void GArrayUnref(nint array);
+    public static partial void ArrayUnref(nint array);
 }

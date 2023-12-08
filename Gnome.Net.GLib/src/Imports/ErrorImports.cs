@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace Gnome.Net.GLib.Imports;
 
-internal static partial class GLibApi
+internal static partial class LibraryApi
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct GError
+    public struct UnmanagedError
     {
         public uint Domain;
         public int Code;

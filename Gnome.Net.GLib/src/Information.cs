@@ -1,14 +1,12 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
-using System.Runtime.InteropServices;
-
 using Gnome.Net.GLib.Imports;
 
 namespace Gnome.Net.GLib;
 
 /// <summary>Information related functions and properties.</summary>
-public static class GInformation
+public static class Information
 {
     /// <summary>Gets/Sets a human-readable name for the application.</summary>
     /// <value>
@@ -25,11 +23,11 @@ public static class GInformation
     /// </remarks>
     public static string? ApplicationName
     {
-        get => GLibApi.GGetApplicationName();
+        get => LibraryApi.GetApplicationName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            GLibApi.GSetApplicationName(value);
+            LibraryApi.SetApplicationName(value);
         }
     }
 
@@ -50,11 +48,11 @@ public static class GInformation
     /// </remarks>
     public static string? ProgramName
     {
-        get => GLibApi.GGetProgramName();
+        get => LibraryApi.GetProgramName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            GLibApi.GSetProgramName(value);
+            LibraryApi.SetProgramName(value);
         }
     }
 
@@ -78,7 +76,7 @@ public static class GInformation
     ///         <see cref="UserDataDir" /> returns.
     ///     </para>
     /// </remarks>
-    public static string? UserConfigDir => GLibApi.GGetUserConfigDir();
+    public static string? UserConfigDir => LibraryApi.GetUserConfigDir();
 
     /// <summary>
     ///     Returns a base directory in which to access application data such as icons that is customized for a
@@ -104,7 +102,7 @@ public static class GInformation
     ///         modify environment variables at runtime.
     ///     </para>
     /// </remarks>
-    public static string? UserDataDir => GLibApi.GGetUserDataDir();
+    public static string? UserDataDir => LibraryApi.GetUserDataDir();
 
     /// <summary>Returns an ordered list of base directories in which to access system-wide application data.</summary>
     /// <value>
@@ -145,5 +143,5 @@ public static class GInformation
     ///         modify environment variables at runtime.
     ///     </para>
     /// </remarks>
-    public static ReadOnlySpan<string> SystemDataDirs => GLibApi.GGetSystemDataDirs();
+    public static ReadOnlySpan<string> SystemDataDirs => LibraryApi.GetSystemDataDirs();
 }

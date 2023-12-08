@@ -4,7 +4,7 @@
 namespace Gnome.Net.GLib.Errors;
 
 /// <summary>Error codes returned by bookmark file parsing.</summary>
-public enum GBookmarkFileError
+public enum BookmarkFileError
 {
     /// <summary>URI was ill-formed.</summary>
     InvalidUri,

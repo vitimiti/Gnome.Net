@@ -4,10 +4,10 @@
 namespace Gnome.Net.GLib;
 
 /// <summary>Contains the public fields of a GArray.</summary>
-public sealed class GArray<T>
+public sealed class Array<T>
 {
     /// <summary>Get/Set the data held by the array.</summary>
-    /// <value>An <see cref="Array" /> of the given <typeparamref name="T" /> type.</value>
+    /// <value>An <see cref="System.Array" /> of the given <typeparamref name="T" /> type.</value>
     public T[] Data { get; set; } = Array.Empty<T>();
 
     /// <summary>Get the length of the <see cref="Data" /> array.</summary>
@@ -26,7 +26,7 @@ public sealed class GArray<T>
     }
 
     /// <summary>Create an empty data structure.</summary>
-    /// <value>A new <see cref="GArray{T}" /> with an empty data <see cref="Array" />.</value>
+    /// <value>A new <see cref="Array{T}" /> with an empty data <see cref="System.Array" />.</value>
     /// <seealso cref="Array.Empty{T}" />
-    public static GArray<T> Empty => new() { Data = Array.Empty<T>() };
+    public static Array<T> Empty => new() { Data = Array.Empty<T>() };
 }

@@ -7,12 +7,12 @@ using ErrorDomains;
 
 /// <summary>Error codes corresponding to <c>errno</c> codes returned from file operations on UNIX.</summary>
 /// <remarks>
-///     Unlike <c>errno</c> codes, <see cref="GFileError" /> values are available on all systems, even Windows. The
+///     Unlike <c>errno</c> codes, <see cref="FileError" /> values are available on all systems, even Windows. The
 ///     exact meaning of each code depends on what sort of file operation you were performing; the UNIX documentation
 ///     gives more details. The following error code descriptions come from the GNU C Library manual, and are under the
 ///     copyright of that manual.
 /// </remarks>
-public enum GFileError
+public enum FileError
 {
     /// <summary>
     ///     Operation not permitted; only the owner of the file (or other resource) or processes with special privileges

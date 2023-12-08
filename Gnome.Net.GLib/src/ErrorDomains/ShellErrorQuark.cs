@@ -5,15 +5,15 @@ using Gnome.Net.GLib.Errors;
 
 namespace Gnome.Net.GLib.ErrorDomains;
 
-/// <summary>Error codes returned by bookmark file parsing.</summary>
-public class GBookmarkFileErrorQuark : IErrorQuark
+/// <summary>Error codes returned by shell functions.</summary>
+public class ShellErrorQuark : IErrorQuark
 {
     /// <inheritdoc cref="IErrorQuark.Domain" />
     public uint Domain { get; internal init; }
 
-    /// <summary>Gets the error code.</summary>
-    /// <value>A <see cref="GBookmarkFileError" /> with the error code.</value>
-    public GBookmarkFileError Code { get; internal init; }
+    /// <summary>The error code.</summary>
+    /// <value>A <see cref="ShellError" /> with the error code.</value>
+    public ShellError Code { get; internal init; }
 
     /// <inheritdoc cref="IErrorQuark.Message" />
     public string? Message { get; internal init; }

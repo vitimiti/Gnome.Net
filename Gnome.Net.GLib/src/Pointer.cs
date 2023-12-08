@@ -10,14 +10,14 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.GLib;
 
 /// <summary>A safe handle to a GLib pointer.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<GPointer>))]
-public class GPointer : SafeHandleZeroOrMinusOneIsInvalid
+[NativeMarshalling(typeof(SafeHandleMarshaller<Pointer>))]
+public class Pointer : SafeHandleZeroOrMinusOneIsInvalid
 {
     /// <summary>Create the GPointer with an empty GLib pointer.</summary>
     /// <param name="ownsHandle">
     ///     <see langword="true" /> if the GPointer owns the handle, <see langword="false" /> otherwise.
     /// </param>
-    public GPointer(bool ownsHandle = true)
+    public Pointer(bool ownsHandle = true)
         : base(ownsHandle) { }
 
     /// <summary>Create the GPointer from an existing handle.</summary>
@@ -25,7 +25,7 @@ public class GPointer : SafeHandleZeroOrMinusOneIsInvalid
     /// <param name="ownsHandle">
     ///     <see langword="true" /> if the GPointer owns the handle, <see langword="false" /> otherwise.
     /// </param>
-    public GPointer(nint preexistingHandle, bool ownsHandle = true)
+    public Pointer(nint preexistingHandle, bool ownsHandle = true)
         : base(ownsHandle)
     {
         handle = preexistingHandle;
@@ -40,7 +40,7 @@ public class GPointer : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibApi.GFree(handle);
+        LibraryApi.Free(handle);
         handle = nint.Zero;
         return true;
     }

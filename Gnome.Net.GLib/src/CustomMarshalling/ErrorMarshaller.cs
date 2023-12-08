@@ -9,7 +9,7 @@ using Gnome.Net.GLib.Imports;
 
 namespace Gnome.Net.GLib.CustomMarshalling;
 
-internal static class GErrorMarshaller
+internal static class ErrorMarshaller
 {
     public static IErrorQuark? FromUnmanaged(nint unmanaged)
     {
@@ -18,36 +18,36 @@ internal static class GErrorMarshaller
             return null;
         }
 
-        var managed = (GLibApi.GError)(
-            Marshal.PtrToStructure(unmanaged, typeof(GLibApi.GError)) ?? new GLibApi.GError()
+        var managed = (LibraryApi.UnmanagedError)(
+            Marshal.PtrToStructure(unmanaged, typeof(LibraryApi.UnmanagedError)) ?? new LibraryApi.UnmanagedError()
         );
 
-        if (managed.Domain == GLibApi.GBookmarkFileErrorQuark())
+        if (managed.Domain == LibraryApi.BookmarkFileErrorQuark())
         {
-            return new GBookmarkFileErrorQuark
+            return new BookmarkFileErrorQuark
             {
                 Domain = managed.Domain,
-                Code = (GBookmarkFileError)managed.Code,
+                Code = (BookmarkFileError)managed.Code,
                 Message = Marshal.PtrToStringUTF8(managed.Message)
             };
         }
 
-        if (managed.Domain == GLibApi.GFileErrorQuark())
+        if (managed.Domain == LibraryApi.FileErrorQuark())
         {
-            return new GFileErrorQuark
+            return new FileErrorQuark
             {
                 Domain = managed.Domain,
-                Code = (GFileError)managed.Code,
+                Code = (FileError)managed.Code,
                 Message = Marshal.PtrToStringUTF8(managed.Message)
             };
         }
 
-        if (managed.Domain == GLibApi.GShellErrorQuark())
+        if (managed.Domain == LibraryApi.ShellErrorQuark())
         {
-            return new GShellErrorQuark
+            return new ShellErrorQuark
             {
                 Domain = managed.Domain,
-                Code = (GShellError)managed.Code,
+                Code = (ShellError)managed.Code,
                 Message = Marshal.PtrToStringUTF8(managed.Message)
             };
         }

@@ -9,11 +9,11 @@ using Gnome.Net.GLib.Imports;
 namespace Gnome.Net.GLib.CustomMarshalling;
 
 [CustomMarshaller(
-    typeof(GArray<CustomMarshallerAttribute.GenericPlaceholder>),
+    typeof(Array<CustomMarshallerAttribute.GenericPlaceholder>),
     MarshalMode.ManagedToUnmanagedIn,
-    typeof(GArrayMarshaller<CustomMarshallerAttribute.GenericPlaceholder>)
+    typeof(ArrayMarshaller<CustomMarshallerAttribute.GenericPlaceholder>)
 )]
-internal static unsafe class GArrayMarshaller<T>
+internal static unsafe class ArrayMarshaller<T>
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct GArrayUnmanaged
@@ -23,7 +23,7 @@ internal static unsafe class GArrayMarshaller<T>
     }
 
     public static GArrayUnmanaged* ConvertToUnmanaged(
-        GArray<CustomMarshallerAttribute.GenericPlaceholder>? managed
+        Array<CustomMarshallerAttribute.GenericPlaceholder>? managed
     )
     {
         if (managed is null)
@@ -53,6 +53,6 @@ internal static unsafe class GArrayMarshaller<T>
 
     public static void Free(GArrayUnmanaged* unmanaged)
     {
-        GLibApi.GArrayUnref((nint)unmanaged);
+        LibraryApi.ArrayUnref((nint)unmanaged);
     }
 }

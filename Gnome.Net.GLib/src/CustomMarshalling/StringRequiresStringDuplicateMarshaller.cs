@@ -11,9 +11,9 @@ namespace Gnome.Net.GLib.CustomMarshalling;
 [CustomMarshaller(
     typeof(string),
     MarshalMode.Default,
-    typeof(StringRequiresGStringDuplicateMarshaller)
+    typeof(StringRequiresStringDuplicateMarshaller)
 )]
-internal static class StringRequiresGStringDuplicateMarshaller
+internal static class StringRequiresStringDuplicateMarshaller
 {
     public static nint ConvertToUnmanaged(string? managed)
     {
@@ -22,6 +22,6 @@ internal static class StringRequiresGStringDuplicateMarshaller
 
     public static string? ConvertToManaged(nint unmanaged)
     {
-        return GLibApi.GStringDuplicate(unmanaged);
+        return LibraryApi.StringDuplicate(unmanaged);
     }
 }

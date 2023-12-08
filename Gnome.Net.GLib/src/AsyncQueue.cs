@@ -10,8 +10,8 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.GLib;
 
 /// <summary>An opaque data structure which represents an asynchronous queue.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<GAsyncQueue>))]
-public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
+[NativeMarshalling(typeof(SafeHandleMarshaller<AsyncQueue>))]
+public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
 {
     private bool _isLocked;
 
@@ -24,13 +24,13 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     ///     queue or due to scheduling.
     /// </remarks>
     public int Length =>
-        _isLocked ? GLibApi.GAsyncQueueLengthUnlocked(this) : GLibApi.GAsyncQueueLength(this);
+        _isLocked ? LibraryApi.AsyncQueueLengthUnlocked(this) : LibraryApi.AsyncQueueLength(this);
 
     /// <summary>Creates a new asynchronous queue.</summary>
-    public GAsyncQueue()
+    public AsyncQueue()
         : base(true)
     {
-        handle = GLibApi.GAsyncQueueNew();
+        handle = LibraryApi.AsyncQueueNew();
     }
 
     /// <summary>Acquires the queue‘s lock.</summary>
@@ -42,50 +42,50 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Lock()
     {
-        GLibApi.GAsyncQueueLock(this);
+        LibraryApi.AsyncQueueLock(this);
         _isLocked = true;
     }
 
     /// <summary>Pops data from the queue.</summary>
-    /// <returns>A new <see cref="GPointer" /> with the popped data, or <see langword="null" />.</returns>
+    /// <returns>A new <see cref="Pointer" /> with the popped data, or <see langword="null" />.</returns>
     /// <remarks>If queue is empty, this function blocks until data becomes available.</remarks>
-    public GPointer? Pop()
+    public Pointer? Pop()
     {
-        var data = _isLocked ? GLibApi.GAsyncQueuePopUnlocked(this) : GLibApi.GAsyncQueuePop(this);
+        var data = _isLocked ? LibraryApi.AsyncQueuePopUnlocked(this) : LibraryApi.AsyncQueuePop(this);
 
-        return data == nint.Zero ? null : new GPointer(data);
+        return data == nint.Zero ? null : new Pointer(data);
     }
 
     /// <summary>Pushes the <paramref name="data" /> into the queue.</summary>
-    /// <param name="data">A <see cref="GPointer" /> with the data to push.</param>
+    /// <param name="data">A <see cref="Pointer" /> with the data to push.</param>
     /// <remarks><paramref name="data" /> must hold a valid handle.</remarks>
-    public void Push(GPointer data)
+    public void Push(Pointer data)
     {
         if (_isLocked)
         {
-            GLibApi.GAsyncQueuePushUnlocked(this, data);
+            LibraryApi.AsyncQueuePushUnlocked(this, data);
             return;
         }
 
-        GLibApi.GAsyncQueuePush(this, data);
+        LibraryApi.AsyncQueuePush(this, data);
     }
 
     /// <summary>Pushes the <paramref name="item" /> into the queue.</summary>
-    /// <param name="item">A <see cref="GPointer" /> with the item to push.</param>
+    /// <param name="item">A <see cref="Pointer" /> with the item to push.</param>
     /// <remarks>
     ///     <paramref name="item" /> must hold a valid handle. In contrast to <see cref="Push" />, this function pushes
     ///     the new item ahead of the items already in the queue, so that it will be the next one to be popped off the
     ///     queue.
     /// </remarks>
-    public void PushFront(GPointer item)
+    public void PushFront(Pointer item)
     {
         if (_isLocked)
         {
-            GLibApi.GAsyncQueuePushFrontUnlocked(this, item);
+            LibraryApi.AsyncQueuePushFrontUnlocked(this, item);
             return;
         }
 
-        GLibApi.GAsyncQueuePushFront(this, item);
+        LibraryApi.AsyncQueuePushFront(this, item);
     }
 
     /// <summary>Pops data from the queue.</summary>
@@ -100,38 +100,38 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     ///         If no data is received before the timeout, <see langword="null" /> is returned.
     ///     </para>
     /// </remarks>
-    public GPointer? TimeoutPop(uint timeout)
+    public Pointer? TimeoutPop(uint timeout)
     {
         var data = _isLocked
-            ? GLibApi.GAsyncQueueTimeoutPopUnlocked(this, timeout)
-            : GLibApi.GAsyncQueueTimeoutPop(this, timeout);
+            ? LibraryApi.AsyncQueueTimeoutPopUnlocked(this, timeout)
+            : LibraryApi.AsyncQueueTimeoutPop(this, timeout);
 
-        return data == nint.Zero ? null : new GPointer(data);
+        return data == nint.Zero ? null : new Pointer(data);
     }
 
     /// <summary>Remove an item from the queue.</summary>
-    /// <param name="item">A <see cref="GPointer" /> with the data to remove from the queue.</param>
+    /// <param name="item">A <see cref="Pointer" /> with the data to remove from the queue.</param>
     /// <returns>
     ///     <see langword="true" /> if the <paramref name="item" /> was removed, <see langword="false" /> otherwise.
     /// </returns>
-    public bool TryRemove(GPointer item)
+    public bool TryRemove(Pointer item)
     {
         return _isLocked
-            ? GLibApi.GAsyncQueueRemoveUnlocked(this, item)
-            : GLibApi.GAsyncQueueRemove(this, item);
+            ? LibraryApi.AsyncQueueRemoveUnlocked(this, item)
+            : LibraryApi.AsyncQueueRemove(this, item);
     }
 
     /// <summary>Tries to pop data from the queue.</summary>
     /// <returns>
-    ///     A new <see cref="GPointer" /> with the popped data or <see langword="null" /> if no data is available.
+    ///     A new <see cref="Pointer" /> with the popped data or <see langword="null" /> if no data is available.
     /// </returns>
-    public GPointer? TryPop()
+    public Pointer? TryPop()
     {
         var data = _isLocked
-            ? GLibApi.GAsyncQueueTryPopUnlocked(this)
-            : GLibApi.GAsyncQueueTryPop(this);
+            ? LibraryApi.AsyncQueueTryPopUnlocked(this)
+            : LibraryApi.AsyncQueueTryPop(this);
 
-        return data == nint.Zero ? null : new GPointer(data);
+        return data == nint.Zero ? null : new Pointer(data);
     }
 
     /// <summary>Releases the queue’s lock.</summary>
@@ -140,7 +140,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Unlock()
     {
-        GLibApi.GAsyncQueueUnlock(this);
+        LibraryApi.AsyncQueueUnlock(this);
         _isLocked = false;
     }
 
@@ -158,7 +158,7 @@ public class GAsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibApi.GAsyncQueueUnref(handle);
+        LibraryApi.AsyncQueueUnref(handle);
         handle = nint.Zero;
         return true;
     }

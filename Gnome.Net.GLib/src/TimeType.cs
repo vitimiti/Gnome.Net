@@ -12,7 +12,7 @@ namespace Gnome.Net.GLib;
 ///         example).
 ///     </para>
 /// </remarks>
-public enum GTimeType
+public enum TimeType
 {
     /// <summary>The time is in local standard time.</summary>
     Standard,

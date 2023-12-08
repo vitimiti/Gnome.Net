@@ -10,25 +10,25 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.GLib;
 
 /// <summary>Represents a time zone.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<GTimeZone>))]
-public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
+[NativeMarshalling(typeof(SafeHandleMarshaller<TimeZone>))]
+public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
 {
-    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to local time.</summary>
-    /// <value>A <see cref="GTimeZone" /> with the local timezone.</value>
+    /// <summary>Creates a <see cref="TimeZone" /> corresponding to local time.</summary>
+    /// <value>A <see cref="TimeZone" /> with the local timezone.</value>
     /// <remarks>
     ///     The local time zone may change between invocations to this function; for example, if the system
     ///     administrator changes it.
     /// </remarks>
-    public static GTimeZone Local => new(GLibApi.GTimeZoneNewLocal());
+    public static TimeZone Local => new(LibraryApi.TimeZoneNewLocal());
 
-    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to UTC.</summary>
-    /// <value>A new <see cref="GTimeZone" /> with the universal timezone.</value>
+    /// <summary>Creates a <see cref="TimeZone" /> corresponding to UTC.</summary>
+    /// <value>A new <see cref="TimeZone" /> with the universal timezone.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
     /// </remarks>
-    public static GTimeZone Utc => new(GLibApi.GTimeZoneNewUtc());
+    public static TimeZone Utc => new(LibraryApi.TimeZoneNewUtc());
 
-    /// <summary>Get the identifier of this GTimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
+    /// <summary>Get the identifier of this TimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
     /// <value>A <see cref="string" /> with the identifier for the timezone.</value>
     /// <remarks>
     ///     <para>
@@ -40,11 +40,11 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         time offset, that will be returned by this function.
     ///     </para>
     /// </remarks>
-    public string Identifier => GLibApi.GTimeZoneGetIdentifier(this) ?? string.Empty;
+    public string Identifier => LibraryApi.TimeZoneGetIdentifier(this) ?? string.Empty;
 
-    /// <summary>Creates a <see cref="GTimeZone" /> corresponding to <paramref name="identifier" />.</summary>
+    /// <summary>Creates a <see cref="TimeZone" /> corresponding to <paramref name="identifier" />.</summary>
     /// <param name="identifier">A <see cref="string" /> with the identifier.</param>
-    /// <returns>A new <see cref="GTimeZone" /> or <see langword="null" /> on failure.</returns>
+    /// <returns>A new <see cref="TimeZone" /> or <see langword="null" /> on failure.</returns>
     /// <remarks>
     ///     <para>If identifier cannot be parsed or loaded, <see langword="null" /> is returned.</para>
     ///     <para>
@@ -102,28 +102,28 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         for the list of time zones on Windows.
     ///     </para>
     /// </remarks>
-    public static GTimeZone? CreateFromIdentifier(string? identifier)
+    public static TimeZone? CreateFromIdentifier(string? identifier)
     {
-        var result = GLibApi.GTimeZoneNewIdentifier(identifier);
-        return result == nint.Zero ? null : new GTimeZone(result);
+        var result = LibraryApi.TimeZoneNewIdentifier(identifier);
+        return result == nint.Zero ? null : new TimeZone(result);
     }
 
     /// <summary>
-    ///     Creates a <see cref="GTimeZone" /> corresponding to the given constant offset from UTC, in seconds.
+    ///     Creates a <see cref="TimeZone" /> corresponding to the given constant offset from UTC, in seconds.
     /// </summary>
     /// <param name="seconds">An <see cref="int" /> with the offset to UTC, in seconds.</param>
-    /// <returns>A new <see cref="GTimeZone" /> at the given offset from UTC, or UTC on failure.</returns>
+    /// <returns>A new <see cref="TimeZone" /> at the given offset from UTC, or UTC on failure.</returns>
     /// <remarks>
     ///     It is possible for this function to fail if <paramref name="seconds" /> is too big (greater than 24 hours),
     ///     in which case this function will return the UTC timezone for backwards compatibility. To detect failures
     ///     like this, use <see cref="CreateFromIdentifier" /> directly.
     /// </remarks>
-    public static GTimeZone CreateFromOffset(int seconds)
+    public static TimeZone CreateFromOffset(int seconds)
     {
-        return new GTimeZone(GLibApi.GTimeZoneNewOffset(seconds));
+        return new TimeZone(LibraryApi.TimeZoneNewOffset(seconds));
     }
 
-    internal GTimeZone(nint preexistingHandle)
+    internal TimeZone(nint preexistingHandle)
         : base(true)
     {
         handle = preexistingHandle;
@@ -139,7 +139,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </returns>
     public bool IsDaylightSavingsTime(int interval)
     {
-        return GLibApi.GTimeZoneIsDst(this, interval);
+        return LibraryApi.TimeZoneIsDst(this, interval);
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return GLibApi.GTimeZoneGetAbbreviation(this, interval) ?? string.Empty;
+        return LibraryApi.TimeZoneGetAbbreviation(this, interval) ?? string.Empty;
     }
 
     /// <summary>
@@ -172,14 +172,14 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int GetOffset(int interval)
     {
-        return GLibApi.GTimeZoneGetOffset(this, interval);
+        return LibraryApi.TimeZoneGetOffset(this, interval);
     }
 
     /// <summary>
     ///     Finds an interval within the timezone that corresponds to the given <paramref name="time" />, possibly
     ///     adjusting <paramref name="time" /> if required to fit into an interval.
     /// </summary>
-    /// <param name="type">A <see cref="GTimeType" /> with the type of <paramref name="time" />.</param>
+    /// <param name="type">A <see cref="TimeType" /> with the type of <paramref name="time" />.</param>
     /// <param name="time">
     ///     A <see langword="ref" /> value to an <see cref="long" /> with the number of seconds since 1970/01/01.
     /// </param>
@@ -201,13 +201,13 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         the adjusted time.
     ///     </para>
     /// </remarks>
-    public int AdjustTime(GTimeType type, ref long time)
+    public int AdjustTime(TimeType type, ref long time)
     {
-        return GLibApi.GTimeZoneAdjustTime(this, type, ref time);
+        return LibraryApi.TimeZoneAdjustTime(this, type, ref time);
     }
 
     /// <summary>Finds an interval within the timezone that corresponds to the given <paramref name="time" />.</summary>
-    /// <param name="type">A <see cref="GTimeType" /> with the type of <paramref name="time" />.</param>
+    /// <param name="type">A <see cref="TimeType" /> with the type of <paramref name="time" />.</param>
     /// <param name="time">An <see cref="long" /> with the number of seconds since 1970/01/01.</param>
     /// <returns>
     ///     An <see cref="int" /> with the interval containing <paramref name="time" />, or -1 in case of failure.
@@ -215,13 +215,13 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>
     ///     <para>The meaning of <paramref name="time" /> depends on <paramref name="type" />.</para>
     ///     <para>
-    ///         If <paramref name="type" /> is <see cref="GTimeType" />.<see cref="GTimeType.Universal" /> then this
+    ///         If <paramref name="type" /> is <see cref="TimeType" />.<see cref="TimeType.Universal" /> then this
     ///         function will always succeed (since universal time is monotonic and continuous).
     ///     </para>
     ///     <para>
     ///         Otherwise <paramref name="time" /> is treated as local time. The distinction between
-    ///         <see cref="GTimeType" />.<see cref="GTimeType.Standard" /> and
-    ///         <see cref="GTimeType" />.<see cref="GTimeType.Daylight" /> is ignored except in the case that the given
+    ///         <see cref="TimeType" />.<see cref="TimeType.Standard" /> and
+    ///         <see cref="TimeType" />.<see cref="TimeType.Daylight" /> is ignored except in the case that the given
     ///         <paramref name="time" /> is ambiguous. In Toronto, for example, 01:30 on November 7th 2010 occurred
     ///         twice (once inside of daylight savings time and the next, an hour later, outside of daylight savings
     ///         time). In this case, the different value of type would result in a different interval being returned.
@@ -231,9 +231,9 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         not exist (due to the leap forward to begin daylight savings time). -1 is returned in that case.
     ///     </para>
     /// </remarks>
-    public int FindInterval(GTimeType type, long time)
+    public int FindInterval(TimeType type, long time)
     {
-        return GLibApi.GTimeZoneFindInterval(this, type, time);
+        return LibraryApi.TimeZoneFindInterval(this, type, time);
     }
 
     /// <summary>Frees the timezone.</summary>
@@ -245,7 +245,7 @@ public sealed class GTimeZone : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        GLibApi.GTimeZoneUnref(handle);
+        LibraryApi.TimeZoneUnref(handle);
         handle = nint.Zero;
         return true;
     }

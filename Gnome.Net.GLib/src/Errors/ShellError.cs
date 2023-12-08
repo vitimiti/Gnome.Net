@@ -4,7 +4,7 @@
 namespace Gnome.Net.GLib.Errors;
 
 /// <summary>Error codes returned by shell functions.</summary>
-public enum GShellError
+public enum ShellError
 {
     /// <summary>Mismatched or otherwise mangled quoting.</summary>
     BadQuoting,

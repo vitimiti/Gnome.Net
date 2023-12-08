@@ -9,42 +9,42 @@ using Gnome.Net.GLib.LibraryUtilities;
 
 namespace Gnome.Net.GLib.Imports;
 
-internal static partial class GLibApi
+internal static partial class LibraryApi
 {
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_adjust_time")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int GTimeZoneAdjustTime(GTimeZone tz, GTimeType type, ref long time);
+    public static partial int TimeZoneAdjustTime(TimeZone tz, TimeType type, ref long time);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_find_interval")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int GTimeZoneFindInterval(GTimeZone tz, GTimeType type, long time);
+    public static partial int TimeZoneFindInterval(TimeZone tz, TimeType type, long time);
 
     [LibraryImport(
         LibraryName.GLib,
         EntryPoint = "g_time_zone_get_abbreviation",
         StringMarshalling = StringMarshalling.Custom,
-        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+        StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? GTimeZoneGetAbbreviation(GTimeZone tz, int interval);
+    public static partial string? TimeZoneGetAbbreviation(TimeZone tz, int interval);
 
     [LibraryImport(
         LibraryName.GLib,
         EntryPoint = "g_time_zone_get_identifier",
         StringMarshalling = StringMarshalling.Custom,
-        StringMarshallingCustomType = typeof(StringRequiresGStringDuplicateMarshaller)
+        StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? GTimeZoneGetIdentifier(GTimeZone tz);
+    public static partial string? TimeZoneGetIdentifier(TimeZone tz);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_get_offset")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int GTimeZoneGetOffset(GTimeZone tz, int interval);
+    public static partial int TimeZoneGetOffset(TimeZone tz, int interval);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_is_dst")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool GTimeZoneIsDst(GTimeZone tz, int interval);
+    public static partial bool TimeZoneIsDst(TimeZone tz, int interval);
 
     [LibraryImport(
         LibraryName.GLib,
@@ -52,21 +52,21 @@ internal static partial class GLibApi
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneNewIdentifier(string? identifier);
+    public static partial nint TimeZoneNewIdentifier(string? identifier);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_new_local")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneNewLocal();
+    public static partial nint TimeZoneNewLocal();
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_new_offset")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneNewOffset(int seconds);
+    public static partial nint TimeZoneNewOffset(int seconds);
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_new_utc")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GTimeZoneNewUtc();
+    public static partial nint TimeZoneNewUtc();
 
     [LibraryImport(LibraryName.GLib, EntryPoint = "g_time_zone_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void GTimeZoneUnref(nint tz);
+    public static partial void TimeZoneUnref(nint tz);
 }
