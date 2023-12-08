@@ -6,8 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace Gnome.Net.Common;
 
-/// <summary>Class for resolving DLL imports by loading native libraries.</summary>
-public class LibraryImportResolver
+/// <summary>
+///     This class provides a method for resolving DLL imports by attempting to load a native library with the specified
+///     parameters.
+/// </summary>
+public static class LibraryImportResolver
 {
     /// <summary>Resolves the DLL import by attempting to load a native library with the specified parameters.</summary>
     /// <param name="libraryName">The name of the library to load.</param>
