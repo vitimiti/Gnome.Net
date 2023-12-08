@@ -3,7 +3,11 @@
 
 namespace Gnome.Net.Glib;
 
-/// <summary>Flags to pass to <see cref="Io.TrySetFileContentsFull" /> to affect its safety and performance.</summary>
+/// <summary>
+///     Flags to pass to
+///     <see cref="Io.TrySetFileContents(string,string,FileSetContentsOptions,int,out Gnome.Net.Glib.ErrorDomains.IErrorQuark?)" />
+///     to affect its safety and performance.
+/// </summary>
 [Flags]
 public enum FileSetContentsOptions
 {

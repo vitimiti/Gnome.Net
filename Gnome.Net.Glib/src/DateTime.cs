@@ -24,7 +24,7 @@ public sealed class DateTime
     /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public static DateTime? NowLocal
     {
@@ -41,7 +41,7 @@ public sealed class DateTime
     /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public static DateTime? NowUtc
     {
@@ -59,7 +59,7 @@ public sealed class DateTime
     /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public DateTime? ToLocal
     {
@@ -77,7 +77,7 @@ public sealed class DateTime
     /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public DateTime? ToUtc
     {
@@ -233,7 +233,7 @@ public sealed class DateTime
     public int NumberingYear => DateTimeImports.GetWeekNumberingYear(this);
 
     /// <summary>Gets the time zone for this <see cref="DateTime" />.</summary>
-    /// <value>A <see cref="GLib.TimeZone" /> corresponding to the current <see cref="DateTime" />.</value>
+    /// <value>A <see cref="Glib.TimeZone" /> corresponding to the current <see cref="DateTime" />.</value>
     public TimeZone TimeZone => new(DateTimeImports.GetTimeZone(this));
 
     /// <summary>Gets the number of seconds since the start of the last minute, including the fractional part.</summary>
@@ -268,7 +268,7 @@ public sealed class DateTime
     ///     Creates a new <see cref="DateTime" /> corresponding to the given <paramref name="date" /> and
     ///     <paramref name="time" /> in the timezone <paramref name="tz" />.
     /// </summary>
-    /// <param name="tz">A <see cref="GLib.TimeZone" /> with the timezone.</param>
+    /// <param name="tz">A <see cref="Glib.TimeZone" /> with the timezone.</param>
     /// <param name="date">
     ///     A tuple of (<see cref="int" />, <see cref="int" />, <see cref="int" />) with the year, month and day,
     ///     respectively.
@@ -341,7 +341,7 @@ public sealed class DateTime
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Local" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public static DateTime? CreateFromLocal(
         (int Year, int Month, int Day) date,
@@ -374,7 +374,7 @@ public sealed class DateTime
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
-    ///     <see cref="GLib.TimeZone" />.<see cref="GLib.TimeZone.Utc" />.
+    ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public static DateTime? CreateFromUtc(
         (int Year, int Month, int Day) date,
@@ -399,7 +399,7 @@ public sealed class DateTime
     /// </summary>
     /// <param name="text">A <see cref="string" /> with an ISO 8601 formatted time, or <see langword="null" />.</param>
     /// <param name="defaultTz">
-    ///     A <see cref="GLib.TimeZone" /> to use if the text doesn’t contain a timezone, or <see langword="null" />.
+    ///     A <see cref="Glib.TimeZone" /> to use if the text doesn’t contain a timezone, or <see langword="null" />.
     /// </param>
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
@@ -529,11 +529,11 @@ public sealed class DateTime
     /// <summary>
     ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in the given timezone.
     /// </summary>
-    /// <param name="tz">A <see cref="GLib.TimeZone" /> with the timezone.</param>
+    /// <param name="tz">A <see cref="Glib.TimeZone" /> with the timezone.</param>
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>The time is as accurate as the system allows, to a maximum accuracy of 1 microsecond.</para>
-    ///     <para>This function will always succeed unless GLib is still being used after the year 9999.</para>
+    ///     <para>This function will always succeed unless Glib is still being used after the year 9999.</para>
     /// </remarks>
     public static DateTime? CreateFromNow(TimeZone tz)
     {
@@ -568,7 +568,7 @@ public sealed class DateTime
     /// <summary>
     ///     Create a new <see cref="DateTime" /> corresponding to the same instant in time as the current one, but in
     ///     the timezone <paramref name="tz" />.</summary>
-    /// <param name="tz">The <see cref="GLib.TimeZone" /> for the new <see cref="DateTime" />.</param>
+    /// <param name="tz">The <see cref="Glib.TimeZone" /> for the new <see cref="DateTime" />.</param>
     /// <returns>
     ///     A new <see cref="DateTime" /> for the given <paramref name="tz" />, or <see langword="null" />.
     /// </returns>
@@ -720,15 +720,15 @@ public sealed class DateTime
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         The format strings understood by this function are a subset of the strftime() format language as
+    ///         The format strings understood by this function are a subset of the <c>strftime()</c> format language as
     ///         specified by C99. The `D`, \U and \W conversions are not supported, nor is the 'E' modifier. The GNU
     ///         extensions %k, %l, %s and `P` are supported, however, as are the ‘0’, ‘_’ and ‘-‘ modifiers. The
     ///         Python extension %f is also supported.
     ///     </para>
     ///     <para>
-    ///         In contrast to strftime(), this function always produces a UTF-8 string, regardless of the current
-    ///         locale. Note that the rendering of many formats is locale-dependent and may not match the strftime()
-    ///         output exactly.
+    ///         In contrast to <c>strftime()</c>, this function always produces a UTF-8 string, regardless of the
+    ///         current locale. Note that the rendering of many formats is locale-dependent and may not match the
+    ///         <c>strftime()</c> output exactly.
     ///     </para>
     ///     <para>
     ///         The following format specifiers are supported:
@@ -921,20 +921,21 @@ public sealed class DateTime
     ///             <item>
     ///                 <term>%:z</term>
     ///                 <description>
-    ///                     The time zone as an offset from UTC (+hh:mm). This is a gnulib strftime() extension.
+    ///                     The time zone as an offset from UTC (+hh:mm). This is a gnulib <c>strftime()</c> extension.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%::z</term>
     ///                 <description>
-    ///                     The time zone as an offset from UTC (+hh:mm:ss). This is a gnulib strftime() extension.
+    ///                     The time zone as an offset from UTC (+hh:mm:ss). This is a gnulib <c>strftime()</c>
+    ///                     extension.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%:::z</term>
     ///                 <description>
     ///                     The time zone as an offset from UTC, with : to necessary precision (e.g., -04, +05:30). This
-    ///                     is a gnulib strftime() extension.
+    ///                     is a gnulib <c>strftime()</c> extension.
     ///                 </description>
     ///             </item>
     ///             <item>
@@ -981,8 +982,8 @@ public sealed class DateTime
     ///         Additionally, when O is used with B, b, or h, it produces the alternative form of a month name. The
     ///         alternative form should be used when the month name is used without a day number (e.g., standalone). It
     ///         is required in some languages (Baltic, Slavic, Greek, and more) due to their grammatical rules. For
-    ///         other languages there is no difference. `OB` is a GNU and BSD strftime() extension expected to be added
-    ///         to the future POSIX specification, %Ob and %Oh are GNU strftime() extensions.
+    ///         other languages there is no difference. `OB` is a GNU and BSD <c>strftime()</c> extension expected to be
+    ///         added to the future POSIX specification, %Ob and %Oh are GNU <c>strftime()</c> extensions.
     ///     </para>
     /// </remarks>
     public string? Format(string format)

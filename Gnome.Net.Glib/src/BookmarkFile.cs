@@ -802,7 +802,7 @@ public class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </returns>
     /// <remarks>
     ///     The write process is guaranteed to be atomic by using
-    ///     <see cref="Io.TrySetFileContents(string,string,out Gnome.Net.Glib2.ErrorDomains.IErrorQuark?)" />.
+    ///     <see cref="Io.TrySetFileContents(string,string,out Gnome.Net.Glib.ErrorDomains.IErrorQuark?)" />.
     /// </remarks>
     public bool ToFile(string filename, out IErrorQuark? error)
     {
