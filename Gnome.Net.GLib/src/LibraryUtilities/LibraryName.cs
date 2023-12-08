@@ -8,22 +8,22 @@ namespace Gnome.Net.GLib.LibraryUtilities;
 
 internal struct LibraryName
 {
-    private const string WindowsName = "libglib-2.0.0.dll";
+    private const string WindowsName = "libglib-2.0-0.dll";
     private const string OsxName = "libglib-2.0.0.dylib";
     private const string UnixName = "libglib-2.0.so.0";
 
-    public const string GLib = "GLib";
+    public const string Glib = "GLib";
     
     private static string GetOsVersionDependentLibraryName(string libraryName)
     {
         return libraryName switch
         {
-            LibraryName.GLib
+            Glib
                 => Environment.OSVersion.Platform switch
                 {
-                    PlatformID.Win32NT => LibraryName.OsxName,
-                    PlatformID.MacOSX => LibraryName.OsxName,
-                    PlatformID.Unix => LibraryName.UnixName,
+                    PlatformID.Win32NT => WindowsName,
+                    PlatformID.MacOSX => OsxName,
+                    PlatformID.Unix => UnixName,
                     _ => libraryName,
                 },
             _ => libraryName,

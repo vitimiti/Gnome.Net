@@ -21,12 +21,12 @@ internal static partial class LibraryApi
         );
     }
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_file_error_quark")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_file_error_quark")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial uint FileErrorQuark();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_file_set_contents",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -40,7 +40,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_file_set_contents_full",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -55,12 +55,12 @@ internal static partial class LibraryApi
         out nint error
     );
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_free")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_free")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void Free(nint memory);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_get_application_name",
         StringMarshalling = StringMarshalling.Custom,
         StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
@@ -69,7 +69,7 @@ internal static partial class LibraryApi
     public static partial string? GetApplicationName();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_get_prgname",
         StringMarshalling = StringMarshalling.Custom,
         StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
@@ -78,7 +78,7 @@ internal static partial class LibraryApi
     public static partial string? GetProgramName();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_get_system_data_dirs",
         StringMarshalling = StringMarshalling.Custom,
         StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
@@ -88,7 +88,7 @@ internal static partial class LibraryApi
     public static partial string[]? GetSystemDataDirs();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_get_user_config_dir",
         StringMarshalling = StringMarshalling.Custom,
         StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
@@ -97,7 +97,7 @@ internal static partial class LibraryApi
     public static partial string? GetUserConfigDir();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_get_user_data_dir",
         StringMarshalling = StringMarshalling.Custom,
         StringMarshallingCustomType = typeof(StringRequiresStringDuplicateMarshaller)
@@ -106,7 +106,7 @@ internal static partial class LibraryApi
     public static partial string? GetUserDataDir();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_set_application_name",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -114,19 +114,19 @@ internal static partial class LibraryApi
     public static partial void SetApplicationName(string applicationName);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_set_prgname",
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void SetProgramName(string applicationName);
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_shell_error_quark")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_shell_error_quark")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial uint ShellErrorQuark();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_strdup",
         StringMarshalling = StringMarshalling.Utf8
     )]

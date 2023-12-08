@@ -12,7 +12,7 @@ namespace Gnome.Net.GLib.Imports;
 internal static partial class LibraryApi
 {
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_add_application",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -25,7 +25,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_add_group",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -36,20 +36,20 @@ internal static partial class LibraryApi
         string group
     );
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_copy")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_copy")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BookmarkFileCopy(BookmarkFile bookmark);
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_error_quark")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_error_quark")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial uint BookmarkFileErrorQuark();
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_free")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_free")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileFree(nint bookmark);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_added_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -61,7 +61,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_application_info",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -78,7 +78,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_applications",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -92,7 +92,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_description",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -104,7 +104,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_groups",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -118,7 +118,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_icon",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -133,7 +133,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_is_private",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -146,7 +146,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_mime_type",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -158,7 +158,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_modified_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -169,12 +169,12 @@ internal static partial class LibraryApi
         out nint error
     );
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_get_size")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_get_size")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial int BookmarkFileGetSize(BookmarkFile bookmark);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_title",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -186,7 +186,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_uris",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -195,7 +195,7 @@ internal static partial class LibraryApi
     public static partial string[]? BookmarkFileGetUris(BookmarkFile bookmark, out nuint length);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_get_visited_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -207,7 +207,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_has_application",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -221,7 +221,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_has_group",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -235,7 +235,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_has_item",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -244,7 +244,7 @@ internal static partial class LibraryApi
     public static partial bool BookmarkFileHasItem(BookmarkFile bookmark, string uri);
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_load_from_data",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -259,7 +259,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_load_from_data_dirs",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -273,7 +273,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_load_from_file",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -286,7 +286,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_move_item",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -299,12 +299,12 @@ internal static partial class LibraryApi
         out nint error
     );
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_new")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_new")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BookmarkFileNew();
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_remove_application",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -318,7 +318,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_remove_group",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -332,7 +332,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_remove_item",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -345,7 +345,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_added_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -357,7 +357,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_application_info",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -374,7 +374,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_description",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -386,7 +386,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_groups",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -400,7 +400,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_icon",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -413,7 +413,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_is_private",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -425,7 +425,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_mime_type",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -437,7 +437,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_modified_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -449,7 +449,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_title",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -461,7 +461,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_set_visited_date_time",
         StringMarshalling = StringMarshalling.Utf8
     )]
@@ -472,7 +472,7 @@ internal static partial class LibraryApi
         DateTime visited
     );
 
-    [LibraryImport(LibraryName.GLib, EntryPoint = "g_bookmark_file_to_data")]
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_to_data")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<byte, byte>), CountElementName = nameof(length))]
     public static partial byte[] BookmarkFileToData(
@@ -482,7 +482,7 @@ internal static partial class LibraryApi
     );
 
     [LibraryImport(
-        LibraryName.GLib,
+        LibraryName.Glib,
         EntryPoint = "g_bookmark_file_to_file",
         StringMarshalling = StringMarshalling.Utf8
     )]
