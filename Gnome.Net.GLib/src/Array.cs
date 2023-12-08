@@ -3,7 +3,7 @@
 
 namespace Gnome.Net.GLib;
 
-/// <summary>Contains the public fields of a GArray.</summary>
+/// <summary>Contains the public fields of an array.</summary>
 public sealed class Array<T>
 {
     /// <summary>Get/Set the data held by the array.</summary>
@@ -27,6 +27,6 @@ public sealed class Array<T>
 
     /// <summary>Create an empty data structure.</summary>
     /// <value>A new <see cref="Array{T}" /> with an empty data <see cref="System.Array" />.</value>
-    /// <seealso cref="Array.Empty{T}" />
+    /// <seealso cref="System.Array.Empty{T}" />
     public static Array<T> Empty => new() { Data = Array.Empty<T>() };
 }
