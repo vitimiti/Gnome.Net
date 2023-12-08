@@ -1,6 +1,8 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
+using System.Runtime.InteropServices;
+
 namespace Gnome.Net.Common;
 
 /// <summary>
@@ -8,12 +10,12 @@ namespace Gnome.Net.Common;
 /// </summary>
 public struct LibraryName
 {
-    private static readonly Dictionary<PlatformID, string> GlibNames =
+    private static readonly Dictionary<string, bool> GlibNames =
         new()
         {
-            { PlatformID.Win32NT, "libglib-2.0-0.dll" },
-            { PlatformID.MacOSX, "libglib-2.0.0.dylib" },
-            { PlatformID.Unix, "libglib-2.0.so.0" }
+            { "libglib-2.0-0.dll", OperatingSystem.IsWindows() },
+            { "libglib-2.0.0.dylib", OperatingSystem.IsMacOS() },
+            { "libglib-2.0.so.0", OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD() }
         };
 
     /// <summary>Represents the default filename of the Glib library.</summary>
@@ -21,17 +23,11 @@ public struct LibraryName
 
     internal static string GetOsVersionDependentLibraryName(string libraryName)
     {
-        return libraryName switch
+        foreach (var name in GlibNames.Where(name => name.Value))
         {
-            Glib
-                => Environment.OSVersion.Platform switch
-                {
-                    PlatformID.Win32NT => GlibNames[PlatformID.Win32NT],
-                    PlatformID.MacOSX => GlibNames[PlatformID.MacOSX],
-                    PlatformID.Unix => GlibNames[PlatformID.Unix],
-                    _ => libraryName,
-                },
-            _ => libraryName,
-        };
+            return name.Key;
+        }
+
+        return libraryName;
     }
 }
