@@ -40,7 +40,7 @@ public class Pointer : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        LibraryApi.Free(handle);
+        CoreImports.Free(handle);
         handle = nint.Zero;
         return true;
     }

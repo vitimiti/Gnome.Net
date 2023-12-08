@@ -18,11 +18,12 @@ internal static class ErrorMarshaller
             return null;
         }
 
-        var managed = (LibraryApi.UnmanagedError)(
-            Marshal.PtrToStructure(unmanaged, typeof(LibraryApi.UnmanagedError)) ?? new LibraryApi.UnmanagedError()
+        var managed = (ErrorImports.UnmanagedError)(
+            Marshal.PtrToStructure(unmanaged, typeof(ErrorImports.UnmanagedError))
+            ?? new ErrorImports.UnmanagedError()
         );
 
-        if (managed.Domain == LibraryApi.BookmarkFileErrorQuark())
+        if (managed.Domain == BookmarkFileImports.ErrorQuark())
         {
             return new BookmarkFileErrorQuark
             {
@@ -32,7 +33,7 @@ internal static class ErrorMarshaller
             };
         }
 
-        if (managed.Domain == LibraryApi.FileErrorQuark())
+        if (managed.Domain == CoreImports.FileErrorQuark())
         {
             return new FileErrorQuark
             {
@@ -42,7 +43,7 @@ internal static class ErrorMarshaller
             };
         }
 
-        if (managed.Domain == LibraryApi.ShellErrorQuark())
+        if (managed.Domain == CoreImports.ShellErrorQuark())
         {
             return new ShellErrorQuark
             {

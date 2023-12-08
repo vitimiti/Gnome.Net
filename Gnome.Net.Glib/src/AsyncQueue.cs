@@ -24,13 +24,13 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     ///     queue or due to scheduling.
     /// </remarks>
     public int Length =>
-        _isLocked ? LibraryApi.AsyncQueueLengthUnlocked(this) : LibraryApi.AsyncQueueLength(this);
+        _isLocked ? AsyncQueueImports.LengthUnlocked(this) : AsyncQueueImports.Length(this);
 
     /// <summary>Creates a new asynchronous queue.</summary>
     public AsyncQueue()
         : base(true)
     {
-        handle = LibraryApi.AsyncQueueNew();
+        handle = AsyncQueueImports.New();
     }
 
     /// <summary>Acquires the queue‘s lock.</summary>
@@ -42,7 +42,7 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Lock()
     {
-        LibraryApi.AsyncQueueLock(this);
+        AsyncQueueImports.Lock(this);
         _isLocked = true;
     }
 
@@ -51,7 +51,7 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>If queue is empty, this function blocks until data becomes available.</remarks>
     public Pointer? Pop()
     {
-        var data = _isLocked ? LibraryApi.AsyncQueuePopUnlocked(this) : LibraryApi.AsyncQueuePop(this);
+        var data = _isLocked ? AsyncQueueImports.PopUnlocked(this) : AsyncQueueImports.Pop(this);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -63,11 +63,11 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            LibraryApi.AsyncQueuePushUnlocked(this, data);
+            AsyncQueueImports.PushUnlocked(this, data);
             return;
         }
 
-        LibraryApi.AsyncQueuePush(this, data);
+        AsyncQueueImports.Push(this, data);
     }
 
     /// <summary>Pushes the <paramref name="item" /> into the queue.</summary>
@@ -81,11 +81,11 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            LibraryApi.AsyncQueuePushFrontUnlocked(this, item);
+            AsyncQueueImports.PushFrontUnlocked(this, item);
             return;
         }
 
-        LibraryApi.AsyncQueuePushFront(this, item);
+        AsyncQueueImports.PushFront(this, item);
     }
 
     /// <summary>Pops data from the queue.</summary>
@@ -103,8 +103,8 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TimeoutPop(uint timeout)
     {
         var data = _isLocked
-            ? LibraryApi.AsyncQueueTimeoutPopUnlocked(this, timeout)
-            : LibraryApi.AsyncQueueTimeoutPop(this, timeout);
+            ? AsyncQueueImports.TimeoutPopUnlocked(this, timeout)
+            : AsyncQueueImports.TimeoutPop(this, timeout);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -117,8 +117,8 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public bool TryRemove(Pointer item)
     {
         return _isLocked
-            ? LibraryApi.AsyncQueueRemoveUnlocked(this, item)
-            : LibraryApi.AsyncQueueRemove(this, item);
+            ? AsyncQueueImports.RemoveUnlocked(this, item)
+            : AsyncQueueImports.Remove(this, item);
     }
 
     /// <summary>Tries to pop data from the queue.</summary>
@@ -128,8 +128,8 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TryPop()
     {
         var data = _isLocked
-            ? LibraryApi.AsyncQueueTryPopUnlocked(this)
-            : LibraryApi.AsyncQueueTryPop(this);
+            ? AsyncQueueImports.TryPopUnlocked(this)
+            : AsyncQueueImports.TryPop(this);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -140,7 +140,7 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Unlock()
     {
-        LibraryApi.AsyncQueueUnlock(this);
+        AsyncQueueImports.Unlock(this);
         _isLocked = false;
     }
 
@@ -158,7 +158,7 @@ public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        LibraryApi.AsyncQueueUnref(handle);
+        AsyncQueueImports.Unref(handle);
         handle = nint.Zero;
         return true;
     }

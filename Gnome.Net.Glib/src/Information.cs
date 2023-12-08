@@ -23,11 +23,11 @@ public static class Information
     /// </remarks>
     public static string? ApplicationName
     {
-        get => LibraryApi.GetApplicationName();
+        get => CoreImports.GetApplicationName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            LibraryApi.SetApplicationName(value);
+            CoreImports.SetApplicationName(value);
         }
     }
 
@@ -48,11 +48,11 @@ public static class Information
     /// </remarks>
     public static string? ProgramName
     {
-        get => LibraryApi.GetProgramName();
+        get => CoreImports.GetProgramName();
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            LibraryApi.SetProgramName(value);
+            CoreImports.SetProgramName(value);
         }
     }
 
@@ -76,7 +76,7 @@ public static class Information
     ///         <see cref="UserDataDir" /> returns.
     ///     </para>
     /// </remarks>
-    public static string? UserConfigDir => LibraryApi.GetUserConfigDir();
+    public static string? UserConfigDir => CoreImports.GetUserConfigDir();
 
     /// <summary>
     ///     Returns a base directory in which to access application data such as icons that is customized for a
@@ -102,7 +102,7 @@ public static class Information
     ///         modify environment variables at runtime.
     ///     </para>
     /// </remarks>
-    public static string? UserDataDir => LibraryApi.GetUserDataDir();
+    public static string? UserDataDir => CoreImports.GetUserDataDir();
 
     /// <summary>Returns an ordered list of base directories in which to access system-wide application data.</summary>
     /// <value>
@@ -143,5 +143,5 @@ public static class Information
     ///         modify environment variables at runtime.
     ///     </para>
     /// </remarks>
-    public static ReadOnlySpan<string> SystemDataDirs => LibraryApi.GetSystemDataDirs();
+    public static ReadOnlySpan<string> SystemDataDirs => CoreImports.GetSystemDataDirs();
 }
