@@ -47,7 +47,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <summary>Gets whether the private flag of the bookmark for <paramref name="uri" /> is set.</summary>
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -83,7 +83,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="name">A <see cref="string" /> with the application name.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -109,7 +109,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="group">A <see cref="string" /> with the group name to be searched.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -250,7 +250,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI of the application.</param>
     /// <param name="name">A <see cref="string" /> with the name of the application.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -512,7 +512,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///     A <see cref="string" /> with the path of a filename to load, in the GLib file name encoding.
     /// </param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -537,7 +537,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///     An <see cref="System.Array" /> of <see cref="byte" /> with the desktop bookmarks loaded in memory.
     /// </param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -572,7 +572,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///     <see langword="null" />.
     /// </param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -606,7 +606,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="oldUri">A <see cref="string" /> with the old URI.</param>
     /// <param name="newUri">A <see cref="string" /> with the new URI, or <see langword="null" />.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -637,7 +637,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </summary>
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -664,7 +664,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///     <see langword="null" /> if <paramref name="count" /> is 0.
     /// </param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -727,7 +727,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="name">A <see cref="string" /> with the application name.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -755,7 +755,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="group">A <see cref="string" /> with the group name.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -778,7 +778,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
 
     /// <summary>This function outputs the <see cref="BookmarkFile" /> as a string.</summary>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
@@ -793,7 +793,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <summary>This function outputs the bookmark into a file.</summary>
     /// <param name="filename">A <see cref="string" /> with the file name.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>

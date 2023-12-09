@@ -16,7 +16,7 @@ public struct ErrorQuarkValues
     /// <value>A <see cref="uint" /> with the quark value.</value>
     public static uint FileError => CoreImports.FileErrorQuark();
 
-    /// <summary>The <see cref="ShellError" /> value.</summary>
+    /// <summary>The <see cref="ShellErrorQuark" /> value.</summary>
     /// <value>A <see cref="uint" /> with the quark value.</value>
     public static uint ShellError => CoreImports.ShellErrorQuark();
 }

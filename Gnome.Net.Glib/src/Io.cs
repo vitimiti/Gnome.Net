@@ -15,14 +15,14 @@ public static class Io
     /// <param name="filename">A <see cref="string" /> with the file name.</param>
     /// <param name="contents">A <see cref="string" /> to write into.</param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
     /// <returns><see langword="true" /> on success, <see langword="false" /> if an error occurred.</returns>
     /// <remarks>
     ///     This is a convenience wrapper around calling
-    ///     <see cref="TrySetFileContents(string,string,FileSetContentsOptions,int,out Gnome.Net.Glib2.ErrorDomains.IErrorQuark?)" />
+    ///     <see cref="TrySetFileContents(string,string,FileSetContentsOptions,int,out Gnome.Net.Glib.ErrorDomains.IErrorQuark?)" />
     ///     with flags set to <see cref="FileSetContentsOptions" />.<see cref="FileSetContentsOptions.Consistent" /> |
     ///     <see cref="FileSetContentsOptions" />.<see cref="FileSetContentsOptions.OnlyExisting" /> and mode set to
     ///     0666.
@@ -52,7 +52,7 @@ public static class Io
     ///     An <see cref="int" /> with the file mode, as passed to <c>open()</c>; typically this will be 0666.
     /// </param>
     /// <param name="error">
-    ///     An <see langword="out" /> value to a <see cref="BookmarkFileErrorQuark" /> with
+    ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
     ///     or <see langword="null" /> if there was no error.
     /// </param>
