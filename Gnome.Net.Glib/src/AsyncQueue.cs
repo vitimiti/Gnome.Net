@@ -11,7 +11,7 @@ namespace Gnome.Net.Glib;
 
 /// <summary>An opaque data structure which represents an asynchronous queue.</summary>
 [NativeMarshalling(typeof(SafeHandleMarshaller<AsyncQueue>))]
-public class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
+public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
 {
     private bool _isLocked;
 

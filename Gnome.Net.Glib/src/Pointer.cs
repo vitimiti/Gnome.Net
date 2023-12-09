@@ -11,7 +11,7 @@ namespace Gnome.Net.Glib;
 
 /// <summary>A safe handle to a GLib pointer.</summary>
 [NativeMarshalling(typeof(SafeHandleMarshaller<Pointer>))]
-public class Pointer : SafeHandleZeroOrMinusOneIsInvalid
+public sealed class Pointer : SafeHandleZeroOrMinusOneIsInvalid
 {
     /// <summary>Create the GPointer with an empty GLib pointer.</summary>
     /// <param name="ownsHandle">

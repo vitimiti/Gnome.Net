@@ -15,7 +15,7 @@ namespace Gnome.Net.Glib;
 
 /// <summary>Represents a set of bookmarks.</summary>
 [NativeMarshalling(typeof(SafeHandleMarshaller<BookmarkFile>))]
-public class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
+public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
 {
     /// <summary>Gets the number of bookmarks inside the <see cref="BookmarkFile" />.</summary>
     /// <value>An <see cref="int" /> with the number of bookmarks.</value>
