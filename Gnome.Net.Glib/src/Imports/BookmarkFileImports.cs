@@ -18,7 +18,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileAddApplication(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string? name,
         string? exec
@@ -30,15 +30,11 @@ internal static partial class ApiImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void BookmarkFileAddGroup(
-        BookmarkFile bookmark,
-        string uri,
-        string group
-    );
+    public static partial void BookmarkFileAddGroup(nint bookmark, string uri, string group);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_copy")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint BookmarkFileCopy(BookmarkFile bookmark);
+    public static partial nint BookmarkFileCopy(nint bookmark);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_error_quark")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -55,7 +51,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BookmarkFileGetAddedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nint error
     );
@@ -68,7 +64,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileGetApplicationInfo(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string name,
         out string? exec,
@@ -85,7 +81,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<string, nint>), CountElementName = nameof(length))]
     public static partial string[]? BookmarkFileGetApplications(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nuint length,
         out nint error
@@ -98,7 +94,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial string? BookmarkFileGetDescription(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nint error
     );
@@ -111,7 +107,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<string, nint>), CountElementName = nameof(length))]
     public static partial string[]? BookmarkFileGetGroups(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nuint length,
         out nint error
@@ -125,7 +121,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileGetIcon(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out string? href,
         out string? mimeType,
@@ -139,11 +135,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool BookmarkFileGetIsPrivate(
-        BookmarkFile bookmark,
-        string uri,
-        out nint error
-    );
+    public static partial bool BookmarkFileGetIsPrivate(nint bookmark, string uri, out nint error);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -152,7 +144,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial string? BookmarkFileGetMimeType(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nint error
     );
@@ -164,14 +156,14 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BookmarkFileGetModifiedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nint error
     );
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bookmark_file_get_size")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int BookmarkFileGetSize(BookmarkFile bookmark);
+    public static partial int BookmarkFileGetSize(nint bookmark);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -179,11 +171,7 @@ internal static partial class ApiImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? BookmarkFileGetTitle(
-        BookmarkFile bookmark,
-        string? uri,
-        out nint error
-    );
+    public static partial string? BookmarkFileGetTitle(nint bookmark, string? uri, out nint error);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -192,7 +180,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<string, nint>), CountElementName = nameof(length))]
-    public static partial string[]? BookmarkFileGetUris(BookmarkFile bookmark, out nuint length);
+    public static partial string[]? BookmarkFileGetUris(nint bookmark, out nuint length);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -201,7 +189,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BookmarkFileGetVisitedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         out nint error
     );
@@ -214,7 +202,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileHasApplication(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string name,
         out nint error
@@ -228,7 +216,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileHasGroup(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string group,
         out nint error
@@ -241,7 +229,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool BookmarkFileHasItem(BookmarkFile bookmark, string uri);
+    public static partial bool BookmarkFileHasItem(nint bookmark, string uri);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -251,7 +239,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileLoadFromData(
-        BookmarkFile bookmark,
+        nint bookmark,
         [MarshalUsing(typeof(ArrayMarshaller<byte, byte>), CountElementName = nameof(length))]
             byte[] data,
         nuint length,
@@ -266,7 +254,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileLoadFromDataDirs(
-        BookmarkFile bookmark,
+        nint bookmark,
         string file,
         out string? fullPath,
         out nint error
@@ -280,7 +268,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileLoadFromFile(
-        BookmarkFile bookmark,
+        nint bookmark,
         string fileName,
         out nint error
     );
@@ -293,7 +281,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileMoveItem(
-        BookmarkFile bookmark,
+        nint bookmark,
         string oldUri,
         string? newUri,
         out nint error
@@ -311,7 +299,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileRemoveApplication(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string name,
         out nint error
@@ -325,7 +313,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileRemoveGroup(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string group,
         out nint error
@@ -338,11 +326,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool BookmarkFileRemoveItem(
-        BookmarkFile bookmark,
-        string uri,
-        out nint error
-    );
+    public static partial bool BookmarkFileRemoveItem(nint bookmark, string uri, out nint error);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -351,7 +335,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetAddedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         DateTime added
     );
@@ -364,7 +348,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool BookmarkFileSetApplicationInfo(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string name,
         string exec,
@@ -380,7 +364,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetDescription(
-        BookmarkFile bookmark,
+        nint bookmark,
         string? uri,
         string description
     );
@@ -392,7 +376,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetGroups(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         [MarshalUsing(typeof(ArrayMarshaller<string, nint>), CountElementName = nameof(length))]
             string[]? groups,
@@ -406,7 +390,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetIcon(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         string? href,
         string mimeType
@@ -419,7 +403,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetIsPrivate(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         [MarshalAs(UnmanagedType.Bool)] bool isPrivate
     );
@@ -430,11 +414,7 @@ internal static partial class ApiImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void BookmarkFileSetMimeType(
-        BookmarkFile bookmark,
-        string uri,
-        string mimeType
-    );
+    public static partial void BookmarkFileSetMimeType(nint bookmark, string uri, string mimeType);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -443,7 +423,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetModifiedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         DateTime modified
     );
@@ -454,11 +434,7 @@ internal static partial class ApiImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void BookmarkFileSetTitle(
-        BookmarkFile bookmark,
-        string? uri,
-        string title
-    );
+    public static partial void BookmarkFileSetTitle(nint bookmark, string? uri, string title);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -467,7 +443,7 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void BookmarkFileSetVisitedDateTime(
-        BookmarkFile bookmark,
+        nint bookmark,
         string uri,
         DateTime visited
     );
@@ -476,7 +452,7 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<byte, byte>), CountElementName = nameof(length))]
     public static partial byte[] BookmarkFileToData(
-        BookmarkFile bookmark,
+        nint bookmark,
         out nuint length,
         out nint error
     );
@@ -488,9 +464,5 @@ internal static partial class ApiImports
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool BookmarkFileToFile(
-        BookmarkFile bookmark,
-        string filename,
-        out nint error
-    );
+    public static partial bool BookmarkFileToFile(nint bookmark, string filename, out nint error);
 }

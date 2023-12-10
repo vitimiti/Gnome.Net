@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices.Marshalling;
@@ -10,13 +10,12 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>Represents a time zone.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<TimeZone>))]
 public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
 {
     /// <summary>Creates a <see cref="TimeZone" /> corresponding to local time.</summary>
     /// <value>A <see cref="TimeZone" /> with the local timezone.</value>
     /// <remarks>
-    ///     The local time zone may change between invocations to this function; for example, if the system
+    ///     The local time zone may change between invocations to handle function; for example, if the system
     ///     administrator changes it.
     /// </remarks>
     public static TimeZone Local => new(ApiImports.TimeZoneNewLocal());
@@ -24,11 +23,11 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <summary>Creates a <see cref="TimeZone" /> corresponding to UTC.</summary>
     /// <value>A new <see cref="TimeZone" /> with the universal timezone.</value>
     /// <remarks>
-    ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
+    ///     handle is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
     /// </remarks>
     public static TimeZone Utc => new(ApiImports.TimeZoneNewUtc());
 
-    /// <summary>Get the identifier of this TimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
+    /// <summary>Get the identifier of handle TimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
     /// <value>A <see cref="string" /> with the identifier for the timezone.</value>
     /// <remarks>
     ///     <para>
@@ -37,10 +36,10 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///     </para>
     ///     <para>
     ///         The identifier will be returned in the same format as provided at construction time: if provided as a
-    ///         time offset, that will be returned by this function.
+    ///         time offset, that will be returned by handle function.
     ///     </para>
     /// </remarks>
-    public string Identifier => ApiImports.TimeZoneGetIdentifier(this) ?? string.Empty;
+    public string Identifier => ApiImports.TimeZoneGetIdentifier(handle) ?? string.Empty;
 
     /// <summary>Creates a <see cref="TimeZone" /> corresponding to <paramref name="identifier" />.</summary>
     /// <param name="identifier">A <see cref="string" /> with the identifier.</param>
@@ -77,7 +76,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         the local time to get Coordinated Universal Time (UTC).
     ///     </para>
     ///     <para>
-    ///         <see cref="Local" /> calls this function with the value of the TZ environment variable. This
+    ///         <see cref="Local" /> calls handle function with the value of the TZ environment variable. handle
     ///         function itself is independent of the value of TZ, but if <paramref name="identifier" /> is
     ///         <see langword="null" /> then /etc/localtime will be consulted to discover the correct time zone on UNIX
     ///         and the registry will be consulted or GetTimeZoneInformation() will be used to get the local time zone
@@ -114,9 +113,9 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <param name="seconds">An <see cref="int" /> with the offset to UTC, in seconds.</param>
     /// <returns>A new <see cref="TimeZone" /> at the given offset from UTC, or UTC on failure.</returns>
     /// <remarks>
-    ///     It is possible for this function to fail if <paramref name="seconds" /> is too big (greater than 24 hours),
-    ///     in which case this function will return the UTC timezone for backwards compatibility. To detect failures
-    ///     like this, use <see cref="CreateFromIdentifier" /> directly.
+    ///     It is possible for handle function to fail if <paramref name="seconds" /> is too big (greater than 24 hours),
+    ///     in which case handle function will return the UTC timezone for backwards compatibility. To detect failures
+    ///     like handle, use <see cref="CreateFromIdentifier" /> directly.
     /// </remarks>
     public static TimeZone CreateFromOffset(int seconds)
     {
@@ -139,7 +138,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </returns>
     public bool IsDaylightSavingsTime(int interval)
     {
-        return ApiImports.TimeZoneIsDst(this, interval);
+        return ApiImports.TimeZoneIsDst(handle, interval);
     }
 
     /// <summary>
@@ -149,12 +148,12 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <param name="interval">An <see cref="int" /> with the interval within the timezone.</param>
     /// <returns>A <see cref="string" /> with the timezone abbreviation.</returns>
     /// <remarks>
-    ///     For example, in Toronto this is “EST” during the winter months and “EDT” during the summer months when
+    ///     For example, in Toronto handle is “EST” during the winter months and “EDT” during the summer months when
     ///     daylight savings time is in effect.
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return ApiImports.TimeZoneGetAbbreviation(this, interval) ?? string.Empty;
+        return ApiImports.TimeZoneGetAbbreviation(handle, interval) ?? string.Empty;
     }
 
     /// <summary>
@@ -172,7 +171,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int GetOffset(int interval)
     {
-        return ApiImports.TimeZoneGetOffset(this, interval);
+        return ApiImports.TimeZoneGetOffset(handle, interval);
     }
 
     /// <summary>
@@ -187,23 +186,23 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>
     ///     <para>The meaning of <paramref name="time" /> depends on <paramref name="type" />.</para>
     ///     <para>
-    ///         This function is similar to <see cref="FindInterval" />, with the difference that it always succeeds (by
+    ///         handle function is similar to <see cref="FindInterval" />, with the difference that it always succeeds (by
     ///         making the adjustments described below).
     ///     </para>
     ///     <para>
-    ///         In any of the cases where <see cref="FindInterval" /> succeeds then this function returns the same
+    ///         In any of the cases where <see cref="FindInterval" /> succeeds then handle function returns the same
     ///         value, without modifying <paramref name="time" />.
     ///     </para>
     ///     <para>
-    ///         This function may, however, modify <paramref name="time" /> in order to deal with non-existent times. If
+    ///         handle function may, however, modify <paramref name="time" /> in order to deal with non-existent times. If
     ///         the non-existent local <paramref name="time" /> of 02:30 were requested on March 14th 2010 in Toronto
-    ///         then this function would adjust <paramref name="time" /> to be 03:00 and return the interval containing
+    ///         then handle function would adjust <paramref name="time" /> to be 03:00 and return the interval containing
     ///         the adjusted time.
     ///     </para>
     /// </remarks>
     public int AdjustTime(TimeType type, ref long time)
     {
-        return ApiImports.TimeZoneAdjustTime(this, type, ref time);
+        return ApiImports.TimeZoneAdjustTime(handle, type, ref time);
     }
 
     /// <summary>Finds an interval within the timezone that corresponds to the given <paramref name="time" />.</summary>
@@ -215,7 +214,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>
     ///     <para>The meaning of <paramref name="time" /> depends on <paramref name="type" />.</para>
     ///     <para>
-    ///         If <paramref name="type" /> is <see cref="TimeType" />.<see cref="TimeType.Universal" /> then this
+    ///         If <paramref name="type" /> is <see cref="TimeType" />.<see cref="TimeType.Universal" /> then handle
     ///         function will always succeed (since universal time is monotonic and continuous).
     ///     </para>
     ///     <para>
@@ -224,16 +223,16 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         <see cref="TimeType" />.<see cref="TimeType.Daylight" /> is ignored except in the case that the given
     ///         <paramref name="time" /> is ambiguous. In Toronto, for example, 01:30 on November 7th 2010 occurred
     ///         twice (once inside of daylight savings time and the next, an hour later, outside of daylight savings
-    ///         time). In this case, the different value of type would result in a different interval being returned.
+    ///         time). In handle case, the different value of type would result in a different interval being returned.
     ///     </para>
     ///     <para>
-    ///         It is still possible for this function to fail. In Toronto, for example, 02:00 on March 14th 2010 does
+    ///         It is still possible for handle function to fail. In Toronto, for example, 02:00 on March 14th 2010 does
     ///         not exist (due to the leap forward to begin daylight savings time). -1 is returned in that case.
     ///     </para>
     /// </remarks>
     public int FindInterval(TimeType type, long time)
     {
-        return ApiImports.TimeZoneFindInterval(this, type, time);
+        return ApiImports.TimeZoneFindInterval(handle, type, time);
     }
 
     /// <summary>Frees the timezone.</summary>

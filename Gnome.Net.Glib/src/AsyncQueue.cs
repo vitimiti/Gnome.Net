@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices.Marshalling;
@@ -10,7 +10,6 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>An opaque data structure which represents an asynchronous queue.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<AsyncQueue>))]
 public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
 {
     private bool _isLocked;
@@ -18,13 +17,15 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// <summary>Get the length of the queue.</summary>
     /// <value>An <see cref="int" /> with the length of the queue.</value>
     /// <remarks>
-    ///     Actually this function returns the number of data items in the queue minus the number of waiting threads, so
+    ///     Actually handle function returns the number of data items in the queue minus the number of waiting threads, so
     ///     a negative value means waiting threads, and a positive value means available entries in the queue. A return
-    ///     value of 0 could mean n entries in the queue and n threads waiting. This can happen due to locking of the
+    ///     value of 0 could mean n entries in the queue and n threads waiting. handle can happen due to locking of the
     ///     queue or due to scheduling.
     /// </remarks>
     public int Length =>
-        _isLocked ? ApiImports.AsyncQueueLengthUnlocked(this) : ApiImports.AsyncQueueLength(this);
+        _isLocked
+            ? ApiImports.AsyncQueueLengthUnlocked(handle)
+            : ApiImports.AsyncQueueLength(handle);
 
     /// <summary>Creates a new asynchronous queue.</summary>
     public AsyncQueue()
@@ -36,24 +37,24 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// <summary>Acquires the queue‘s lock.</summary>
     /// <remarks>
     ///     <para>
-    ///         If another thread is already holding the lock, this call will block until the lock becomes available.
+    ///         If another thread is already holding the lock, handle call will block until the lock becomes available.
     ///     </para>
     ///     <para>Call <see cref="Unlock" /> to drop the lock again.</para>
     /// </remarks>
     public void Lock()
     {
-        ApiImports.AsyncQueueLock(this);
+        ApiImports.AsyncQueueLock(handle);
         _isLocked = true;
     }
 
     /// <summary>Pops data from the queue.</summary>
     /// <returns>A new <see cref="Pointer" /> with the popped data, or <see langword="null" />.</returns>
-    /// <remarks>If queue is empty, this function blocks until data becomes available.</remarks>
+    /// <remarks>If queue is empty, handle function blocks until data becomes available.</remarks>
     public Pointer? Pop()
     {
         var data = _isLocked
-            ? ApiImports.AsyncQueuePopUnlocked(this)
-            : ApiImports.AsyncQueuePop(this);
+            ? ApiImports.AsyncQueuePopUnlocked(handle)
+            : ApiImports.AsyncQueuePop(handle);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -65,17 +66,17 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            ApiImports.AsyncQueuePushUnlocked(this, data);
+            ApiImports.AsyncQueuePushUnlocked(handle, data);
             return;
         }
 
-        ApiImports.AsyncQueuePush(this, data);
+        ApiImports.AsyncQueuePush(handle, data);
     }
 
     /// <summary>Pushes the <paramref name="item" /> into the queue.</summary>
     /// <param name="item">A <see cref="Pointer" /> with the item to push.</param>
     /// <remarks>
-    ///     <paramref name="item" /> must hold a valid handle. In contrast to <see cref="Push" />, this function pushes
+    ///     <paramref name="item" /> must hold a valid handle. In contrast to <see cref="Push" />, handle function pushes
     ///     the new item ahead of the items already in the queue, so that it will be the next one to be popped off the
     ///     queue.
     /// </remarks>
@@ -83,11 +84,11 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            ApiImports.AsyncQueuePushFrontUnlocked(this, item);
+            ApiImports.AsyncQueuePushFrontUnlocked(handle, item);
             return;
         }
 
-        ApiImports.AsyncQueuePushFront(this, item);
+        ApiImports.AsyncQueuePushFront(handle, item);
     }
 
     /// <summary>Pops data from the queue.</summary>
@@ -105,8 +106,8 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TimeoutPop(uint timeout)
     {
         var data = _isLocked
-            ? ApiImports.AsyncQueueTimeoutPopUnlocked(this, timeout)
-            : ApiImports.AsyncQueueTimeoutPop(this, timeout);
+            ? ApiImports.AsyncQueueTimeoutPopUnlocked(handle, timeout)
+            : ApiImports.AsyncQueueTimeoutPop(handle, timeout);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -119,8 +120,8 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public bool TryRemove(Pointer item)
     {
         return _isLocked
-            ? ApiImports.AsyncQueueRemoveUnlocked(this, item)
-            : ApiImports.AsyncQueueRemove(this, item);
+            ? ApiImports.AsyncQueueRemoveUnlocked(handle, item)
+            : ApiImports.AsyncQueueRemove(handle, item);
     }
 
     /// <summary>Tries to pop data from the queue.</summary>
@@ -130,19 +131,19 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TryPop()
     {
         var data = _isLocked
-            ? ApiImports.AsyncQueueTryPopUnlocked(this)
-            : ApiImports.AsyncQueueTryPop(this);
+            ? ApiImports.AsyncQueueTryPopUnlocked(handle)
+            : ApiImports.AsyncQueueTryPop(handle);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
 
     /// <summary>Releases the queue’s lock.</summary>
     /// <remarks>
-    ///     Calling this function when you have not acquired the with <see cref="Lock" /> leads to undefined behaviour.
+    ///     Calling handle function when you have not acquired the with <see cref="Lock" /> leads to undefined behaviour.
     /// </remarks>
     public void Unlock()
     {
-        ApiImports.AsyncQueueUnlock(this);
+        ApiImports.AsyncQueueUnlock(handle);
         _isLocked = false;
     }
 

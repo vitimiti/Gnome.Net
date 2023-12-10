@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices.Marshalling;
@@ -14,18 +14,17 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>Represents a set of bookmarks.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<BookmarkFile>))]
 public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
 {
     /// <summary>Gets the number of bookmarks inside the <see cref="BookmarkFile" />.</summary>
     /// <value>An <see cref="int" /> with the number of bookmarks.</value>
-    public int Size => ApiImports.BookmarkFileGetSize(this);
+    public int Size => ApiImports.BookmarkFileGetSize(handle);
 
     /// <summary>Gets all URIs of the bookmarks in the bookmark file.</summary>
     /// <value>
     ///     An <see cref="System.Array" /> of <see cref="string" /> with the bookmark URIs, or <see langword="null" />.
     /// </value>
-    public string[]? Uris => ApiImports.BookmarkFileGetUris(this, out _);
+    public string[]? Uris => ApiImports.BookmarkFileGetUris(handle, out _);
 
     private BookmarkFile(nint preexistingHandle)
         : base(true)
@@ -60,7 +59,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool IsPrivate(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetIsPrivate(this, uri, out var errorHandle);
+        var result = ApiImports.BookmarkFileGetIsPrivate(handle, uri, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -73,7 +72,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <remarks>If a bookmark for <paramref name="uri" /> cannot be found, then it is created.</remarks>
     public void SetIsPrivate(string uri, bool isPrivate)
     {
-        ApiImports.BookmarkFileSetIsPrivate(this, uri, isPrivate);
+        ApiImports.BookmarkFileSetIsPrivate(handle, uri, isPrivate);
     }
 
     /// <summary>
@@ -97,7 +96,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool HasApplication(string uri, string name, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileHasApplication(this, uri, name, out var errorHandle);
+        var result = ApiImports.BookmarkFileHasApplication(handle, uri, name, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -122,7 +121,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool HasGroup(string uri, string group, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileHasGroup(this, uri, group, out var errorHandle);
+        var result = ApiImports.BookmarkFileHasGroup(handle, uri, group, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -135,7 +134,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </returns>
     public bool HasItem(string uri)
     {
-        return ApiImports.BookmarkFileHasItem(this, uri);
+        return ApiImports.BookmarkFileHasItem(handle, uri);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -149,7 +148,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public DateTime? GetAddedDateTime(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetAddedDateTime(this, uri, out var errorHandle);
+        var result = ApiImports.BookmarkFileGetAddedDateTime(handle, uri, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result == nint.Zero ? null : new DateTime(result);
     }
@@ -162,7 +161,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <remarks>If no bookmark for <paramref name="uri" /> is found then it is created.</remarks>
     public void SetAddedDateTime(string uri, DateTime added)
     {
-        ApiImports.BookmarkFileSetAddedDateTime(this, uri, added);
+        ApiImports.BookmarkFileSetAddedDateTime(handle, uri, added);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -174,7 +173,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public DateTime? GetModifiedDateTime(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetModifiedDateTime(this, uri, out nint errorHandle);
+        var result = ApiImports.BookmarkFileGetModifiedDateTime(handle, uri, out nint errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result == nint.Zero ? null : new DateTime(result);
     }
@@ -192,7 +191,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetModifiedDateTime(string uri, DateTime modified)
     {
-        ApiImports.BookmarkFileSetModifiedDateTime(this, uri, modified);
+        ApiImports.BookmarkFileSetModifiedDateTime(handle, uri, modified);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -204,7 +203,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public DateTime? GetVisitedDateTime(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetVisitedDateTime(this, uri, out nint errorHandle);
+        var result = ApiImports.BookmarkFileGetVisitedDateTime(handle, uri, out nint errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result == nint.Zero ? null : new DateTime(result);
     }
@@ -223,7 +222,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetVisitedDateTime(string uri, DateTime visited)
     {
-        ApiImports.BookmarkFileSetVisitedDateTime(this, uri, visited);
+        ApiImports.BookmarkFileSetVisitedDateTime(handle, uri, visited);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -239,7 +238,12 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public string[]? GetApplications(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetApplications(this, uri, out _, out var errorHandle);
+        var result = ApiImports.BookmarkFileGetApplications(
+            handle,
+            uri,
+            out _,
+            out var errorHandle
+        );
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -276,7 +280,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     )
     {
         var result = ApiImports.BookmarkFileGetApplicationInfo(
-            this,
+            handle,
             uri,
             name,
             out var exec,
@@ -306,7 +310,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public string? GetTitle(string? uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetTitle(this, uri, out nint errorHandle);
+        var result = ApiImports.BookmarkFileGetTitle(handle, uri, out nint errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -322,7 +326,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetTitle(string? uri, string title)
     {
-        ApiImports.BookmarkFileSetTitle(this, uri, title);
+        ApiImports.BookmarkFileSetTitle(handle, uri, title);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -334,7 +338,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public string? GetDescription(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetDescription(this, uri, out var errorHandle);
+        var result = ApiImports.BookmarkFileGetDescription(handle, uri, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -355,7 +359,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetDescription(string? uri, string description)
     {
-        ApiImports.BookmarkFileSetDescription(this, uri, description);
+        ApiImports.BookmarkFileSetDescription(handle, uri, description);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -367,7 +371,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public string[]? GetGroups(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetGroups(this, uri, out var _, out var errorHandle);
+        var result = ApiImports.BookmarkFileGetGroups(handle, uri, out var _, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -384,7 +388,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetGroups(string uri, string[]? groups)
     {
-        ApiImports.BookmarkFileSetGroups(this, uri, groups, (nuint)(groups?.Length ?? 0));
+        ApiImports.BookmarkFileSetGroups(handle, uri, groups, (nuint)(groups?.Length ?? 0));
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -401,7 +405,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     public (string? HRef, string? MimeType)? GetIcon(string uri, out IErrorQuark? error)
     {
         var result = ApiImports.BookmarkFileGetIcon(
-            this,
+            handle,
             uri,
             out var href,
             out var mimeType,
@@ -428,7 +432,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void SetIcon(string uri, string? href, string mimeType)
     {
-        ApiImports.BookmarkFileSetIcon(this, uri, href, mimeType);
+        ApiImports.BookmarkFileSetIcon(handle, uri, href, mimeType);
     }
 
     /// <inheritdoc cref="TryRemoveItem" />
@@ -442,7 +446,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public string? GetMimeType(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileGetMimeType(this, uri, out nint errorHandle);
+        var result = ApiImports.BookmarkFileGetMimeType(handle, uri, out nint errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -455,7 +459,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <remarks>If a bookmark for <paramref name="uri" /> cannot be found then it is created.</remarks>
     public void SetMimeType(string uri, string mimeType)
     {
-        ApiImports.BookmarkFileSetMimeType(this, uri, mimeType);
+        ApiImports.BookmarkFileSetMimeType(handle, uri, mimeType);
     }
 
     /// <summary>
@@ -474,7 +478,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///     <para>
     ///         Every bookmark inside a <see cref="BookmarkFile" /> must have at least an application registered. Each
     ///         application must provide a name, a command line useful for launching the bookmark, the number of times
-    ///         the bookmark has been registered by the application and the last time the application registered this
+    ///         the bookmark has been registered by the application and the last time the application registered handle
     ///         bookmark.
     ///     </para>
     ///     <para>
@@ -485,7 +489,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     ///         URI.
     ///     </para>
     ///     <para>
-    ///         This function will automatically take care of updating the registrations count and timestamping in case
+    ///         handle function will automatically take care of updating the registrations count and timestamping in case
     ///         an application with the same <paramref name="name" /> had already registered a bookmark for
     ///         <paramref name="uri" /> inside the bookmark.
     ///     </para>
@@ -493,7 +497,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public void AddApplication(string uri, string? name, string? exec)
     {
-        ApiImports.BookmarkFileAddApplication(this, uri, name, exec);
+        ApiImports.BookmarkFileAddApplication(handle, uri, name, exec);
     }
 
     /// <summary>
@@ -504,7 +508,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="group">A <see cref="string" /> with the group name to be added.</param>
     public void AddGroup(string uri, string group)
     {
-        ApiImports.BookmarkFileAddGroup(this, uri, group);
+        ApiImports.BookmarkFileAddGroup(handle, uri, group);
     }
 
     /// <summary>Loads a desktop bookmark file into the <see cref="BookmarkFile" /> structure.</summary>
@@ -525,7 +529,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool TryLoadFromFile(string filename, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileLoadFromFile(this, filename, out nint errorHandle);
+        var result = ApiImports.BookmarkFileLoadFromFile(handle, filename, out nint errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -551,7 +555,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     public bool TryLoadFromData(byte[] data, out IErrorQuark? error)
     {
         var result = ApiImports.BookmarkFileLoadFromData(
-            this,
+            handle,
             data,
             (nuint)data.Length,
             out var errorHandle
@@ -562,7 +566,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     }
 
     /// <summary>
-    ///     This function looks for a desktop bookmark file named <paramref name="file" /> in the paths returned from
+    ///     handle function looks for a desktop bookmark file named <paramref name="file" /> in the paths returned from
     ///     <see cref="Information.UserDataDir" /> and <see cref="Information.SystemDataDirs" />, loads the file into
     ///     the <see cref="BookmarkFile"/> and returns the file's full path in <paramref name="fullPath" />.
     /// </summary>
@@ -590,7 +594,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     )
     {
         var result = ApiImports.BookmarkFileLoadFromDataDirs(
-            this,
+            handle,
             file,
             out fullPath,
             out nint errorHandle
@@ -626,7 +630,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool TryMoveItem(string oldUri, string? newUri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileMoveItem(this, oldUri, newUri, out var errorHandle);
+        var result = ApiImports.BookmarkFileMoveItem(handle, oldUri, newUri, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -646,7 +650,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </returns>
     public bool TryRemoveItem(string uri, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileRemoveItem(this, uri, out var errorHandle);
+        var result = ApiImports.BookmarkFileRemoveItem(handle, uri, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -658,9 +662,9 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <param name="uri">A <see cref="string" /> with the URI.</param>
     /// <param name="name">A <see cref="string" /> with the application name.</param>
     /// <param name="exec">A <see cref="string" /> with the application's command line.</param>
-    /// <param name="count">An <see cref="int" /> with the number of registrations done for this application.</param>
+    /// <param name="count">An <see cref="int" /> with the number of registrations done for handle application.</param>
     /// <param name="stamp">
-    ///     A <see cref="DateTime" /> with the time of the last registration for this application, which may be
+    ///     A <see cref="DateTime" /> with the time of the last registration for handle application, which may be
     ///     <see langword="null" /> if <paramref name="count" /> is 0.
     /// </param>
     /// <param name="error">
@@ -674,7 +678,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         You should rarely use this function; use <see cref="AddApplication" /> and
+    ///         You should rarely use handle function; use <see cref="AddApplication" /> and
     ///         <see cref="TryRemoveApplication" /> instead.
     ///     </para>
     ///     <para>
@@ -707,7 +711,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     )
     {
         var result = ApiImports.BookmarkFileSetApplicationInfo(
-            this,
+            handle,
             uri,
             name,
             exec,
@@ -743,7 +747,12 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool TryRemoveApplication(string uri, string name, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileRemoveApplication(this, uri, name, out var errorHandle);
+        var result = ApiImports.BookmarkFileRemoveApplication(
+            handle,
+            uri,
+            name,
+            out var errorHandle
+        );
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -771,12 +780,12 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool TryRemoveGroup(string uri, string group, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileRemoveGroup(this, uri, group, out var errorHandle);
+        var result = ApiImports.BookmarkFileRemoveGroup(handle, uri, group, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
 
-    /// <summary>This function outputs the <see cref="BookmarkFile" /> as a string.</summary>
+    /// <summary>handle function outputs the <see cref="BookmarkFile" /> as a string.</summary>
     /// <param name="error">
     ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
     ///     <a href="https://docs.gtk.org/glib/error-reporting.html#rules-for-use-of-gerror">a recoverable error</a>,
@@ -785,12 +794,12 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// <returns>A <see cref="string" /> holding the contents of the <see cref="BookmarkFile" />.</returns>
     public string ToData(out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileToData(this, out _, out var errorHandle);
+        var result = ApiImports.BookmarkFileToData(handle, out _, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return Encoding.Default.GetString(result);
     }
 
-    /// <summary>This function outputs the bookmark into a file.</summary>
+    /// <summary>handle function outputs the bookmark into a file.</summary>
     /// <param name="filename">A <see cref="string" /> with the file name.</param>
     /// <param name="error">
     ///     An <see langword="out" /> value to a <see cref="IErrorQuark" /> with
@@ -806,7 +815,7 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     /// </remarks>
     public bool ToFile(string filename, out IErrorQuark? error)
     {
-        var result = ApiImports.BookmarkFileToFile(this, filename, out var errorHandle);
+        var result = ApiImports.BookmarkFileToFile(handle, filename, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result;
     }
@@ -826,9 +835,9 @@ public sealed class BookmarkFile : SafeHandleZeroOrMinusOneIsInvalid, ICloneable
     }
 
     /// <summary>Deeply copies the bookmark object to a new one.</summary>
-    /// <returns>A new <see cref="object" /> which is a <see cref="BookmarkFile" /> copy of this bookmark.</returns>
+    /// <returns>A new <see cref="object" /> which is a <see cref="BookmarkFile" /> copy of handle bookmark.</returns>
     public object Clone()
     {
-        return new BookmarkFile(ApiImports.BookmarkFileCopy(this));
+        return new BookmarkFile(ApiImports.BookmarkFileCopy(handle));
     }
 }

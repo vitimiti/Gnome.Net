@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices.Marshalling;
@@ -13,16 +13,15 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>Represents a file mapping.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<MappedFile>))]
 public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
 {
     /// <summary>Creates a new <see cref="Glib.Bytes" /> which references the data mapped from file.</summary>
     /// <value>A <see cref="Glib.Bytes" /> with the data mapped from file, referenced.</value>
     /// <remarks>
-    ///     The mapped contents of the file must not be modified after creating this bytes object, because a
+    ///     The mapped contents of the file must not be modified after creating handle bytes object, because a
     ///     <see cref="Glib.Bytes" /> should be immutable.
     /// </remarks>
-    public Bytes Bytes => new(ApiImports.MappedFileGetBytes(this), false);
+    public Bytes Bytes => new(ApiImports.MappedFileGetBytes(handle), false);
 
     /// <summary>Gets the contents of the <see cref="MappedFile" />.</summary>
     /// <value>A <see cref="string" /> with the contents of the mapped file, or <see langword="null" />.</value>
@@ -33,11 +32,11 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
     ///     </para>
     ///     <para>If the file is empty, then <see langword="null" /> is returned.</para>
     /// </remarks>
-    public string? Contents => ApiImports.MappedFileGetContents(this);
+    public string? Contents => ApiImports.MappedFileGetContents(handle);
 
     /// <summary>Gets the length of the contents of a mapped file.</summary>
     /// <value>A <see cref="uint" /> with the length of the contents of the <see cref="MappedFile" />.</value>
-    public uint Length => (uint)ApiImports.MappedFileGetLength(this);
+    public uint Length => (uint)ApiImports.MappedFileGetLength(handle);
 
     /// <summary>Maps a file into memory.</summary>
     /// <param name="filename">
@@ -53,7 +52,7 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
     ///     A newly allocated <see cref="MappedFile" />, or <see langword="null" /> if the mapping failed.
     /// </returns>
     /// <remarks>
-    ///     <para>On UNIX, this is using the <c>mmap()</c> function.</para>
+    ///     <para>On UNIX, handle is using the <c>mmap()</c> function.</para>
     ///     <para>
     ///         If writable is <see langword="true" />, the mapped buffer may be modified, otherwise it is an error to
     ///         modify the mapped buffer. Modifications to the buffer are not visible to other processes mapping the

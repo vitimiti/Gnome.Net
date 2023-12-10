@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices;
@@ -32,13 +32,12 @@ namespace Gnome.Net.Glib;
 ///         <see cref="CompareTo(Gnome.Net.Glib.Bytes?)" /> function to <see cref="Tree" />.
 ///     </para>
 ///     <para>
-///         The data pointed to by this bytes must not be modified. For a mutable array of bytes see
+///         The data pointed to by handle bytes must not be modified. For a mutable array of bytes see
 ///         <see cref="ByteArray" />. Clone <see cref="Data" /> to create a mutable array for a <see cref="Bytes" />
 ///         sequence. To create an immutable <see cref="Bytes" /> from a mutable <see cref="ByteArray" />, pass in the
 ///         <see cref="ByteArray" />.<see cref="ByteArray.Data" /> to <see cref="Bytes()"/>.
 ///     </para>
 /// </remarks>
-[NativeMarshalling(typeof(SafeHandleMarshaller<Bytes>))]
 public sealed class Bytes
     : SafeHandleZeroOrMinusOneIsInvalid,
         IEquatable<Bytes>,
@@ -47,11 +46,11 @@ public sealed class Bytes
 {
     /// <summary>Get the byte data in the <see cref="Bytes" />.</summary>
     /// <value>A <see cref="ReadOnlySpan{T}" /> of <see cref="byte" /> with the internal data.</value>
-    public ReadOnlySpan<byte> Data => ApiImports.BytesGetData(this, out _);
+    public ReadOnlySpan<byte> Data => ApiImports.BytesGetData(handle, out _);
 
     /// <summary>Gets the size of the byte data in the <see cref="Bytes" />.</summary>
     /// <value>A <see cref="uint" /> with the size of the byte data.</value>
-    public uint Size => (uint)ApiImports.BytesGetSize(this);
+    public uint Size => (uint)ApiImports.BytesGetSize(handle);
 
     /// <summary>Creates a new <see cref="Bytes" /> from <paramref name="data" />.</summary>
     /// <param name="data">An <see cref="nint" /> with the data to take.</param>
@@ -85,7 +84,7 @@ public sealed class Bytes
     {
         return new Pointer(
             ApiImports.BytesGetRegion(
-                this,
+                handle,
                 (nuint)Marshal.SizeOf<nint>(),
                 offset,
                 numberOfElements
@@ -111,12 +110,12 @@ public sealed class Bytes
     /// <summary>Creates an integer hash code for the byte data in the <see cref="Bytes" />.</summary>
     /// <returns>An <see cref="int" /> with the hash value corresponding to the key.</returns>
     /// <remarks>
-    ///     This function can be passed to <see cref="HashTable" /> as the key hash function parameter, when using
+    ///     handle function can be passed to <see cref="HashTable" /> as the key hash function parameter, when using
     ///     non-null <see cref="Bytes" /> as keys in a <see cref="HashTable" />.
     /// </remarks>
     public override int GetHashCode()
     {
-        return (int)ApiImports.BytesHash(this);
+        return (int)ApiImports.BytesHash(handle);
     }
 
     /// <summary>Determines whether the current instance is equal to another Bytes object.</summary>
@@ -124,7 +123,7 @@ public sealed class Bytes
     /// <returns>true if the current instance is equal to the other Bytes object; otherwise, false.</returns>
     public bool Equals(Bytes? other)
     {
-        return ApiImports.BytesEqual(this, other);
+        return ApiImports.BytesEqual(handle, other?.handle ?? nint.Zero);
     }
 
     /// <summary>Determines whether the current object is equal to another object.</summary>
@@ -133,7 +132,7 @@ public sealed class Bytes
     ///     true if the current object is equal to the <paramref name="obj"/> parameter; otherwise, false.
     /// </returns>
     /// <remarks>
-    ///     This function can be passed to <paramref name="HasTable" /> as the key equality function, when using
+    ///     handle function can be passed to <paramref name="HasTable" /> as the key equality function, when using
     ///     non-null Bytes as keys in a <see cref="HashTable" />.
     /// </remarks>
     public override bool Equals(object? obj)
@@ -154,27 +153,27 @@ public sealed class Bytes
     /// </returns>
     public int CompareTo(Bytes? other)
     {
-        return ApiImports.BytesCompare(this, other);
+        return ApiImports.BytesCompare(handle, other?.handle ?? nint.Zero);
     }
 
     /// <summary>
-    ///     Compares this  object with the specified object and returns an integer that indicates whether this object is
+    ///     Compares handle  object with the specified object and returns an integer that indicates whether handle object is
     ///     less than, equal to, or greater than the specified object.
     /// </summary>
     ///     <param name="obj">The object to compare with.</param>
     /// <returns>
-    ///         A signed integer that indicates the relative order of this object and the specified object.
+    ///         A signed integer that indicates the relative order of handle object and the specified object.
     ///     <para>
     ///         Less than zero:
-    ///         This object is less than the <paramref name="obj"/> parameter.
+    ///         handle object is less than the <paramref name="obj"/> parameter.
     ///     </para>
     ///     <para>
     ///         Zero:
-    ///         This object is equal to the <paramref name="obj"/> parameter.
+    ///         handle object is equal to the <paramref name="obj"/> parameter.
     ///     </para>
     ///     <para>
     ///      Greater than zero:
-    ///         This object is greater than the <paramref name="obj"/> parameter.
+    ///         handle object is greater than the <paramref name="obj"/> parameter.
     ///     </para>
     /// </returns>
     /// <exception cref="ArgumentException">Thrown when the <paramref name="obj"/> is not of type Bytes.</exception>

@@ -24,7 +24,7 @@ internal static partial class ApiImports
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_get_bytes")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint MappedFileGetBytes(MappedFile file);
+    public static partial nint MappedFileGetBytes(nint file);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -32,11 +32,11 @@ internal static partial class ApiImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? MappedFileGetContents(MappedFile file);
+    public static partial string? MappedFileGetContents(nint file);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_get_length")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nuint MappedFileGetLength(MappedFile file);
+    public static partial nuint MappedFileGetLength(nint file);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]

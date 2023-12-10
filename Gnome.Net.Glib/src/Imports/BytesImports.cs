@@ -13,22 +13,22 @@ internal static partial class ApiImports
 {
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_compare")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int BytesCompare(Bytes? left, Bytes? right);
+    public static partial int BytesCompare(nint left, nint right);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_equal")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool BytesEqual(Bytes? left, Bytes? right);
+    public static partial bool BytesEqual(nint left, nint right);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_get_data")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(ArrayMarshaller<byte, byte>), CountElementName = nameof(size))]
-    public static partial byte[]? BytesGetData(Bytes bytes, out nuint size);
+    public static partial byte[]? BytesGetData(nint bytes, out nuint size);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_get_region")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial nint BytesGetRegion(
-        Bytes bytes,
+        nint bytes,
         nuint elementSize,
         nuint offset,
         nuint numberOfElements
@@ -36,11 +36,11 @@ internal static partial class ApiImports
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_get_size")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nuint BytesGetSize(Bytes bytes);
+    public static partial nuint BytesGetSize(nint bytes);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_hash")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial uint BytesHash(Bytes bytes);
+    public static partial uint BytesHash(nint bytes);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_bytes_new")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]

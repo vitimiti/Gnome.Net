@@ -1,4 +1,4 @@
-// This file is part of the Gnome.Net project and is under the MIT license.
+// handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices.Marshalling;
@@ -11,7 +11,6 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>Represents a date and time, including a time zone.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<DateTime>))]
 public sealed class DateTime
     : SafeHandleZeroOrMinusOneIsInvalid,
         IEquatable<DateTime>,
@@ -19,11 +18,11 @@ public sealed class DateTime
         IComparable
 {
     /// <summary>
-    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in the local time zone.
+    ///     Creates a <see cref="DateTime" /> corresponding to handle exact instant in the local time zone.
     /// </summary>
     /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
-    ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
+    ///     handle is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public static DateTime? NowLocal
@@ -36,11 +35,11 @@ public sealed class DateTime
     }
 
     /// <summary>
-    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in UTC.
+    ///     Creates a <see cref="DateTime" /> corresponding to handle exact instant in UTC.
     /// </summary>
     /// <value>A new <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>
-    ///     This is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
+    ///     handle is equivalent to calling <see cref="CreateFromNow" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public static DateTime? NowUtc
@@ -58,14 +57,14 @@ public sealed class DateTime
     /// </summary>
     /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
-    ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
+    ///     handle call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public DateTime? ToLocal
     {
         get
         {
-            var result = ApiImports.DateTimeToLocal(this);
+            var result = ApiImports.DateTimeToLocal(handle);
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -76,14 +75,14 @@ public sealed class DateTime
     /// </summary>
     /// <value>A new <see cref="DateTime" />, or <see langword="null" /> on error.</value>
     /// <remarks>
-    ///     This call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
+    ///     handle call is equivalent to calling <see cref="ToTimeZone" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public DateTime? ToUtc
     {
         get
         {
-            var result = ApiImports.DateTimeToUtc(this);
+            var result = ApiImports.DateTimeToUtc(handle);
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -97,7 +96,7 @@ public sealed class DateTime
     ///     Unix time is the number of seconds that have elapsed since 1970-01-01 00:00:00 UTC, regardless of the time
     ///     zone associated with the <see cref="DateTime" />.
     /// </remarks>
-    public long ToUnix => ApiImports.DateTimeToUnix(this);
+    public long ToUnix => ApiImports.DateTimeToUnix(handle);
 
     /// <summary>
     ///     Gets whether daylight savings time is in effect at the time and in the time zone of the
@@ -107,15 +106,15 @@ public sealed class DateTime
     ///     <see langword="true" /> if the current <see cref="DateTime" /> daylight savings time is in effect,
     ///     <see langword="false" /> otherwise.
     /// </value>
-    public bool IsDaylightSavings => ApiImports.DateTimeIsDaylightSavings(this);
+    public bool IsDaylightSavings => ApiImports.DateTimeIsDaylightSavings(handle);
 
     /// <summary>
     ///     Format the <see cref="DateTime" /> in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>,
     ///     including the date, time and time zone, and return that as a UTF-8 encoded string.
     /// </summary>
     /// <value>A <see cref="string" /> with the formatted <see cref="DateTime" />, or <see langword="null" />.</value>
-    /// <remarks>This will output to sub-second precision if needed.</remarks>
-    public string? FormatIso8601 => ApiImports.DateTimeFormatIso8601(this);
+    /// <remarks>handle will output to sub-second precision if needed.</remarks>
+    public string? FormatIso8601 => ApiImports.DateTimeFormatIso8601(handle);
 
     /// <summary>Gets the ISO 8601 week number for the week containing the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the ISO 8601 week number of the week.</value>
@@ -125,36 +124,36 @@ public sealed class DateTime
     ///         produce some unusual results (described below).
     ///     </para>
     ///     <para>
-    ///         The first week of the year is week 1. This is the week that contains the first Thursday of the year.
-    ///         Equivalently, this is the first week that has more than 4 of its days falling within the calendar year.
+    ///         The first week of the year is week 1. handle is the week that contains the first Thursday of the year.
+    ///         Equivalently, handle is the first week that has more than 4 of its days falling within the calendar year.
     ///     </para>
     ///     <para>
-    ///         The value 0 is never returned by this function. Days contained within a year but occurring before the
+    ///         The value 0 is never returned by handle function. Days contained within a year but occurring before the
     ///         first ISO 8601 week of that year are considered as being contained in the last week of the previous
     ///         year. Similarly, the final days of a calendar year may be considered as being part of the first ISO 8601
     ///         week of the next year if 4 or more days of that week are contained within the new year.
     ///     </para>
     /// </remarks>
-    public int WeekOfYear => ApiImports.DateTimeGetWeekOfYear(this);
+    public int WeekOfYear => ApiImports.DateTimeGetWeekOfYear(handle);
 
     /// <summary>
     ///     Gets the day of the year represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfYear => ApiImports.DateTimeGetDayOfYear(this);
+    public int DayOfYear => ApiImports.DateTimeGetDayOfYear(handle);
 
     /// <summary>
     ///     Gets the day of the month represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfMonth => ApiImports.DateTimeGetDayOfMonth(this);
+    public int DayOfMonth => ApiImports.DateTimeGetDayOfMonth(handle);
 
     /// <summary>
     ///     Gets the ISO 8601 day of the week on which the <see cref="DateTime" /> falls (1 is Monday, 2 is Tuesday… 7
     ///     is Sunday).
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the week.</value>
-    public int DayOfWeek => ApiImports.DateTimeGetDayOfWeek(this);
+    public int DayOfWeek => ApiImports.DateTimeGetDayOfWeek(handle);
 
     /// <summary>Gets the Gregorian day, month, and year of the <see cref="DateTime" />.</summary>
     /// <value>
@@ -165,34 +164,34 @@ public sealed class DateTime
     {
         get
         {
-            ApiImports.DateTimeGetYearMonthDay(this, out var year, out var month, out var day);
+            ApiImports.DateTimeGetYearMonthDay(handle, out var year, out var month, out var day);
             return (year, month, day);
         }
     }
 
     /// <summary>Gets the year of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the year of the date.</value>
-    public int Year => ApiImports.DateTimeGetYear(this);
+    public int Year => ApiImports.DateTimeGetYear(handle);
 
     /// <summary>Gets the month of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the month of the date.</value>
-    public int Month => ApiImports.DateTimeGetMonth(this);
+    public int Month => ApiImports.DateTimeGetMonth(handle);
 
     /// <summary>Gets the hour of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the hour of the date.</value>
-    public int Hour => ApiImports.DateTimeGetHour(this);
+    public int Hour => ApiImports.DateTimeGetHour(handle);
 
     /// <summary>Gets the minute of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the minute of the date.</value>
-    public int Minute => ApiImports.DateTimeGetMinute(this);
+    public int Minute => ApiImports.DateTimeGetMinute(handle);
 
     /// <summary>Gets the second of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the second of the date.</value>
-    public int Second => ApiImports.DateTimeGetSecond(this);
+    public int Second => ApiImports.DateTimeGetSecond(handle);
 
     /// <summary>Gets the microsecond of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the microsecond of the date.</value>
-    public int Microsecond => ApiImports.DateTimeGetMicrosecond(this);
+    public int Microsecond => ApiImports.DateTimeGetMicrosecond(handle);
 
     /// <summary>
     ///     Gets the ISO 8601 week-numbering year in which the week containing the <see cref="DateTime" /> falls.
@@ -200,11 +199,11 @@ public sealed class DateTime
     /// <value>An <see cref="int" /> with the ISO 8601 week-numbering year.</value>
     /// <remarks>
     ///     <para>
-    ///         This function, taken together with <see cref="WeekOfYear" /> and <see cref="DayOfWeek" /> can be used to
+    ///         handle function, taken together with <see cref="WeekOfYear" /> and <see cref="DayOfWeek" /> can be used to
     ///         determine the full ISO week date on which datetime falls.
     ///     </para>
     ///     <para>
-    ///         This is usually equal to the normal Gregorian year (as returned by <see cref="Year" />), except as
+    ///         handle is usually equal to the normal Gregorian year (as returned by <see cref="Year" />), except as
     ///         detailed below:
     ///     </para>
     ///     <para>
@@ -213,12 +212,12 @@ public sealed class DateTime
     ///         week-numbering year.
     ///     </para>
     ///     <para>
-    ///         For Monday, Tuesday and Wednesday occurring near the end of the year, this may mean that the
+    ///         For Monday, Tuesday and Wednesday occurring near the end of the year, handle may mean that the
     ///         week-numbering year is one greater than the calendar year (so that these days have the same
     ///         week-numbering year as the Thursday occurring early in the next year).
     ///     </para>
     ///     <para>
-    ///         For Friday, Saturday and Sunday occurring near the start of the year, this may mean that the
+    ///         For Friday, Saturday and Sunday occurring near the start of the year, handle may mean that the
     ///         week-numbering year is one less than the calendar year (so that these days have the same week-numbering
     ///         year as the Thursday occurring late in the previous year).
     ///     </para>
@@ -227,23 +226,23 @@ public sealed class DateTime
     ///         majority of the days in the current week (Monday to Sunday).
     ///     </para>
     ///     <para>
-    ///         Note that 0001/01/01 in the proleptic Gregorian calendar is a Monday, so this function never returns 0.
+    ///         Note that 0001/01/01 in the proleptic Gregorian calendar is a Monday, so handle function never returns 0.
     ///     </para>
     /// </remarks>
-    public int NumberingYear => ApiImports.DateTimeGetWeekNumberingYear(this);
+    public int NumberingYear => ApiImports.DateTimeGetWeekNumberingYear(handle);
 
-    /// <summary>Gets the time zone for this <see cref="DateTime" />.</summary>
+    /// <summary>Gets the time zone for handle <see cref="DateTime" />.</summary>
     /// <value>A <see cref="Glib.TimeZone" /> corresponding to the current <see cref="DateTime" />.</value>
-    public TimeZone TimeZone => new(ApiImports.DateTimeGetTimeZone(this));
+    public TimeZone TimeZone => new(ApiImports.DateTimeGetTimeZone(handle));
 
     /// <summary>Gets the number of seconds since the start of the last minute, including the fractional part.</summary>
     /// <value>An <see cref="int" /> with the number of seconds since the start of the last minute.</value>
-    public double Seconds => ApiImports.DateTimeGetSeconds(this);
+    public double Seconds => ApiImports.DateTimeGetSeconds(handle);
 
     /// <summary>
     ///     Gets the offset to UTC in effect at the time and in the time zone of <see cref="DateTime" />.
     /// </summary>
-    /// <value>An <see cref="long" /> with the offset to UTC at this time and time zone.</value>
+    /// <value>An <see cref="long" /> with the offset to UTC at handle time and time zone.</value>
     /// <remarks>
     ///     <para>
     ///         The offset is the number of microseconds that you add to UTC time to arrive at local time for the time
@@ -251,18 +250,18 @@ public sealed class DateTime
     ///     </para>
     ///     <para>If the <see cref="DateTime" /> represents UTC time, then the offset is always zero.</para>
     /// </remarks>
-    public long UtcOffset => ApiImports.DateTimeGetUtcOffset(this);
+    public long UtcOffset => ApiImports.DateTimeGetUtcOffset(handle);
 
     /// <summary>
     ///     Gets the time zone abbreviation to be used at the time and in the time zone of the <see cref="DateTime" />.
     /// </summary>
     /// <value>A <see cref="string" /> with the time zone abbreviation.</value>
     /// <remarks>
-    ///     For example, in Toronto this is currently “EST” during the winter months and “EDT” during the summer months
+    ///     For example, in Toronto handle is currently “EST” during the winter months and “EDT” during the summer months
     ///     when daylight savings time is in effect.
     /// </remarks>
     public string TimeZoneAbbreviation =>
-        ApiImports.DateTimeGetTimeZoneAbbreviation(this) ?? string.Empty;
+        ApiImports.DateTimeGetTimeZoneAbbreviation(handle) ?? string.Empty;
 
     /// <summary>
     ///     Creates a new <see cref="DateTime" /> corresponding to the given <paramref name="date" /> and
@@ -295,7 +294,7 @@ public sealed class DateTime
     ///     <para>
     ///         If the given time is not representable in the given time zone (for example, 02:30 on March 14th 2010 in
     ///         Toronto, due to daylight savings time) then the time will be rounded up to the nearest existing time (in
-    ///         this case, 03:00). If this matters to you then you should verify the return value for containing the
+    ///         handle case, 03:00). If handle matters to you then you should verify the return value for containing the
     ///         same as the numbers you gave.
     ///     </para>
     ///     <para>
@@ -304,7 +303,7 @@ public sealed class DateTime
     ///         time is taken.
     ///     </para>
     ///     <para>
-    ///         It is not considered a programmer error for the values to this function to be out of range, but in the
+    ///         It is not considered a programmer error for the values to handle function to be out of range, but in the
     ///         case that they are, the function will return <see langword="null" />.
     ///     </para>
     /// </remarks>
@@ -340,7 +339,7 @@ public sealed class DateTime
     /// </param>
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
-    ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
+    ///     handle call is equivalent to calling <see cref="Create" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Local" />.
     /// </remarks>
     public static DateTime? CreateFromLocal(
@@ -373,7 +372,7 @@ public sealed class DateTime
     /// </param>
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
-    ///     This call is equivalent to calling <see cref="Create" /> with the time zone returned by
+    ///     handle call is equivalent to calling <see cref="Create" /> with the time zone returned by
     ///     <see cref="Glib.TimeZone" />.<see cref="Glib.TimeZone.Utc" />.
     /// </remarks>
     public static DateTime? CreateFromUtc(
@@ -469,11 +468,11 @@ public sealed class DateTime
     ///         </list>
     ///     </para>
     ///     <para>
-    ///         If the timezone is not provided in text it must be provided in <paramref name="defaultTz" /> (this field
+    ///         If the timezone is not provided in text it must be provided in <paramref name="defaultTz" /> (handle field
     ///         is otherwise ignored).
     ///     </para>
     ///     <para>
-    ///         This call can fail (returning <see langword="null" />) if text is not a valid ISO 8601 formatted
+    ///         handle call can fail (returning <see langword="null" />) if text is not a valid ISO 8601 formatted
     ///         <see cref="string" />.
     ///     </para>
     /// </remarks>
@@ -495,7 +494,7 @@ public sealed class DateTime
     ///         local time offset.
     ///     </para>
     ///     <para>
-    ///         This call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
+    ///         handle call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
     ///         outside of the supported range of <see cref="DateTime" />.
     ///     </para>
     /// </remarks>
@@ -516,7 +515,7 @@ public sealed class DateTime
     ///         local time offset.
     ///     </para>
     ///     <para>
-    ///         This call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
+    ///         handle call can fail (returning <see langword="null" />) if <paramref name="time" /> represents a time
     ///         outside of the supported range of <see cref="DateTime" />.
     ///     </para>
     /// </remarks>
@@ -527,13 +526,13 @@ public sealed class DateTime
     }
 
     /// <summary>
-    ///     Creates a <see cref="DateTime" /> corresponding to this exact instant in the given timezone.
+    ///     Creates a <see cref="DateTime" /> corresponding to handle exact instant in the given timezone.
     /// </summary>
     /// <param name="tz">A <see cref="Glib.TimeZone" /> with the timezone.</param>
     /// <returns>A new <see cref="DateTime" />, or <see langword="null" />.</returns>
     /// <remarks>
     ///     <para>The time is as accurate as the system allows, to a maximum accuracy of 1 microsecond.</para>
-    ///     <para>This function will always succeed unless Glib is still being used after the year 9999.</para>
+    ///     <para>handle function will always succeed unless Glib is still being used after the year 9999.</para>
     /// </remarks>
     public static DateTime? CreateFromNow(TimeZone tz)
     {
@@ -556,7 +555,7 @@ public sealed class DateTime
     /// </remarks>
     public static long Difference(DateTime begin, DateTime end)
     {
-        return ApiImports.DateTimeDifference(begin, end);
+        return ApiImports.DateTimeDifference(begin.handle, end.handle);
     }
 
     internal DateTime(nint preexistingHandle)
@@ -573,12 +572,12 @@ public sealed class DateTime
     ///     A new <see cref="DateTime" /> for the given <paramref name="tz" />, or <see langword="null" />.
     /// </returns>
     /// <remarks>
-    ///     This call can fail in the case that the time goes out of bounds. For example, converting 0001-01-01 00:00:00
+    ///     handle call can fail in the case that the time goes out of bounds. For example, converting 0001-01-01 00:00:00
     ///     UTC to a time zone west of Greenwich will fail (due to the year 0 being out of range).
     /// </remarks>
     public DateTime? ToTimeZone(TimeZone tz)
     {
-        var result = ApiImports.DateTimeToTimeZone(this, tz);
+        var result = ApiImports.DateTimeToTimeZone(handle, tz);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -586,7 +585,7 @@ public sealed class DateTime
     /// <param name="timeSpan">An <see cref="long" /> with the timespan to add.</param>
     public void Add(long timeSpan)
     {
-        handle = ApiImports.DateTimeAdd(this, timeSpan);
+        handle = ApiImports.DateTimeAdd(handle, timeSpan);
     }
 
     /// <summary>Add the specified <paramref name="date" /> and <paramref name="time" />.</summary>
@@ -605,7 +604,7 @@ public sealed class DateTime
     )
     {
         handle = ApiImports.DateTimeAddFull(
-            this,
+            handle,
             date.Years,
             date.Months,
             date.Days,
@@ -621,7 +620,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddYears(int years)
     {
-        handle = ApiImports.DateTimeAddYears(this, years);
+        handle = ApiImports.DateTimeAddYears(handle, years);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{years}' years to the current date time.");
@@ -634,7 +633,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMonths(int months)
     {
-        handle = ApiImports.DateTimeAddMonths(this, months);
+        handle = ApiImports.DateTimeAddMonths(handle, months);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -649,7 +648,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddWeeks(int weeks)
     {
-        handle = ApiImports.DateTimeAddWeeks(this, weeks);
+        handle = ApiImports.DateTimeAddWeeks(handle, weeks);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{weeks}' weeks to the current date time.");
@@ -662,7 +661,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddDays(int days)
     {
-        handle = ApiImports.DateTimeAddDays(this, days);
+        handle = ApiImports.DateTimeAddDays(handle, days);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{days}' days to the current date time.");
@@ -675,7 +674,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddHours(int hours)
     {
-        handle = ApiImports.DateTimeAddHours(this, hours);
+        handle = ApiImports.DateTimeAddHours(handle, hours);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{hours}' hours to the current date time.");
@@ -688,7 +687,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMinutes(int minutes)
     {
-        handle = ApiImports.DateTimeAddMinutes(this, minutes);
+        handle = ApiImports.DateTimeAddMinutes(handle, minutes);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -703,7 +702,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddSeconds(int seconds)
     {
-        handle = ApiImports.DateTimeAddSeconds(this, seconds);
+        handle = ApiImports.DateTimeAddSeconds(handle, seconds);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -720,13 +719,13 @@ public sealed class DateTime
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         The format strings understood by this function are a subset of the <c>strftime()</c> format language as
+    ///         The format strings understood by handle function are a subset of the <c>strftime()</c> format language as
     ///         specified by C99. The `D`, \U and \W conversions are not supported, nor is the 'E' modifier. The GNU
     ///         extensions %k, %l, %s and `P` are supported, however, as are the ‘0’, ‘_’ and ‘-‘ modifiers. The
     ///         Python extension %f is also supported.
     ///     </para>
     ///     <para>
-    ///         In contrast to <c>strftime()</c>, this function always produces a UTF-8 string, regardless of the
+    ///         In contrast to <c>strftime()</c>, handle function always produces a UTF-8 string, regardless of the
     ///         current locale. Note that the rendering of many formats is locale-dependent and may not match the
     ///         <c>strftime()</c> output exactly.
     ///     </para>
@@ -775,14 +774,14 @@ public sealed class DateTime
     ///             <item>
     ///                 <term>%g</term>
     ///                 <description>
-    ///                     The last two digits of the ISO 8601 week-based year as a decimal number (00-99). This works
+    ///                     The last two digits of the ISO 8601 week-based year as a decimal number (00-99). handle works
     ///                     well with `V` and %u.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>`G`</term>
     ///                 <description>
-    ///                     The ISO 8601 week-based year as a decimal number. This works well with `V` and %u.
+    ///                     The ISO 8601 week-based year as a decimal number. handle works well with `V` and %u.
     ///                 </description>
     ///             </item>
     ///             <item>
@@ -831,7 +830,7 @@ public sealed class DateTime
     ///                 <term>%p</term>
     ///                 <description>
     ///                     Either “AM” or “PM” according to the given time value, or the corresponding strings for the
-    ///                     current locale. Noon is treated as “PM” and midnight as “AM”. Use of this format specifier
+    ///                     current locale. Noon is treated as “PM” and midnight as “AM”. Use of handle format specifier
     ///                     is discouraged, as many locales have no concept of AM/PM formatting. Use %c or `X` instead.
     ///                 </description>
     ///             </item>
@@ -839,14 +838,14 @@ public sealed class DateTime
     ///                 <term>`P`</term>
     ///                 <description>
     ///                     Like %p but lowercase: "am" or "pm" or a corresponding string for the current locale. Use
-    ///                     of this format specifier is discouraged, as many locales have no concept of AM/PM
+    ///                     of handle format specifier is discouraged, as many locales have no concept of AM/PM
     ///                     formatting. Use %c or `X` instead.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%r</term>
     ///                 <description>
-    ///                     The time in a.m. or p.m. notation. Use of this format specifier is discouraged, as many
+    ///                     The time in a.m. or p.m. notation. Use of handle format specifier is discouraged, as many
     ///                     locales have no concept of AM/PM formatting. Use %c or `X` instead.
     ///                 </description>
     ///             </item>
@@ -875,7 +874,7 @@ public sealed class DateTime
     ///             <item>
     ///                 <term>%u</term>
     ///                 <description>
-    ///                     The ISO 8601 standard day of the week as a decimal, range 1 to 7, Monday being 1. This works
+    ///                     The ISO 8601 standard day of the week as a decimal, range 1 to 7, Monday being 1. handle works
     ///                     well with `G` and `V`.
     ///                 </description>
     ///             </item>
@@ -884,13 +883,13 @@ public sealed class DateTime
     ///                 <description>
     ///                     The ISO 8601 standard week number of the current year as a decimal number, range 01 to 53,
     ///                     where week 1 is the first week that has at least 4 days in the new year. See
-    ///                     <see cref="WeekOfYear" />. This works well with `G` and %u.
+    ///                     <see cref="WeekOfYear" />. handle works well with `G` and %u.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%w</term>
     ///                 <description>
-    ///                     The day of the week as a decimal, range 0 to 6, Sunday being 0. This is not the ISO 8601
+    ///                     The day of the week as a decimal, range 0 to 6, Sunday being 0. handle is not the ISO 8601
     ///                     standard format — use %u instead.
     ///                 </description>
     ///             </item>
@@ -921,20 +920,20 @@ public sealed class DateTime
     ///             <item>
     ///                 <term>%:z</term>
     ///                 <description>
-    ///                     The time zone as an offset from UTC (+hh:mm). This is a gnulib <c>strftime()</c> extension.
+    ///                     The time zone as an offset from UTC (+hh:mm). handle is a gnulib <c>strftime()</c> extension.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%::z</term>
     ///                 <description>
-    ///                     The time zone as an offset from UTC (+hh:mm:ss). This is a gnulib <c>strftime()</c>
+    ///                     The time zone as an offset from UTC (+hh:mm:ss). handle is a gnulib <c>strftime()</c>
     ///                     extension.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>%:::z</term>
     ///                 <description>
-    ///                     The time zone as an offset from UTC, with : to necessary precision (e.g., -04, +05:30). This
+    ///                     The time zone as an offset from UTC, with : to necessary precision (e.g., -04, +05:30). handle
     ///                     is a gnulib <c>strftime()</c> extension.
     ///                 </description>
     ///             </item>
@@ -961,19 +960,19 @@ public sealed class DateTime
     ///             <item>
     ///                 <term>_</term>
     ///                 <description>
-    ///                     Pad a numeric result with spaces. This overrides the default padding for the specifier.
+    ///                     Pad a numeric result with spaces. handle overrides the default padding for the specifier.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>-</term>
     ///                 <description>
-    ///                     Do not pad a numeric result. This overrides the default padding for the specifier.
+    ///                     Do not pad a numeric result. handle overrides the default padding for the specifier.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <term>0</term>
     ///                 <description>
-    ///                     Pad a numeric result with zeros. This overrides the default padding for the specifier.
+    ///                     Pad a numeric result with zeros. handle overrides the default padding for the specifier.
     ///                 </description>
     ///             </item>
     ///         </list>
@@ -988,7 +987,7 @@ public sealed class DateTime
     /// </remarks>
     public string? Format(string format)
     {
-        return ApiImports.DateTimeFormat(this, format);
+        return ApiImports.DateTimeFormat(handle, format);
     }
 
     /// <summary>Releases the memory held in the date time.</summary>
@@ -1009,7 +1008,7 @@ public sealed class DateTime
     /// <returns>An <see cref="int" /> with the <see cref="DateTime" /> hash.</returns>
     public override int GetHashCode()
     {
-        return (int)ApiImports.DateTimeHash(this);
+        return (int)ApiImports.DateTimeHash(handle);
     }
 
     /// <summary>Checks for equality between two <see cref="DateTime" />.</summary>
@@ -1023,7 +1022,7 @@ public sealed class DateTime
     /// </remarks>
     public bool Equals(DateTime? other)
     {
-        return other is not null && ApiImports.DateTimeEqual(this, other);
+        return other is not null && ApiImports.DateTimeEqual(handle, other?.handle ?? nint.Zero);
     }
 
     /// <summary>
@@ -1048,7 +1047,7 @@ public sealed class DateTime
     /// </returns>
     public int CompareTo(DateTime? other)
     {
-        return other is null ? 1 : ApiImports.DateTimeCompare(this, other);
+        return other is null ? 1 : ApiImports.DateTimeCompare(handle, other?.handle ?? nint.Zero);
     }
 
     /// <summary>Compare an <see cref="object" /> with the current <see cref="DateTime" />.</summary>

@@ -11,7 +11,6 @@ using Microsoft.Win32.SafeHandles;
 namespace Gnome.Net.Glib;
 
 /// <summary>A safe handle to a GLib pointer.</summary>
-[NativeMarshalling(typeof(SafeHandleMarshaller<Pointer>))]
 public sealed class Pointer : SafeHandleZeroOrMinusOneIsInvalid
 {
     /// <summary>Gets the data represented as a read-only span of bytes.</summary>
