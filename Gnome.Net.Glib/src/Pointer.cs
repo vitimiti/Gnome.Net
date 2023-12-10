@@ -1,6 +1,7 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
 using Gnome.Net.Glib.Imports;
@@ -13,6 +14,29 @@ namespace Gnome.Net.Glib;
 [NativeMarshalling(typeof(SafeHandleMarshaller<Pointer>))]
 public sealed class Pointer : SafeHandleZeroOrMinusOneIsInvalid
 {
+    /// <summary>Gets the data represented as a read-only span of bytes.</summary>
+    /// <value>A <see cref="ReadOnlySpan{T}" /> of <see cref="byte" />.</value>
+    /// <remarks>This property retrieves the data stored in the handle as a read-only span of bytes.</remarks>
+    public ReadOnlySpan<byte> Data
+    {
+        get
+        {
+            var list = new List<byte>();
+            var elementSize = Marshal.SizeOf<nint>();
+            var lastByte = (byte)1;
+            var index = 0;
+            while (lastByte != 0)
+            {
+                var ptr = Marshal.ReadIntPtr(handle, index * elementSize);
+                lastByte = Marshal.ReadByte(ptr);
+                list.Add(lastByte);
+                index += 1;
+            }
+
+            return list.ToArray();
+        }
+    }
+
     /// <summary>Create the GPointer with an empty GLib pointer.</summary>
     /// <param name="ownsHandle">
     ///     <see langword="true" /> if the GPointer owns the handle, <see langword="false" /> otherwise.
