@@ -22,16 +22,19 @@ internal static class NullTerminatedUtf8StringArrayMarshaller
 
         var list = new List<string>();
         var elementSize = Marshal.SizeOf<nint>();
-        for (var i = 0; i < 256; i++) // Unknown length
+        var lastStr = "default";
+        var index = 0;
+        while (string.IsNullOrWhiteSpace(lastStr))
         {
-            var ptr = Marshal.ReadIntPtr(unmanaged, i * elementSize);
-            var str = Marshal.PtrToStringUTF8(ptr);
-            if (string.IsNullOrWhiteSpace(str))
+            var ptr = Marshal.ReadIntPtr(unmanaged, index * elementSize);
+            lastStr = Marshal.PtrToStringUTF8(ptr);
+            if (string.IsNullOrWhiteSpace(lastStr))
             {
                 break;
             }
 
-            list.Add(str);
+            list.Add(lastStr);
+            index += 1;
         }
 
         return list.ToArray();
