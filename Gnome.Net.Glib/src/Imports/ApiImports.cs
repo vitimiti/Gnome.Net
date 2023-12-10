@@ -11,9 +11,9 @@ using Gnome.Net.Glib.CustomMarshalling;
 
 namespace Gnome.Net.Glib.Imports;
 
-internal static partial class CoreImports
+internal static partial class ApiImports
 {
-    static CoreImports()
+    static ApiImports()
     {
         NativeLibrary.SetDllImportResolver(
             Assembly.GetExecutingAssembly(),

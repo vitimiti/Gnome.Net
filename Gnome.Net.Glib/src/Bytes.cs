@@ -47,11 +47,11 @@ public sealed class Bytes
 {
     /// <summary>Get the byte data in the <see cref="Bytes" />.</summary>
     /// <value>A <see cref="ReadOnlySpan{T}" /> of <see cref="byte" /> with the internal data.</value>
-    public ReadOnlySpan<byte> Data => BytesImports.GetData(this, out _);
+    public ReadOnlySpan<byte> Data => ApiImports.BytesGetData(this, out _);
 
     /// <summary>Gets the size of the byte data in the <see cref="Bytes" />.</summary>
     /// <value>A <see cref="uint" /> with the size of the byte data.</value>
-    public uint Size => (uint)BytesImports.GetSize(this);
+    public uint Size => (uint)ApiImports.BytesGetSize(this);
 
     /// <summary>Creates a new <see cref="Bytes" /> from <paramref name="data" />.</summary>
     /// <param name="data">An <see cref="nint" /> with the data to take.</param>
@@ -59,7 +59,7 @@ public sealed class Bytes
     /// <remarks>The internal data will be owned by the <see cref="Bytes" />.</remarks>
     public static Bytes TakeData(nint data)
     {
-        return new Bytes(BytesImports.NewTake(data, (nuint)Marshal.SizeOf<nint>()), true);
+        return new Bytes(ApiImports.BytesNewTake(data, (nuint)Marshal.SizeOf<nint>()), true);
     }
 
     internal Bytes(nint preexistingHandle, bool ownsHandle)
@@ -74,7 +74,7 @@ public sealed class Bytes
     public Bytes(nint data)
         : base(false)
     {
-        handle = BytesImports.New(data, (nuint)Marshal.SizeOf<nint>());
+        handle = ApiImports.BytesNew(data, (nuint)Marshal.SizeOf<nint>());
     }
 
     /// <summary>Gets a region of data from the current instance.</summary>
@@ -84,7 +84,12 @@ public sealed class Bytes
     public Pointer GetRegion(uint offset, uint numberOfElements)
     {
         return new Pointer(
-            BytesImports.GetRegion(this, (nuint)Marshal.SizeOf<nint>(), offset, numberOfElements),
+            ApiImports.BytesGetRegion(
+                this,
+                (nuint)Marshal.SizeOf<nint>(),
+                offset,
+                numberOfElements
+            ),
             false
         );
     }
@@ -98,7 +103,7 @@ public sealed class Bytes
             return true;
         }
 
-        BytesImports.Unref(handle);
+        ApiImports.BytesUnref(handle);
         handle = nint.Zero;
         return true;
     }
@@ -111,7 +116,7 @@ public sealed class Bytes
     /// </remarks>
     public override int GetHashCode()
     {
-        return (int)BytesImports.Hash(this);
+        return (int)ApiImports.BytesHash(this);
     }
 
     /// <summary>Determines whether the current instance is equal to another Bytes object.</summary>
@@ -119,7 +124,7 @@ public sealed class Bytes
     /// <returns>true if the current instance is equal to the other Bytes object; otherwise, false.</returns>
     public bool Equals(Bytes? other)
     {
-        return BytesImports.Equal(this, other);
+        return ApiImports.BytesEqual(this, other);
     }
 
     /// <summary>Determines whether the current object is equal to another object.</summary>
@@ -149,7 +154,7 @@ public sealed class Bytes
     /// </returns>
     public int CompareTo(Bytes? other)
     {
-        return BytesImports.Compare(this, other);
+        return ApiImports.BytesCompare(this, other);
     }
 
     /// <summary>

@@ -64,7 +64,7 @@ public sealed class Pointer : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        CoreImports.Free(handle);
+        ApiImports.Free(handle);
         handle = nint.Zero;
         return true;
     }

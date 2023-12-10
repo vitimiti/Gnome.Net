@@ -22,7 +22,7 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
     ///     The mapped contents of the file must not be modified after creating this bytes object, because a
     ///     <see cref="Glib.Bytes" /> should be immutable.
     /// </remarks>
-    public Bytes Bytes => new(MappedFileImports.GetBytes(this), false);
+    public Bytes Bytes => new(ApiImports.MappedFileGetBytes(this), false);
 
     /// <summary>Gets the contents of the <see cref="MappedFile" />.</summary>
     /// <value>A <see cref="string" /> with the contents of the mapped file, or <see langword="null" />.</value>
@@ -33,11 +33,11 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
     ///     </para>
     ///     <para>If the file is empty, then <see langword="null" /> is returned.</para>
     /// </remarks>
-    public string? Contents => MappedFileImports.GetContents(this);
+    public string? Contents => ApiImports.MappedFileGetContents(this);
 
     /// <summary>Gets the length of the contents of a mapped file.</summary>
     /// <value>A <see cref="uint" /> with the length of the contents of the <see cref="MappedFile" />.</value>
-    public uint Length => (uint)MappedFileImports.GetLength(this);
+    public uint Length => (uint)ApiImports.MappedFileGetLength(this);
 
     /// <summary>Maps a file into memory.</summary>
     /// <param name="filename">
@@ -74,7 +74,7 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public static MappedFile? CreateFromFile(string filename, bool writable, out IErrorQuark? error)
     {
-        var result = MappedFileImports.New(filename, writable, out var errorHandle);
+        var result = ApiImports.MappedFileNew(filename, writable, out var errorHandle);
         error = ErrorMarshaller.FromUnmanaged(errorHandle);
         return result == nint.Zero ? null : new MappedFile(result);
     }
@@ -94,7 +94,7 @@ public sealed class MappedFile : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        MappedFileImports.Unref(handle);
+        ApiImports.MappedFileUnref(handle);
         handle = nint.Zero;
         return true;
     }

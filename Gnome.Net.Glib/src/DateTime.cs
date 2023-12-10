@@ -30,7 +30,7 @@ public sealed class DateTime
     {
         get
         {
-            var result = DateTimeImports.NewNowLocal();
+            var result = ApiImports.DateTimeNewNowLocal();
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -47,7 +47,7 @@ public sealed class DateTime
     {
         get
         {
-            var result = DateTimeImports.NewNowUtc();
+            var result = ApiImports.DateTimeNewNowUtc();
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -65,7 +65,7 @@ public sealed class DateTime
     {
         get
         {
-            var result = DateTimeImports.ToLocal(this);
+            var result = ApiImports.DateTimeToLocal(this);
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -83,7 +83,7 @@ public sealed class DateTime
     {
         get
         {
-            var result = DateTimeImports.ToUtc(this);
+            var result = ApiImports.DateTimeToUtc(this);
             return result == nint.Zero ? null : new DateTime(result);
         }
     }
@@ -97,7 +97,7 @@ public sealed class DateTime
     ///     Unix time is the number of seconds that have elapsed since 1970-01-01 00:00:00 UTC, regardless of the time
     ///     zone associated with the <see cref="DateTime" />.
     /// </remarks>
-    public long ToUnix => DateTimeImports.ToUnix(this);
+    public long ToUnix => ApiImports.DateTimeToUnix(this);
 
     /// <summary>
     ///     Gets whether daylight savings time is in effect at the time and in the time zone of the
@@ -107,7 +107,7 @@ public sealed class DateTime
     ///     <see langword="true" /> if the current <see cref="DateTime" /> daylight savings time is in effect,
     ///     <see langword="false" /> otherwise.
     /// </value>
-    public bool IsDaylightSavings => DateTimeImports.IsDaylightSavings(this);
+    public bool IsDaylightSavings => ApiImports.DateTimeIsDaylightSavings(this);
 
     /// <summary>
     ///     Format the <see cref="DateTime" /> in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>,
@@ -115,7 +115,7 @@ public sealed class DateTime
     /// </summary>
     /// <value>A <see cref="string" /> with the formatted <see cref="DateTime" />, or <see langword="null" />.</value>
     /// <remarks>This will output to sub-second precision if needed.</remarks>
-    public string? FormatIso8601 => DateTimeImports.FormatIso8601(this);
+    public string? FormatIso8601 => ApiImports.DateTimeFormatIso8601(this);
 
     /// <summary>Gets the ISO 8601 week number for the week containing the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the ISO 8601 week number of the week.</value>
@@ -135,26 +135,26 @@ public sealed class DateTime
     ///         week of the next year if 4 or more days of that week are contained within the new year.
     ///     </para>
     /// </remarks>
-    public int WeekOfYear => DateTimeImports.GetWeekOfYear(this);
+    public int WeekOfYear => ApiImports.DateTimeGetWeekOfYear(this);
 
     /// <summary>
     ///     Gets the day of the year represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfYear => DateTimeImports.GetDayOfYear(this);
+    public int DayOfYear => ApiImports.DateTimeGetDayOfYear(this);
 
     /// <summary>
     ///     Gets the day of the month represented by the <see cref="DateTime" /> in the gregorian calendar.
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the month.</value>
-    public int DayOfMonth => DateTimeImports.GetDayOfMonth(this);
+    public int DayOfMonth => ApiImports.DateTimeGetDayOfMonth(this);
 
     /// <summary>
     ///     Gets the ISO 8601 day of the week on which the <see cref="DateTime" /> falls (1 is Monday, 2 is Tuesday… 7
     ///     is Sunday).
     /// </summary>
     /// <value>An <see cref="int" /> with the day of the week.</value>
-    public int DayOfWeek => DateTimeImports.GetDayOfWeek(this);
+    public int DayOfWeek => ApiImports.DateTimeGetDayOfWeek(this);
 
     /// <summary>Gets the Gregorian day, month, and year of the <see cref="DateTime" />.</summary>
     /// <value>
@@ -165,34 +165,34 @@ public sealed class DateTime
     {
         get
         {
-            DateTimeImports.GetYearMonthDay(this, out var year, out var month, out var day);
+            ApiImports.DateTimeGetYearMonthDay(this, out var year, out var month, out var day);
             return (year, month, day);
         }
     }
 
     /// <summary>Gets the year of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the year of the date.</value>
-    public int Year => DateTimeImports.GetYear(this);
+    public int Year => ApiImports.DateTimeGetYear(this);
 
     /// <summary>Gets the month of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the month of the date.</value>
-    public int Month => DateTimeImports.GetMonth(this);
+    public int Month => ApiImports.DateTimeGetMonth(this);
 
     /// <summary>Gets the hour of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the hour of the date.</value>
-    public int Hour => DateTimeImports.GetHour(this);
+    public int Hour => ApiImports.DateTimeGetHour(this);
 
     /// <summary>Gets the minute of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the minute of the date.</value>
-    public int Minute => DateTimeImports.GetMinute(this);
+    public int Minute => ApiImports.DateTimeGetMinute(this);
 
     /// <summary>Gets the second of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the second of the date.</value>
-    public int Second => DateTimeImports.GetSecond(this);
+    public int Second => ApiImports.DateTimeGetSecond(this);
 
     /// <summary>Gets the microsecond of the date represented by the <see cref="DateTime" />.</summary>
     /// <value>An <see cref="int" /> with the microsecond of the date.</value>
-    public int Microsecond => DateTimeImports.GetMicrosecond(this);
+    public int Microsecond => ApiImports.DateTimeGetMicrosecond(this);
 
     /// <summary>
     ///     Gets the ISO 8601 week-numbering year in which the week containing the <see cref="DateTime" /> falls.
@@ -230,15 +230,15 @@ public sealed class DateTime
     ///         Note that 0001/01/01 in the proleptic Gregorian calendar is a Monday, so this function never returns 0.
     ///     </para>
     /// </remarks>
-    public int NumberingYear => DateTimeImports.GetWeekNumberingYear(this);
+    public int NumberingYear => ApiImports.DateTimeGetWeekNumberingYear(this);
 
     /// <summary>Gets the time zone for this <see cref="DateTime" />.</summary>
     /// <value>A <see cref="Glib.TimeZone" /> corresponding to the current <see cref="DateTime" />.</value>
-    public TimeZone TimeZone => new(DateTimeImports.GetTimeZone(this));
+    public TimeZone TimeZone => new(ApiImports.DateTimeGetTimeZone(this));
 
     /// <summary>Gets the number of seconds since the start of the last minute, including the fractional part.</summary>
     /// <value>An <see cref="int" /> with the number of seconds since the start of the last minute.</value>
-    public double Seconds => DateTimeImports.GetSeconds(this);
+    public double Seconds => ApiImports.DateTimeGetSeconds(this);
 
     /// <summary>
     ///     Gets the offset to UTC in effect at the time and in the time zone of <see cref="DateTime" />.
@@ -251,7 +251,7 @@ public sealed class DateTime
     ///     </para>
     ///     <para>If the <see cref="DateTime" /> represents UTC time, then the offset is always zero.</para>
     /// </remarks>
-    public long UtcOffset => DateTimeImports.GetUtcOffset(this);
+    public long UtcOffset => ApiImports.DateTimeGetUtcOffset(this);
 
     /// <summary>
     ///     Gets the time zone abbreviation to be used at the time and in the time zone of the <see cref="DateTime" />.
@@ -262,7 +262,7 @@ public sealed class DateTime
     ///     when daylight savings time is in effect.
     /// </remarks>
     public string TimeZoneAbbreviation =>
-        DateTimeImports.GetTimeZoneAbbreviation(this) ?? string.Empty;
+        ApiImports.DateTimeGetTimeZoneAbbreviation(this) ?? string.Empty;
 
     /// <summary>
     ///     Creates a new <see cref="DateTime" /> corresponding to the given <paramref name="date" /> and
@@ -314,7 +314,7 @@ public sealed class DateTime
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = DateTimeImports.New(
+        var result = ApiImports.DateTimeNew(
             tz,
             date.Year,
             date.Month,
@@ -348,7 +348,7 @@ public sealed class DateTime
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = DateTimeImports.NewLocal(
+        var result = ApiImports.DateTimeNewLocal(
             date.Year,
             date.Month,
             date.Day,
@@ -381,7 +381,7 @@ public sealed class DateTime
         (int Hour, int Minute, double Seconds) time
     )
     {
-        var result = DateTimeImports.NewUtc(
+        var result = ApiImports.DateTimeNewUtc(
             date.Year,
             date.Month,
             date.Day,
@@ -479,7 +479,7 @@ public sealed class DateTime
     /// </remarks>
     public static DateTime? CreateFromIso8601(string? text, TimeZone? defaultTz)
     {
-        var result = DateTimeImports.NewFromIso8601(text, defaultTz);
+        var result = ApiImports.DateTimeNewFromIso8601(text, defaultTz);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -501,7 +501,7 @@ public sealed class DateTime
     /// </remarks>
     public static DateTime? CreateFromUnixLocal(long time)
     {
-        var result = DateTimeImports.NewFromUnixLocal(time);
+        var result = ApiImports.DateTimeNewFromUnixLocal(time);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -522,7 +522,7 @@ public sealed class DateTime
     /// </remarks>
     public static DateTime? CreateFromUnixUtc(long time)
     {
-        var result = DateTimeImports.NewFromUnixUtc(time);
+        var result = ApiImports.DateTimeNewFromUnixUtc(time);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -537,7 +537,7 @@ public sealed class DateTime
     /// </remarks>
     public static DateTime? CreateFromNow(TimeZone tz)
     {
-        var result = DateTimeImports.NewNow(tz);
+        var result = ApiImports.DateTimeNewNow(tz);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -556,7 +556,7 @@ public sealed class DateTime
     /// </remarks>
     public static long Difference(DateTime begin, DateTime end)
     {
-        return DateTimeImports.Difference(begin, end);
+        return ApiImports.DateTimeDifference(begin, end);
     }
 
     internal DateTime(nint preexistingHandle)
@@ -578,7 +578,7 @@ public sealed class DateTime
     /// </remarks>
     public DateTime? ToTimeZone(TimeZone tz)
     {
-        var result = DateTimeImports.ToTimeZone(this, tz);
+        var result = ApiImports.DateTimeToTimeZone(this, tz);
         return result == nint.Zero ? null : new DateTime(result);
     }
 
@@ -586,7 +586,7 @@ public sealed class DateTime
     /// <param name="timeSpan">An <see cref="long" /> with the timespan to add.</param>
     public void Add(long timeSpan)
     {
-        handle = DateTimeImports.Add(this, timeSpan);
+        handle = ApiImports.DateTimeAdd(this, timeSpan);
     }
 
     /// <summary>Add the specified <paramref name="date" /> and <paramref name="time" />.</summary>
@@ -604,7 +604,7 @@ public sealed class DateTime
         (int Hours, int Minutes, double Seconds) time
     )
     {
-        handle = DateTimeImports.AddFull(
+        handle = ApiImports.DateTimeAddFull(
             this,
             date.Years,
             date.Months,
@@ -621,7 +621,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddYears(int years)
     {
-        handle = DateTimeImports.AddYears(this, years);
+        handle = ApiImports.DateTimeAddYears(this, years);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{years}' years to the current date time.");
@@ -634,7 +634,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMonths(int months)
     {
-        handle = DateTimeImports.AddMonths(this, months);
+        handle = ApiImports.DateTimeAddMonths(this, months);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -649,7 +649,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddWeeks(int weeks)
     {
-        handle = DateTimeImports.AddWeeks(this, weeks);
+        handle = ApiImports.DateTimeAddWeeks(this, weeks);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{weeks}' weeks to the current date time.");
@@ -662,7 +662,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddDays(int days)
     {
-        handle = DateTimeImports.AddDays(this, days);
+        handle = ApiImports.DateTimeAddDays(this, days);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{days}' days to the current date time.");
@@ -675,7 +675,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddHours(int hours)
     {
-        handle = DateTimeImports.AddHours(this, hours);
+        handle = ApiImports.DateTimeAddHours(this, hours);
         if (handle == nint.Zero)
         {
             throw new DateTimeException($"Unable to add '{hours}' hours to the current date time.");
@@ -688,7 +688,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddMinutes(int minutes)
     {
-        handle = DateTimeImports.AddMinutes(this, minutes);
+        handle = ApiImports.DateTimeAddMinutes(this, minutes);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -703,7 +703,7 @@ public sealed class DateTime
     /// <exception cref="DateTimeException">When setting the internal handle to <see langword="null" />.</exception>
     public void AddSeconds(int seconds)
     {
-        handle = DateTimeImports.AddSeconds(this, seconds);
+        handle = ApiImports.DateTimeAddSeconds(this, seconds);
         if (handle == nint.Zero)
         {
             throw new DateTimeException(
@@ -988,7 +988,7 @@ public sealed class DateTime
     /// </remarks>
     public string? Format(string format)
     {
-        return DateTimeImports.Format(this, format);
+        return ApiImports.DateTimeFormat(this, format);
     }
 
     /// <summary>Releases the memory held in the date time.</summary>
@@ -1000,7 +1000,7 @@ public sealed class DateTime
             return true;
         }
 
-        DateTimeImports.Unref(handle);
+        ApiImports.DateTimeUnref(handle);
         handle = nint.Zero;
         return true;
     }
@@ -1009,7 +1009,7 @@ public sealed class DateTime
     /// <returns>An <see cref="int" /> with the <see cref="DateTime" /> hash.</returns>
     public override int GetHashCode()
     {
-        return (int)DateTimeImports.Hash(this);
+        return (int)ApiImports.DateTimeHash(this);
     }
 
     /// <summary>Checks for equality between two <see cref="DateTime" />.</summary>
@@ -1023,7 +1023,7 @@ public sealed class DateTime
     /// </remarks>
     public bool Equals(DateTime? other)
     {
-        return other is not null && DateTimeImports.Equal(this, other);
+        return other is not null && ApiImports.DateTimeEqual(this, other);
     }
 
     /// <summary>
@@ -1048,7 +1048,7 @@ public sealed class DateTime
     /// </returns>
     public int CompareTo(DateTime? other)
     {
-        return other is null ? 1 : DateTimeImports.Compare(this, other);
+        return other is null ? 1 : ApiImports.DateTimeCompare(this, other);
     }
 
     /// <summary>Compare an <see cref="object" /> with the current <see cref="DateTime" />.</summary>

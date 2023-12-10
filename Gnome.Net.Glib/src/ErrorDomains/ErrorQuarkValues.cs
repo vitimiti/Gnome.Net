@@ -10,13 +10,13 @@ public struct ErrorQuarkValues
 {
     /// <summary>The <see cref="BookmarkFileErrorQuark" /> value.</summary>
     /// <value>A <see cref="uint" /> with the quark value.</value>
-    public static uint BookmarkFileError => BookmarkFileImports.ErrorQuark();
+    public static uint BookmarkFileError => ApiImports.BookmarkFileErrorQuark();
 
     /// <summary>The <see cref="FileErrorQuark" /> value.</summary>
     /// <value>A <see cref="uint" /> with the quark value.</value>
-    public static uint FileError => CoreImports.FileErrorQuark();
+    public static uint FileError => ApiImports.FileErrorQuark();
 
     /// <summary>The <see cref="ShellErrorQuark" /> value.</summary>
     /// <value>A <see cref="uint" /> with the quark value.</value>
-    public static uint ShellError => CoreImports.ShellErrorQuark();
+    public static uint ShellError => ApiImports.ShellErrorQuark();
 }

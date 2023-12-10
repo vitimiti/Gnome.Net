@@ -24,13 +24,13 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     ///     queue or due to scheduling.
     /// </remarks>
     public int Length =>
-        _isLocked ? AsyncQueueImports.LengthUnlocked(this) : AsyncQueueImports.Length(this);
+        _isLocked ? ApiImports.AsyncQueueLengthUnlocked(this) : ApiImports.AsyncQueueLength(this);
 
     /// <summary>Creates a new asynchronous queue.</summary>
     public AsyncQueue()
         : base(true)
     {
-        handle = AsyncQueueImports.New();
+        handle = ApiImports.AsyncQueueNew();
     }
 
     /// <summary>Acquires the queue‘s lock.</summary>
@@ -42,7 +42,7 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Lock()
     {
-        AsyncQueueImports.Lock(this);
+        ApiImports.AsyncQueueLock(this);
         _isLocked = true;
     }
 
@@ -51,7 +51,9 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// <remarks>If queue is empty, this function blocks until data becomes available.</remarks>
     public Pointer? Pop()
     {
-        var data = _isLocked ? AsyncQueueImports.PopUnlocked(this) : AsyncQueueImports.Pop(this);
+        var data = _isLocked
+            ? ApiImports.AsyncQueuePopUnlocked(this)
+            : ApiImports.AsyncQueuePop(this);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -63,11 +65,11 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            AsyncQueueImports.PushUnlocked(this, data);
+            ApiImports.AsyncQueuePushUnlocked(this, data);
             return;
         }
 
-        AsyncQueueImports.Push(this, data);
+        ApiImports.AsyncQueuePush(this, data);
     }
 
     /// <summary>Pushes the <paramref name="item" /> into the queue.</summary>
@@ -81,11 +83,11 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     {
         if (_isLocked)
         {
-            AsyncQueueImports.PushFrontUnlocked(this, item);
+            ApiImports.AsyncQueuePushFrontUnlocked(this, item);
             return;
         }
 
-        AsyncQueueImports.PushFront(this, item);
+        ApiImports.AsyncQueuePushFront(this, item);
     }
 
     /// <summary>Pops data from the queue.</summary>
@@ -103,8 +105,8 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TimeoutPop(uint timeout)
     {
         var data = _isLocked
-            ? AsyncQueueImports.TimeoutPopUnlocked(this, timeout)
-            : AsyncQueueImports.TimeoutPop(this, timeout);
+            ? ApiImports.AsyncQueueTimeoutPopUnlocked(this, timeout)
+            : ApiImports.AsyncQueueTimeoutPop(this, timeout);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -117,8 +119,8 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public bool TryRemove(Pointer item)
     {
         return _isLocked
-            ? AsyncQueueImports.RemoveUnlocked(this, item)
-            : AsyncQueueImports.Remove(this, item);
+            ? ApiImports.AsyncQueueRemoveUnlocked(this, item)
+            : ApiImports.AsyncQueueRemove(this, item);
     }
 
     /// <summary>Tries to pop data from the queue.</summary>
@@ -128,8 +130,8 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     public Pointer? TryPop()
     {
         var data = _isLocked
-            ? AsyncQueueImports.TryPopUnlocked(this)
-            : AsyncQueueImports.TryPop(this);
+            ? ApiImports.AsyncQueueTryPopUnlocked(this)
+            : ApiImports.AsyncQueueTryPop(this);
 
         return data == nint.Zero ? null : new Pointer(data);
     }
@@ -140,7 +142,7 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public void Unlock()
     {
-        AsyncQueueImports.Unlock(this);
+        ApiImports.AsyncQueueUnlock(this);
         _isLocked = false;
     }
 
@@ -158,7 +160,7 @@ public sealed class AsyncQueue : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        AsyncQueueImports.Unref(handle);
+        ApiImports.AsyncQueueUnref(handle);
         handle = nint.Zero;
         return true;
     }

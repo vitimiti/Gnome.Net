@@ -1,7 +1,6 @@
 // This file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -9,87 +8,79 @@ using Gnome.Net.Common;
 
 namespace Gnome.Net.Glib.Imports;
 
-internal static partial class AsyncQueueImports
+internal static partial class ApiImports
 {
-    static AsyncQueueImports()
-    {
-        NativeLibrary.SetDllImportResolver(
-            Assembly.GetExecutingAssembly(),
-            LibraryImportResolver.DllImportResolver
-        );
-    }
-
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_length")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int Length(AsyncQueue queue);
+    public static partial int AsyncQueueLength(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_length_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int LengthUnlocked(AsyncQueue queue);
+    public static partial int AsyncQueueLengthUnlocked(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_lock")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void Lock(AsyncQueue queue);
+    public static partial void AsyncQueueLock(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_new")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint New();
+    public static partial nint AsyncQueueNew();
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_pop")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint Pop(AsyncQueue queue);
+    public static partial nint AsyncQueuePop(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_pop_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint PopUnlocked(AsyncQueue queue);
+    public static partial nint AsyncQueuePopUnlocked(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_push")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void Push(AsyncQueue queue, Pointer data);
+    public static partial void AsyncQueuePush(AsyncQueue queue, Pointer data);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_push_front")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void PushFront(AsyncQueue queue, Pointer item);
+    public static partial void AsyncQueuePushFront(AsyncQueue queue, Pointer item);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_push_front_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void PushFrontUnlocked(AsyncQueue queue, Pointer item);
+    public static partial void AsyncQueuePushFrontUnlocked(AsyncQueue queue, Pointer item);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_push_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void PushUnlocked(AsyncQueue queue, Pointer data);
+    public static partial void AsyncQueuePushUnlocked(AsyncQueue queue, Pointer data);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_remove")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool Remove(AsyncQueue queue, Pointer item);
+    public static partial bool AsyncQueueRemove(AsyncQueue queue, Pointer item);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_remove_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static partial bool RemoveUnlocked(AsyncQueue queue, Pointer item);
+    public static partial bool AsyncQueueRemoveUnlocked(AsyncQueue queue, Pointer item);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_timeout_pop")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TimeoutPop(AsyncQueue queue, uint timeout);
+    public static partial nint AsyncQueueTimeoutPop(AsyncQueue queue, uint timeout);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_timeout_pop_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TimeoutPopUnlocked(AsyncQueue queue, uint timeout);
+    public static partial nint AsyncQueueTimeoutPopUnlocked(AsyncQueue queue, uint timeout);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_try_pop")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TryPop(AsyncQueue queue);
+    public static partial nint AsyncQueueTryPop(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_try_pop_unlocked")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TryPopUnlocked(AsyncQueue queue);
+    public static partial nint AsyncQueueTryPopUnlocked(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_unlock")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void Unlock(AsyncQueue queue);
+    public static partial void AsyncQueueUnlock(AsyncQueue queue);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_async_queue_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void Unref(nint queue);
+    public static partial void AsyncQueueUnref(nint queue);
 }

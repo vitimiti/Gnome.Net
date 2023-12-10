@@ -3,13 +3,12 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.Marshalling;
 
 using Gnome.Net.Common;
 
 namespace Gnome.Net.Glib.Imports;
 
-internal static partial class MappedFileImports
+internal static partial class ApiImports
 {
     [LibraryImport(
         LibraryName.Glib,
@@ -17,7 +16,7 @@ internal static partial class MappedFileImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint New(
+    public static partial nint MappedFileNew(
         string filename,
         [MarshalAs(UnmanagedType.Bool)] bool writable,
         out nint error
@@ -25,7 +24,7 @@ internal static partial class MappedFileImports
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_get_bytes")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint GetBytes(MappedFile file);
+    public static partial nint MappedFileGetBytes(MappedFile file);
 
     [LibraryImport(
         LibraryName.Glib,
@@ -33,13 +32,13 @@ internal static partial class MappedFileImports
         StringMarshalling = StringMarshalling.Utf8
     )]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? GetContents(MappedFile file);
+    public static partial string? MappedFileGetContents(MappedFile file);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_get_length")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nuint GetLength(MappedFile file);
+    public static partial nuint MappedFileGetLength(MappedFile file);
 
     [LibraryImport(LibraryName.Glib, EntryPoint = "g_mapped_file_unref")]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void Unref(nint file);
+    public static partial void MappedFileUnref(nint file);
 }

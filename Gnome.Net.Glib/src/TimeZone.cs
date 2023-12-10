@@ -19,14 +19,14 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///     The local time zone may change between invocations to this function; for example, if the system
     ///     administrator changes it.
     /// </remarks>
-    public static TimeZone Local => new(TimeZoneImports.NewLocal());
+    public static TimeZone Local => new(ApiImports.TimeZoneNewLocal());
 
     /// <summary>Creates a <see cref="TimeZone" /> corresponding to UTC.</summary>
     /// <value>A new <see cref="TimeZone" /> with the universal timezone.</value>
     /// <remarks>
     ///     This is equivalent to calling <see cref="CreateFromIdentifier" /> with a value like “Z”, “UTC”, “+00”, etc.
     /// </remarks>
-    public static TimeZone Utc => new(TimeZoneImports.NewUtc());
+    public static TimeZone Utc => new(ApiImports.TimeZoneNewUtc());
 
     /// <summary>Get the identifier of this TimeZone, as passed to <see cref="CreateFromIdentifier" />.</summary>
     /// <value>A <see cref="string" /> with the identifier for the timezone.</value>
@@ -40,7 +40,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     ///         time offset, that will be returned by this function.
     ///     </para>
     /// </remarks>
-    public string Identifier => TimeZoneImports.GetIdentifier(this) ?? string.Empty;
+    public string Identifier => ApiImports.TimeZoneGetIdentifier(this) ?? string.Empty;
 
     /// <summary>Creates a <see cref="TimeZone" /> corresponding to <paramref name="identifier" />.</summary>
     /// <param name="identifier">A <see cref="string" /> with the identifier.</param>
@@ -104,7 +104,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public static TimeZone? CreateFromIdentifier(string? identifier)
     {
-        var result = TimeZoneImports.NewIdentifier(identifier);
+        var result = ApiImports.TimeZoneNewIdentifier(identifier);
         return result == nint.Zero ? null : new TimeZone(result);
     }
 
@@ -120,7 +120,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public static TimeZone CreateFromOffset(int seconds)
     {
-        return new TimeZone(TimeZoneImports.NewOffset(seconds));
+        return new TimeZone(ApiImports.TimeZoneNewOffset(seconds));
     }
 
     internal TimeZone(nint preexistingHandle)
@@ -139,7 +139,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </returns>
     public bool IsDaylightSavingsTime(int interval)
     {
-        return TimeZoneImports.IsDst(this, interval);
+        return ApiImports.TimeZoneIsDst(this, interval);
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public string GetAbbreviation(int interval)
     {
-        return TimeZoneImports.GetAbbreviation(this, interval) ?? string.Empty;
+        return ApiImports.TimeZoneGetAbbreviation(this, interval) ?? string.Empty;
     }
 
     /// <summary>
@@ -172,7 +172,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int GetOffset(int interval)
     {
-        return TimeZoneImports.GetOffset(this, interval);
+        return ApiImports.TimeZoneGetOffset(this, interval);
     }
 
     /// <summary>
@@ -203,7 +203,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int AdjustTime(TimeType type, ref long time)
     {
-        return TimeZoneImports.AdjustTime(this, type, ref time);
+        return ApiImports.TimeZoneAdjustTime(this, type, ref time);
     }
 
     /// <summary>Finds an interval within the timezone that corresponds to the given <paramref name="time" />.</summary>
@@ -233,7 +233,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
     /// </remarks>
     public int FindInterval(TimeType type, long time)
     {
-        return TimeZoneImports.FindInterval(this, type, time);
+        return ApiImports.TimeZoneFindInterval(this, type, time);
     }
 
     /// <summary>Frees the timezone.</summary>
@@ -245,7 +245,7 @@ public sealed class TimeZone : SafeHandleZeroOrMinusOneIsInvalid
             return true;
         }
 
-        TimeZoneImports.Unref(handle);
+        ApiImports.TimeZoneUnref(handle);
         handle = nint.Zero;
         return true;
     }

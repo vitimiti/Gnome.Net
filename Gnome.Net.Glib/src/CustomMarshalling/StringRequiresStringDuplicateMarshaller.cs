@@ -22,6 +22,6 @@ internal static class StringRequiresStringDuplicateMarshaller
 
     public static string? ConvertToManaged(nint unmanaged)
     {
-        return CoreImports.StringDuplicate(unmanaged);
+        return ApiImports.StringDuplicate(unmanaged);
     }
 }

@@ -29,7 +29,7 @@ public static class Io
     /// </remarks>
     public static bool TrySetFileContents(string filename, string contents, out IErrorQuark? error)
     {
-        var result = CoreImports.FileSetContents(
+        var result = ApiImports.FileSetContents(
             filename,
             contents,
             contents.Length,
@@ -136,7 +136,7 @@ public static class Io
         out IErrorQuark? error
     )
     {
-        var result = CoreImports.FileSetContentsFull(
+        var result = ApiImports.FileSetContentsFull(
             filename,
             contents,
             contents.Length,
