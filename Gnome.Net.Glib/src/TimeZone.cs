@@ -1,8 +1,6 @@
 // handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
-using System.Runtime.InteropServices.Marshalling;
-
 using Gnome.Net.Glib.Imports;
 
 using Microsoft.Win32.SafeHandles;

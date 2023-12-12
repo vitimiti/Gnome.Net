@@ -2,7 +2,6 @@
 // See LICENSE.md for more information.
 
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.Marshalling;
 
 using Gnome.Net.Glib.Imports;
 

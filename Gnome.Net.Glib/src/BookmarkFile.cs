@@ -1,7 +1,6 @@
 // handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
-using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 
 using Gnome.Net.Glib.CustomMarshalling;

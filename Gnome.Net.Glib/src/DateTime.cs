@@ -1,8 +1,6 @@
 // handle file is part of the Gnome.Net project and is under the MIT license.
 // See LICENSE.md for more information.
 
-using System.Runtime.InteropServices.Marshalling;
-
 using Gnome.Net.Glib.Exceptions;
 using Gnome.Net.Glib.Imports;
 
@@ -1022,7 +1020,7 @@ public sealed class DateTime
     /// </remarks>
     public bool Equals(DateTime? other)
     {
-        return other is not null && ApiImports.DateTimeEqual(handle, other?.handle ?? nint.Zero);
+        return other is not null && ApiImports.DateTimeEqual(handle, other.handle);
     }
 
     /// <summary>
@@ -1047,7 +1045,7 @@ public sealed class DateTime
     /// </returns>
     public int CompareTo(DateTime? other)
     {
-        return other is null ? 1 : ApiImports.DateTimeCompare(handle, other?.handle ?? nint.Zero);
+        return other is null ? 1 : ApiImports.DateTimeCompare(handle, other.handle);
     }
 
     /// <summary>Compare an <see cref="object" /> with the current <see cref="DateTime" />.</summary>
