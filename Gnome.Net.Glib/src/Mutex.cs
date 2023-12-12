@@ -12,9 +12,8 @@ namespace Gnome.Net.Glib;
 public class Mutex : SafeHandleMinusOneIsInvalid
 {
     /// <summary>Initializes the mutex so that it can be used.</summary>
-    /// <param name="ownsHandle"></param>
-    public Mutex(bool ownsHandle)
-        : base(ownsHandle)
+    public Mutex()
+        : base(true)
     {
         ApiImports.MutexInit(handle);
     }
