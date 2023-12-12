@@ -68,6 +68,10 @@ internal static partial class ApiImports
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial string? GetApplicationName();
 
+    [LibraryImport(LibraryName.Glib, EntryPoint = "g_get_monotonic_time")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    public static partial long GetMonotonicTime();
+
     [LibraryImport(
         LibraryName.Glib,
         EntryPoint = "g_get_prgname",
